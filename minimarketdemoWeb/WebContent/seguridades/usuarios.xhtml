@@ -37,6 +37,12 @@
 				<p:column headerText="ID">
 					<h:outputText value="#{usuario.idSegUsuario}" />
 				</p:column>
+				
+				<p:column headerText="CODIGO" filterBy="#{usuario.codigo}"
+					filterMatchMode="contains">
+					<h:outputText value="#{usuario.codigo}" />
+				</p:column>
+				
 				<p:column headerText="APELLIDOS" filterBy="#{usuario.apellidos}"
 					filterMatchMode="contains">
 					<h:outputText value="#{usuario.apellidos}" />
