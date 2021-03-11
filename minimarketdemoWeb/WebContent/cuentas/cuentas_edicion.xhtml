@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata> -->
+<h:head>
+	<title>Usuarios</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="cuentas?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value=""
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<h:form>
+			<p:panelGrid columns="2">
+				<h:outputText value="Nombre" />
+				<p:inputText value=""
+					required="true" requiredMessage="Ingrese nombre" />
+				<h:outputText value="Tipo cuenta" />
+                <p:selectOneMenu id="option" value="">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Option1" itemValue="Option1"/>
+                    <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                    <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                    
+                </p:selectOneMenu>
+				<h:outputText value="Entidad" />
+				<p:inputText value=""
+					required="true" requiredMessage="Ingrese Entidad" />
+				<h:outputText value="Saldo" />
+                <p:inputNumber id="input1" value="" modifyValueOnWheel="false" />
+				<p:commandButton value="Actualizar" icon="pi pi-save" update="@form"
+					></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
+</body>
+</html>
