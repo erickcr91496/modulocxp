@@ -13,11 +13,13 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
-			<p:menuitem value="Cuentas bancarias" icon="pi pi-step-forward" action="cuentas?faces-redirect=true"/>
-			
-			<p:menuitem value="Documentos de pago" icon="pi pi-briefcase" />
-			<p:menuitem value="Estado de cuenta" icon="pi pi-step-backward" />
-			<p:menuitem value="Pagos" icon="pi pi-step-backward" />
+			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
+				action="cuentas?faces-redirect=true" />
+
+			<p:menuitem value="Documentos de pago" icon="pi pi-copy" />
+			<p:menuitem value="Estado de cuenta"
+				icon="pi pi-exclamation-triangle" />
+			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
 
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
@@ -28,7 +30,7 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<p:staticMessage severity="info" summary="Módulo de inventario"></p:staticMessage>
+		<p:staticMessage severity="info" summary="Módulo de Cuentas Bancarias"></p:staticMessage>
 	</h:form>
 	<div></div>
 </body>
