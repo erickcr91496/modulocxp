@@ -47,4 +47,25 @@ public class ManagerCuentaProv {
     	em.persist(m);
     }
     
+    public void actualizarCuentaProv(MdProvCb cuentaprov) throws Exception {
+    	MdProvCb c=em.find(MdProvCb.class, cuentaprov.getCodigomd());
+    	
+    	if(c==null) 
+    		throw new Exception("No existe la cuenta indicada ("+cuentaprov.getCodigomd()+")");
+    	
+    	c.setSaldoPagar(cuentaprov.getSaldoPagar());
+    	
+    	em.merge(c);
+    	}
+    
+    
+    public void eliminarCuentasProv(Integer codigo) throws Exception{
+    	MdProvCb c=em.find(MdProvCb.class, codigo);
+    	if(c==null)
+    		throw new Exception("No existe la cuenta indicada: "+codigo);
+    	em.remove(c);
+    			
+    }
+    
+    
 }

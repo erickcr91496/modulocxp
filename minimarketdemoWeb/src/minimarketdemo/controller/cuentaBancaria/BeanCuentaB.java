@@ -25,6 +25,7 @@ public class BeanCuentaB implements Serializable {
 	private String descripcion;
 	private BigDecimal saldo;
 	private Boolean estado;
+	private CuentaBancaria cuentaEdit;
 	
 	
 	private List<Proveedor> listaProveedores;
@@ -50,6 +51,7 @@ public class BeanCuentaB implements Serializable {
 	public void inicializar() {
 		listaCuentasBancarias=mCuentas.findAllCuentasBancarias();
 		listaProveedores= mCuentas.findAllProveedores();
+		
 	}
 	
 	public void actionListenerCrearCuenta() {
@@ -73,8 +75,47 @@ public class BeanCuentaB implements Serializable {
 		
 	}
 	
+	public void actionListenerSeleccionarCuenta(CuentaBancaria cuenta) {
+		cuentaEdit=cuenta;
+		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
+		
+	}
+	
+	public void actionListenerActualizarCuenta() {
+		try {
+			
+			mCuentas.actualizarCuentaBancaria(cuentaEdit);
+			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
+			JSFUtil.crearMensajeINFO("Cuenta actualizada");
+			
+		} catch (Exception e) {
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void actionListenerEliminarCuenta(String codigo) {
+		try {
+			mCuentas.eliminarCuentaBancaria(codigo);
+			JSFUtil.crearMensajeINFO("la cuenta se ha eliminado");
+			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
+			
+		} catch (Exception e) {
+			
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 
 	
+	public CuentaBancaria getCuentaEdit() {
+		return cuentaEdit;
+	}
+
+	public void setCuentaEdit(CuentaBancaria cuentaEdit) {
+		this.cuentaEdit = cuentaEdit;
+	}
+
 	public List<Proveedor> getListaProveedores() {
 		return listaProveedores;
 	}

@@ -51,4 +51,29 @@ private EntityManager em;
     	em.persist(c);
     }
     
+    public void eliminarCuentaBancaria(String codigo) throws Exception{
+    	CuentaBancaria c=em.find(CuentaBancaria.class, codigo);
+    	if(c==null)
+    		throw new Exception("No existe la cuenta indicada: "+codigo);
+    	em.remove(c);
+    			
+    }
+    
+    public void actualizarCuentaBancaria(CuentaBancaria cuenta) throws Exception {
+    	CuentaBancaria c=em.find(CuentaBancaria.class, cuenta.getCodigocb());
+    	
+    	if(c==null) 
+    		throw new Exception("No existe la cuenta indicada ("+cuenta.getCodigocb()+")");
+    	
+    	c.setNombre(cuenta.getNombre());
+    	c.setTipoCuenta(cuenta.getTipoCuenta());
+    	c.setEntidadBancaria(cuenta.getEntidadBancaria());
+    	c.setDescripcion(cuenta.getDescripcion());
+    	c.setSaldocb(cuenta.getSaldocb());
+    	
+    	em.merge(c);
+    	}
+    
+    
+    
 }
