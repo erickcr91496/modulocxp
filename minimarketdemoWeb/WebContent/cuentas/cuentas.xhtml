@@ -19,19 +19,17 @@
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
 			<p:menuitem value="Nueva Cuenta " icon="pi pi-wallet"
-				action="cuentanueva?faces-redirect=true"/>
+				action="cuentanueva?faces-redirect=true" />
 			<f:facet name="options">
-				<p:menuButton value=""
-					icon="pi pi-user">
+				<p:menuButton value="" icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
-					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
-						></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
 	</h:form>
 	<p:panel>
-<!-- 		<h:form>
+		<!-- 		<h:form>
 			<p:dataTable   value="" var="c"
 				paginator="true" rows="5">
 				<p:column headerText="ID">
@@ -81,49 +79,49 @@
  		</h:form> 
  		
  		 -->
- 		 
- 		<h:form id="formDatos">
 
-					<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u">
-						<p:column headerText="CODIGO CB">
-							<h:outputText value="#{u.codigocb}" />
-						</p:column>
-						<p:column headerText="NOMBRE">
-							<h:outputText value="#{u.nombre}" />
-						</p:column>
-						<p:column headerText="TIPO DE CUENTA">
-							<h:outputText value="#{u.tipoCuenta}" />
-						</p:column>
-						<p:column headerText="ENTIDAD BANCARIA">
-							<h:outputText value="#{u.entidadBancaria}" />
-						</p:column>
-						<p:column headerText="DESCRIPCION">
-							<h:outputText value="#{u.descripcion}" />
-						</p:column>
-						<p:column headerText="SALDO">
-							<h:outputText value="#{u.saldocb}" />
-						</p:column>
-						<p:column headerText="ESTADO">
-							<h:outputText value="#{u.estadocb}" />
-						</p:column>
+		<h:form id="formDatos">
 
-
-
-						<p:column headerText="OPCIONES">
-							<p:commandButton icon="pi pi-trash" title="eliminar"
-								update="@form">
-								<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
+			<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u"
+			paginator="true" rows="5">
+				<p:column headerText="CODIGO CB" >
+					<h:outputText value="#{u.codigocb}" />
+				</p:column>
+				<p:column headerText="NOMBRE" >
+					<h:outputText value="#{u.nombre}" />
+				</p:column>
+				<p:column headerText="TIPO DE CUENTA" >
+					<h:outputText value="#{u.tipoCuenta}" />
+				</p:column>
+				<p:column headerText="ENTIDAD BANCARIA" >
+					<h:outputText value="#{u.entidadBancaria}" />
+				</p:column>
+				<p:column headerText="DESCRIPCION" >
+					<h:outputText value="#{u.descripcion}" />
+				</p:column>
+				<p:column headerText="SALDO" >
+					<h:outputText value="#{u.saldocb}" />
+				</p:column>
+				<p:column headerText="ESTADO" >
+					<h:outputText value="#{u.estadocb}" />
+				</p:column>
 
 
-								<p:confirm header="Confirmacion" message="desea eliminar?"
-									icon="pi pi-exclamation-triangle"></p:confirm>
-							</p:commandButton>
 
-							<p:commandButton icon="pi pi-user-edit" title="editar"></p:commandButton>
-						</p:column>
-					</p:dataTable>
-				</h:form>
- 		
+				<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-trash" title="eliminar" update="@form">
+						<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
+
+
+						<p:confirm header="Confirmacion" message="desea eliminar?"
+							icon="pi pi-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+
+					<p:commandButton icon="pi pi-user-edit" title="editar"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
 	</p:panel>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 		responsive="true" width="350">

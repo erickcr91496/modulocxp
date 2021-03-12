@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata> -->
+<h:head>
+	<title>Nueva Dato Pago</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home"
+				action="datos_pago?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<h:form>
+			<p:panelGrid columns="2" >
+					<h:outputText value="codigoCB" />
+					<p:inputText value="#{beanCuentaProv.codigoCB}" required="true"
+						requiredMessage="debe ingresar el codigo de CB"></p:inputText>
+					<h:outputText value="codigoProv" />
+					<p:inputText value="#{beanCuentaProv.codigoProv}" required="true"
+						requiredMessage="debe ingresar el codigo prov"></p:inputText>
+
+					<h:outputText value="Saldo a pagar" />
+					<p:inputText value="#{beanCuentaProv.saldo}" required="true"
+						requiredMessage="debe ingresar el saldo"></p:inputText>
+
+					<p:commandButton
+						actionListener="#{beanCuentaProv.actionListenerCrearCuentasProv()}"
+						value="Crear CuentasProv" icon="pi pi-save" update="@form"></p:commandButton>
+
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
+</body>
+</html>
