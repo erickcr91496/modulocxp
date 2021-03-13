@@ -29,16 +29,13 @@
 		</p:menubar>
 	</h:form>
 	<p:panel>
-<<<<<<< HEAD
 
 
 
 		<h:form>
 			<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u"
-=======
 		<!-- 		<h:form>
 			<p:dataTable   value="" var="c"
->>>>>>> 9d8b847 ( listar y crear Maestro detalle)
 				paginator="true" rows="5">
 				<p:column headerText="CODIGO CB">
 					<h:outputText value="#{u.codigocb}" />
@@ -70,8 +67,7 @@
 						<p:confirm header="Confirmacion" message="desea eliminar?"
 							icon="pi pi-exclamation-triangle"></p:confirm>
 					</p:commandButton>
-<<<<<<< HEAD
-=======
+
 				</p:column>
 			</p:dataTable>
  		</h:form> 
@@ -79,57 +75,57 @@
  		 -->
 
 		<h:form id="formDatos">
->>>>>>> 9d8b847 ( listar y crear Maestro detalle)
 
+		<h:form>
 			<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u"
-			paginator="true" rows="5">
-				<p:column headerText="CODIGO CB" >
+				paginator="true" rows="5">
+				<p:column headerText="CODIGO CB">
 					<h:outputText value="#{u.codigocb}" />
 				</p:column>
-				<p:column headerText="NOMBRE" >
+				<p:column headerText="NOMBRE">
 					<h:outputText value="#{u.nombre}" />
 				</p:column>
-				<p:column headerText="TIPO DE CUENTA" >
+				<p:column headerText="TIPO DE CUENTA">
 					<h:outputText value="#{u.tipoCuenta}" />
 				</p:column>
-				<p:column headerText="ENTIDAD BANCARIA" >
+				<p:column headerText="ENTIDAD BANCARIA">
 					<h:outputText value="#{u.entidadBancaria}" />
 				</p:column>
-				<p:column headerText="DESCRIPCION" >
+				<p:column headerText="DESCRIPCION">
 					<h:outputText value="#{u.descripcion}" />
 				</p:column>
-				<p:column headerText="SALDO" >
+				<p:column headerText="SALDO">
 					<h:outputText value="#{u.saldocb}" />
 				</p:column>
-				<p:column headerText="ESTADO" >
+				<p:column headerText="ESTADO">
 					<h:outputText value="#{u.estadocb}" />
 				</p:column>
 
 
-<<<<<<< HEAD
 				</p:column>
 			</p:dataTable>
 		</h:form>
-=======
->>>>>>> 9d8b847 ( listar y crear Maestro detalle)
 
 				<p:column headerText="OPCIONES">
 					<p:commandButton icon="pi pi-trash" title="eliminar" update="@form">
 						<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
 
 
-<<<<<<< HEAD
-=======
+
+				<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action="#{beanCuentaB.actionSeleccionarEdicionCuenta(u)}" />
+					<p:commandButton icon="pi pi-times-circle" title="eliminar"
+						actionListener="#{beanCuentaB.actionListenerEliminarCuenta(u.codigocb)}"
+						styleClass="ui-button-danger" update="@form">
 						<p:confirm header="Confirmacion" message="desea eliminar?"
 							icon="pi pi-exclamation-triangle"></p:confirm>
 					</p:commandButton>
 
-					<p:commandButton icon="pi pi-user-edit" title="editar"></p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>
 
->>>>>>> 9d8b847 ( listar y crear Maestro detalle)
 	</p:panel>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 		responsive="true" width="350">
