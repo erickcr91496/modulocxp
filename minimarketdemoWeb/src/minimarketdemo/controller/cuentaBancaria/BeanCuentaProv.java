@@ -65,6 +65,12 @@ public class BeanCuentaProv implements Serializable {
 		
 	}
 	
+	public String actionSeleccionarEdicionDatoPago(MdProvCb cuentaProv) {
+		cuentaProvEdit=cuentaProv;
+		System.out.println("cuenta seleccionado: "+cuentaProvEdit.getCodigomd());
+		return "datos_pago_edicion";
+	}
+	
 	public void actionListenerActualizarCuentaProv() {
 		try {
 			mCuentasProv.actualizarCuentaProv(cuentaProvEdit);

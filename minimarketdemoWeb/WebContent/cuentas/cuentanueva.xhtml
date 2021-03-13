@@ -31,16 +31,15 @@
 		<h:form>
 			<p:panelGrid columns="2">
 
-				<h:outputText value="Codigo CuentaB" />
-				<p:inputText value="#{beanCuentaB.codigoCB}" required="true"
-					requiredMessage="debe ingresar el codigo de CB"></p:inputText>
 				<h:outputText value="Nombre" />
 				<p:inputText value="#{beanCuentaB.nombre}" required="true"
 					requiredMessage="debe ingresar el nombre"></p:inputText>
-				<h:outputText value="tipo de cuenta" />
-				<p:inputText value="#{beanCuentaB.tipoCuenta}" required="true"
-					requiredMessage="debe ingresar el tipo de cuenta"></p:inputText>
-
+				<h:outputText value="Tipo cuenta:" />
+				<p:selectOneMenu id="option" value="#{beanCuentaB.tipoCuenta}">
+					<f:selectItem itemLabel="Cuenta Ahorros" itemValue="Cuenta Ahorros" />
+					<f:selectItem itemLabel="Cuenta Corriente"
+						itemValue="Cuenta Corriente" />
+				</p:selectOneMenu>
 				<h:outputText value="Entidad Bancaria" />
 				<p:inputText value="#{beanCuentaB.entidadBancaria}" required="true"
 					requiredMessage="debe ingresar la entidad bancaria"></p:inputText>
@@ -50,11 +49,9 @@
 				<h:outputText value="saldo" />
 				<p:inputText value="#{beanCuentaB.saldo}" required="true"
 					requiredMessage="debe ingresar el saldo"></p:inputText>
-
 				<p:commandButton
 					actionListener="#{beanCuentaB.actionListenerCrearCuenta()}"
-					value="Crear CuentaB" icon="pi pi-save" update="@form">
-				</p:commandButton>
+					value="Crear CuentaB" icon="pi pi-save" update="@form"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</p:panel>

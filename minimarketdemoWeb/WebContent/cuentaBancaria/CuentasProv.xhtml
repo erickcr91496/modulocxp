@@ -50,9 +50,10 @@
 						toggleable="true">
 						<h:panelGrid columns="2">
 							<h:outputText value="Codigo CuentaB" />
-							<p:inputText value="#{beanCuentaB.codigoCB}" required="true"
+							<p:inputText value="#{beanCuentaB.codigoCB}" 
 								requiredMessage="debe ingresar el codigo de CB"></p:inputText>
-							<h:outputText value="Nombre" />
+							
+ 							<h:outputText value="Nombre" />
 							<p:inputText value="#{beanCuentaB.nombre}" required="true"
 								requiredMessage="debe ingresar el nombre"></p:inputText>
 
@@ -131,8 +132,7 @@
 
 							<p:commandButton icon="pi pi-user-edit" title="editar"
 								actionListener="#{beanCuentaB.actionListenerSeleccionarCuenta(u)}"
-								update=":formEdicion"
-								onclick="PF('dlgEdicion').show();"></p:commandButton>
+								update=":formEdicion" onclick="PF('dlgEdicion').show();"></p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</h:form>

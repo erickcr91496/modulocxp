@@ -9,7 +9,7 @@
 		type="preRenderView"></f:event>
 </f:metadata> -->
 <h:head>
-	<title>Edicion cuentas</title>
+	<title>Edicion Datos Pago</title>
 </h:head>
 <body>
 	<p:growl>
@@ -18,7 +18,7 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home"
-				action="cuentas?faces-redirect=true" />
+				action="datos_pago?faces-redirect=true" />
 			<f:facet name="options">
 				<p:menuButton value="" icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
@@ -30,32 +30,18 @@
 	<p:panel>
 		<h:form>
 			<p:panelGrid columns="2">
-				<h:outputText value="Nombre" />
-				<p:inputText value="#{beanCuentaB.cuentaEdit.nombre}"
-					required="true" requiredMessage="debe ingresar el nombre"></p:inputText>
-
-				<h:outputText value="Tipo cuenta:" />
-				<p:selectOneMenu id="option"
-					value="#{beanCuentaB.cuentaEdit.tipoCuenta}">
-					<f:selectItem itemLabel="Cuenta Ahorros" itemValue="Cuenta Ahorros" />
-					<f:selectItem itemLabel="Cuenta Corriente"
-						itemValue="Cuenta Corriente" />
-				</p:selectOneMenu>
-
-				<h:outputText value="Entidad Bancaria" />
-				<p:inputText value="#{beanCuentaB.cuentaEdit.entidadBancaria}"
-					required="true" requiredMessage="debe ingresar la entidad bancaria"></p:inputText>
-				<h:outputText value="Descripcion" />
-				<p:inputText value="#{beanCuentaB.cuentaEdit.descripcion}"
-					required="true" requiredMessage="debe ingresar la descripcion"></p:inputText>
-				<h:outputText value="saldo" />
-				<p:inputText value="#{beanCuentaB.cuentaEdit.saldocb}"
+				<h:outputText value="Codigo CuentaB" />
+				<h:outputText
+					value="#{beanCuentaProv.cuentaProvEdit.cuentaBancaria.codigocb}" />
+				<h:outputText value="Proveedor" />
+				<h:outputText
+					value="#{beanCuentaProv.cuentaProvEdit.proveedor.nombre}" />
+				<h:outputText value="Saldo a pagar" />
+				<p:inputText value="#{beanCuentaProv.cuentaProvEdit.saldoPagar}"
 					required="true" requiredMessage="debe ingresar el saldo"></p:inputText>
-
-
 				<p:commandButton value="Actualizar" icon="fa fa-save"
 					update="@form"
-					actionListener="#{beanCuentaB.actionListenerActualizarCuenta()}"></p:commandButton>
+					actionListener="#{beanCuentaProv.actionListenerActualizarCuentaProv()}"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</p:panel>

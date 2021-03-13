@@ -3,7 +3,6 @@ package minimarketdemo.model.core.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -17,25 +16,26 @@ public class CuentaBancaria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false, length=2147483647)
 	private String codigocb;
 
+	@Column(length=50)
 	private String descripcion;
 
-	@Column(name="entidad_bancaria")
+	@Column(name="entidad_bancaria", length=50)
 	private String entidadBancaria;
 
 	private Boolean estadocb;
 
+	@Column(length=50)
 	private String nombre;
 
+	@Column(precision=10, scale=2)
 	private BigDecimal saldocb;
 
-	@Column(name="tipo_cuenta")
+	@Column(name="tipo_cuenta", length=50)
 	private String tipoCuenta;
-
-	//bi-directional many-to-one association to MdProvCb
-	@OneToMany(mappedBy="cuentaBancaria")
-	private List<MdProvCb> mdProvCbs;
 
 	public CuentaBancaria() {
 	}
@@ -94,28 +94,6 @@ public class CuentaBancaria implements Serializable {
 
 	public void setTipoCuenta(String tipoCuenta) {
 		this.tipoCuenta = tipoCuenta;
-	}
-
-	public List<MdProvCb> getMdProvCbs() {
-		return this.mdProvCbs;
-	}
-
-	public void setMdProvCbs(List<MdProvCb> mdProvCbs) {
-		this.mdProvCbs = mdProvCbs;
-	}
-
-	public MdProvCb addMdProvCb(MdProvCb mdProvCb) {
-		getMdProvCbs().add(mdProvCb);
-		mdProvCb.setCuentaBancaria(this);
-
-		return mdProvCb;
-	}
-
-	public MdProvCb removeMdProvCb(MdProvCb mdProvCb) {
-		getMdProvCbs().remove(mdProvCb);
-		mdProvCb.setCuentaBancaria(null);
-
-		return mdProvCb;
 	}
 
 }

@@ -12,6 +12,7 @@ import javax.inject.Named;
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.core.entities.CuentaBancaria;
 import minimarketdemo.model.core.entities.Proveedor;
+import minimarketdemo.model.core.entities.SegUsuario;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
 
 @Named
@@ -56,11 +57,10 @@ public class BeanCuentaB implements Serializable {
 	
 	public void actionListenerCrearCuenta() {
 		try {
-			mCuentas.crearCuentaBancaria(codigoCB, nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
+			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
 			//actualizamos la lista de cuentas
 			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			codigoCB="";
 			nombre="";
 			tipoCuenta="";
 			entidadBancaria="";
@@ -92,6 +92,12 @@ public class BeanCuentaB implements Serializable {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
+		cuentaEdit=cuentab;
+		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
+		return "cuentas_edicion";
 	}
 	
 	public void actionListenerEliminarCuenta(String codigo) {
