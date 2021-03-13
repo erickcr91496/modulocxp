@@ -3,7 +3,6 @@ package minimarketdemo.model.core.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -44,6 +43,7 @@ public class CuentaBancaria implements Serializable {
 	//bi-directional many-to-one association to Pago
 	@OneToMany(mappedBy="cuentaBancaria")
 	private List<Pago> pagos;
+
 
 	public CuentaBancaria() {
 	}
@@ -133,5 +133,6 @@ public class CuentaBancaria implements Serializable {
 
 		return pago;
 	}
+
 
 }

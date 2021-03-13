@@ -57,6 +57,7 @@ public class BeanCuentaB implements Serializable {
 
 	public void actionListenerCrearCuenta() {
 		try {
+<<<<<<< HEAD
 
 			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
@@ -69,6 +70,9 @@ public class BeanCuentaB implements Serializable {
 			
 			
 
+=======
+<<<<<<< HEAD
+>>>>>>> 60f611e ( visas actualizadas crud Cuentas y Maestro Detalle v2)
 			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
 			provee = mProveedor.proveedorById(codiProv);
 			System.out.println(provee.getNombre());
@@ -84,6 +88,18 @@ public class BeanCuentaB implements Serializable {
 
 			provee = new Proveedor();
 
+=======
+			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
+			JSFUtil.crearMensajeINFO("Cuenta creada");
+			//actualizamos la lista de cuentas
+			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
+			nombre="";
+			tipoCuenta="";
+			entidadBancaria="";
+			descripcion="";
+			
+			
+>>>>>>> 144bf4c ( visas actualizadas crud Cuentas y Maestro Detalle v2)
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
@@ -111,6 +127,7 @@ public class BeanCuentaB implements Serializable {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
 		cuentaEdit=cuentab;
@@ -118,7 +135,19 @@ public class BeanCuentaB implements Serializable {
 		return "cuentas_edicion";
 	}
 	
+=======
+<<<<<<< HEAD
+>>>>>>> 60f611e ( visas actualizadas crud Cuentas y Maestro Detalle v2)
 
+=======
+	
+	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
+		cuentaEdit=cuentab;
+		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
+		return "cuentas_edicion";
+	}
+	
+>>>>>>> 144bf4c ( visas actualizadas crud Cuentas y Maestro Detalle v2)
 	public void actionListenerEliminarCuenta(String codigo) {
 		try {
 			mCuentas.eliminarCuentaBancaria(codigo);

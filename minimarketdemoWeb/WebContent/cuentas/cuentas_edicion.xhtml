@@ -39,6 +39,9 @@
 					<p:ajax event="change" update="@this" />
 				</p:selectOneMenu>
 				
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{beanCuentaB.cuentaEdit.nombre}"
+					required="true" requiredMessage="debe ingresar el nombre"></p:inputText>
 
 				<h:outputText value="Tipo cuenta:" />
 				<p:selectOneMenu id="option"
