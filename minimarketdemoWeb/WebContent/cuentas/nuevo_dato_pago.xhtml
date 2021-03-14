@@ -29,22 +29,26 @@
 	</h:form>
 	<p:panel>
 		<h:form>
-			<p:panelGrid columns="2" >
-					<h:outputText value="codigoCB" />
-					<p:inputText value="#{beanCuentaProv.codigoCB}" required="true"
-						requiredMessage="debe ingresar el codigo de CB"></p:inputText>
-					<h:outputText value="codigoProv" />
-					<p:inputText value="#{beanCuentaProv.codigoProv}" required="true"
-						requiredMessage="debe ingresar el codigo prov"></p:inputText>
-
-					<h:outputText value="Saldo a pagar" />
-					<p:inputText value="#{beanCuentaProv.saldo}" required="true"
-						requiredMessage="debe ingresar el saldo"></p:inputText>
-
-					<p:commandButton
-						actionListener="#{beanCuentaProv.actionListenerCrearCuentasProv()}"
-						value="Crear CuentasProv" icon="pi pi-save" update="@form"></p:commandButton>
-
+			<p:panelGrid columns="2">
+				<h:outputText value="CodigoCB:" />
+				<p:selectOneMenu value="#{beanCuentaProv.codigoCB}">
+					<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
+						itemLabel="#{c.cuentaBancaria.codigocb}"
+						itemValue="#{c.cuentaBancaria.codigocb}"></f:selectItems>
+				</p:selectOneMenu>
+				<h:outputText value="Proveedor" />
+				<p:selectOneMenu value="#{beanCuentaProv.codigoProv}">
+					<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
+						itemLabel="#{c.proveedor.nombre}"
+						itemValue="#{c.proveedor.codigoprov}"></f:selectItems>
+				</p:selectOneMenu>
+				<h:outputText value="Saldo a pagar" />
+				<p:inputText value="#{beanCuentaProv.saldo}" required="true"
+					requiredMessage="debe ingresar el saldo"></p:inputText>
+				<p:commandButton
+					actionListener="#{beanCuentaProv.actionListenerCrearCuentasProv()}"
+					value="Crear CuentasProv" icon="pi pi-save"
+					update="@form"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</p:panel>
