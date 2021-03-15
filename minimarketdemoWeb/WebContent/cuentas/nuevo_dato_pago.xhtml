@@ -29,6 +29,7 @@
 	</h:form>
 	<p:panel>
 		<h:form>
+
 			<p:panelGrid columns="2">
 				<h:outputText value="CodigoCB:" />
 				<p:selectOneMenu value="#{beanCuentaProv.codigoCB}">
@@ -65,6 +66,7 @@
 					<p:commandButton
 						actionListener="#{beanCuentaProv.actionListenerCrearCuentasProv()}"
 						value="Crear CuentasProv" icon="pi pi-save" update="@form"></p:commandButton>
+
 
 			</p:panelGrid>
 		</h:form>

@@ -49,11 +49,17 @@
 				</p:column>
 
 				<p:column headerText="OPCIONES">
+
 					<p:commandButton icon="pi pi-pencil" title="editar"
 						action="#{beanCuentaProv.actionSeleccionarEdicionDatoPago(u)}" />
 					<p:commandButton icon="pi pi-times-circle" title="eliminar"
 						actionListener="#{beanCuentaProv.actionListenerEliminarCuentasProvs(u.codigomd)}"
 						styleClass="ui-button-danger" update="@form">
+
+					<p:commandButton icon="pi pi-trash" title="eliminar" update="@form">
+
+
+
 
 					<p:commandButton icon="pi pi-trash" title="eliminar" update="@form">
 
@@ -66,10 +72,14 @@
 
 					<p:commandButton icon="pi pi-user-edit" title="editar"></p:commandButton>
 
+
+					<p:commandButton icon="pi pi-user-edit" title="editar"></p:commandButton>
+
 				</p:column>
 			</p:dataTable>
 		</h:form>
 
+
 	</p:panel>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 		responsive="true" width="350">
@@ -78,6 +88,7 @@
 		<p:commandButton value="Sí" type="button"
 			styleClass="ui-confirmdialog-yes" />
 	</p:confirmDialog>
+
 	</p:panel>
 	
 	
@@ -101,6 +112,6 @@
 		<p:commandButton value="Sí" type="button"
 			styleClass="ui-confirmdialog-yes" />
 	</p:confirmDialog>
-s
+
 </body>
 </html>
