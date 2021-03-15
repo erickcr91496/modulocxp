@@ -30,17 +30,14 @@ private EntityManager em;
     public List<CuentaBancaria> findAllCuentasBancarias(){
     	return em.createNamedQuery("CuentaBancaria.findAll", CuentaBancaria.class).getResultList();
     }
+       
     
-    public List<Proveedor> findAllProveedores(){
-    	return em.createNamedQuery("Proveedor.findAll", Proveedor.class).getResultList();
-    }
-    
-    
-    public void crearCuentaBancaria(String codigo, String nombre, String tipo_cuenta,String entidad_bancaria, String descripcion,
+    public void crearCuentaBancaria( int condigoProv ,String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) {
     	
     	CuentaBancaria c = new CuentaBancaria();
-    	c.setCodigocb(codigo);
+    	
+    	c.setCodigoprov(condigoProv);
     	c.setNombre(nombre);
     	c.setTipoCuenta(tipo_cuenta);
     	c.setEntidadBancaria(descripcion);
@@ -66,6 +63,7 @@ private EntityManager em;
     		throw new Exception("No existe la cuenta indicada ("+cuenta.getCodigocb()+")");
     	
     	c.setNombre(cuenta.getNombre());
+    	c.setCodigoprov(cuenta.getCodigoprov());
     	c.setTipoCuenta(cuenta.getTipoCuenta());
     	c.setEntidadBancaria(cuenta.getEntidadBancaria());
     	c.setDescripcion(cuenta.getDescripcion());

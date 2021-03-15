@@ -17,25 +17,33 @@ public class CuentaBancaria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false, length=2147483647)
 	private String codigocb;
 
+	@Column(nullable=false)
+	private Integer codigoprov;
+
+	@Column(length=50)
 	private String descripcion;
 
-	@Column(name="entidad_bancaria")
+	@Column(name="entidad_bancaria", length=50)
 	private String entidadBancaria;
 
 	private Boolean estadocb;
 
+	@Column(length=50)
 	private String nombre;
 
+	@Column(precision=10, scale=2)
 	private BigDecimal saldocb;
 
-	@Column(name="tipo_cuenta")
+	@Column(name="tipo_cuenta", length=50)
 	private String tipoCuenta;
 
-	//bi-directional many-to-one association to MdProvCb
+	//bi-directional many-to-one association to Pago
 	@OneToMany(mappedBy="cuentaBancaria")
-	private List<MdProvCb> mdProvCbs;
+	private List<Pago> pagos;
 
 	public CuentaBancaria() {
 	}
@@ -46,6 +54,14 @@ public class CuentaBancaria implements Serializable {
 
 	public void setCodigocb(String codigocb) {
 		this.codigocb = codigocb;
+	}
+
+	public Integer getCodigoprov() {
+		return this.codigoprov;
+	}
+
+	public void setCodigoprov(Integer codigoprov) {
+		this.codigoprov = codigoprov;
 	}
 
 	public String getDescripcion() {
@@ -96,26 +112,26 @@ public class CuentaBancaria implements Serializable {
 		this.tipoCuenta = tipoCuenta;
 	}
 
-	public List<MdProvCb> getMdProvCbs() {
-		return this.mdProvCbs;
+	public List<Pago> getPagos() {
+		return this.pagos;
 	}
 
-	public void setMdProvCbs(List<MdProvCb> mdProvCbs) {
-		this.mdProvCbs = mdProvCbs;
+	public void setPagos(List<Pago> pagos) {
+		this.pagos = pagos;
 	}
 
-	public MdProvCb addMdProvCb(MdProvCb mdProvCb) {
-		getMdProvCbs().add(mdProvCb);
-		mdProvCb.setCuentaBancaria(this);
+	public Pago addPago(Pago pago) {
+		getPagos().add(pago);
+		pago.setCuentaBancaria(this);
 
-		return mdProvCb;
+		return pago;
 	}
 
-	public MdProvCb removeMdProvCb(MdProvCb mdProvCb) {
-		getMdProvCbs().remove(mdProvCb);
-		mdProvCb.setCuentaBancaria(null);
+	public Pago removePago(Pago pago) {
+		getPagos().remove(pago);
+		pago.setCuentaBancaria(null);
 
-		return mdProvCb;
+		return pago;
 	}
 
 }

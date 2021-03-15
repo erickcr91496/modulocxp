@@ -5,8 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <!-- <f:metadata> -->
-<!-- 	<f:event listener="" -->
-<!-- 		type="preRenderView"></f:event> -->
+<!-- <f:event listener="" -->
+<!-- type="preRenderView"></f:event> -->
 <!-- </f:metadata> -->
 <h:head>
 	<title>Cuentas</title>
@@ -19,111 +19,61 @@
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
 			<p:menuitem value="Nueva Cuenta " icon="pi pi-wallet"
-				action="cuentanueva?faces-redirect=true"/>
+				action="cuentanueva?faces-redirect=true" />
 			<f:facet name="options">
-				<p:menuButton value=""
-					icon="pi pi-user">
+				<p:menuButton value="" icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
-					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
-						></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
 	</h:form>
 	<p:panel>
-<!-- 		<h:form>
-			<p:dataTable   value="" var="c"
+
+
+
+		<h:form>
+			<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u"
 				paginator="true" rows="5">
-				<p:column headerText="ID">
-					<h:outputText  value=""/>
+				<p:column headerText="CODIGO CB">
+					<h:outputText value="#{u.codigocb}" />
 				</p:column>
-				
-				<p:column headerText="CODIGO" filterBy=""
-					filterMatchMode="contains">
-					<h:outputText  value=""/>
+				<p:column headerText="NOMBRE">
+					<h:outputText value="#{u.nombre}" />
 				</p:column>
-				
-				<p:column headerText="NOMBRE" filterBy=""
-					filterMatchMode="contains">
-					<h:outputText value="" />
+				<p:column headerText="TIPO DE CUENTA">
+					<h:outputText value="#{u.tipoCuenta}" />
 				</p:column>
-				<p:column headerText="TIPO CUENTA" filterBy=""
-					filterMatchMode="">
-					<h:outputText  value=""/>
+				<p:column headerText="ENTIDAD BANCARIA">
+					<h:outputText value="#{u.entidadBancaria}" />
 				</p:column>
-				<p:column headerText="ENTIDAD BANCARIA" filterBy=""
-					filterMatchMode="contains">
-					<h:outputText value="" />
+				<p:column headerText="DESCRIPCION">
+					<h:outputText value="#{u.descripcion}" />
 				</p:column>
-				<p:column headerText="SALDO" filterBy=""
-					filterMatchMode="contains">
-					<h:outputText  value=""/>
+				<p:column headerText="SALDO">
+					<h:outputText value="#{u.saldocb}" />
 				</p:column>
-				
 				<p:column headerText="ESTADO">
-					<h:outputText  value=""/>
+					<h:outputText value="#{u.estadocb}" />
 				</p:column>
 				<p:column headerText="OPCIONES">
-					<p:commandButton icon="pi pi-check-circle"
-						title="activar/desactivar" styleClass="ui-button-warning"
-						update="@form"
-						 />
 					<p:commandButton icon="pi pi-pencil" title="editar"
-						 />
+						action="#{beanCuentaB.actionSeleccionarEdicionCuenta(u)}" />
 					<p:commandButton icon="pi pi-times-circle" title="eliminar"
-						styleClass="ui-button-danger" update="@form"
-						>
-						<p:confirm header="Confirmación"
-							message="Desea borrar este usuario?" icon="pi pi-info-circle" />
+						actionListener="#{beanCuentaB.actionListenerEliminarCuenta(u.codigocb)}"
+						styleClass="ui-button-danger" update="@form">
+						<p:confirm header="Confirmacion" message="desea eliminar?"
+							icon="pi pi-exclamation-triangle"></p:confirm>
 					</p:commandButton>
+
+
+
 				</p:column>
 			</p:dataTable>
- 		</h:form> 
- 		
- 		 -->
- 		 
- 		<h:form id="formDatos">
-
-					<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u">
-						<p:column headerText="CODIGO CB">
-							<h:outputText value="#{u.codigocb}" />
-						</p:column>
-						<p:column headerText="NOMBRE">
-							<h:outputText value="#{u.nombre}" />
-						</p:column>
-						<p:column headerText="TIPO DE CUENTA">
-							<h:outputText value="#{u.tipoCuenta}" />
-						</p:column>
-						<p:column headerText="ENTIDAD BANCARIA">
-							<h:outputText value="#{u.entidadBancaria}" />
-						</p:column>
-						<p:column headerText="DESCRIPCION">
-							<h:outputText value="#{u.descripcion}" />
-						</p:column>
-						<p:column headerText="SALDO">
-							<h:outputText value="#{u.saldocb}" />
-						</p:column>
-						<p:column headerText="ESTADO">
-							<h:outputText value="#{u.estadocb}" />
-						</p:column>
+		</h:form>
 
 
 
-						<p:column headerText="OPCIONES">
-							<p:commandButton icon="pi pi-trash" title="eliminar"
-								update="@form">
-								<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
-
-
-								<p:confirm header="Confirmacion" message="desea eliminar?"
-									icon="pi pi-exclamation-triangle"></p:confirm>
-							</p:commandButton>
-
-							<p:commandButton icon="pi pi-user-edit" title="editar"></p:commandButton>
-						</p:column>
-					</p:dataTable>
-				</h:form>
- 		
 	</p:panel>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 		responsive="true" width="350">

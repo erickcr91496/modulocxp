@@ -17,23 +17,23 @@ public class Pago implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="nro_pago")
+	@Column(name="nro_pago", unique=true, nullable=false, length=15)
 	private String nroPago;
 
+	@Column(nullable=false, length=50)
 	private String descripcion;
 
-	private Boolean estado;
-
 	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
 	private Date fecha;
 
-	@Column(name="id_usuario")
+	@Column(name="id_usuario", nullable=false)
 	private Integer idUsuario;
 
-	//bi-directional many-to-one association to MdProvCb
+	//bi-directional many-to-one association to CuentaBancaria
 	@ManyToOne
-	@JoinColumn(name="codigomd")
-	private MdProvCb mdProvCb;
+	@JoinColumn(name="codigocb", nullable=false)
+	private CuentaBancaria cuentaBancaria;
 
 	public Pago() {
 	}
@@ -54,14 +54,6 @@ public class Pago implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Boolean getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-
 	public Date getFecha() {
 		return this.fecha;
 	}
@@ -78,12 +70,12 @@ public class Pago implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	public MdProvCb getMdProvCb() {
-		return this.mdProvCb;
+	public CuentaBancaria getCuentaBancaria() {
+		return this.cuentaBancaria;
 	}
 
-	public void setMdProvCb(MdProvCb mdProvCb) {
-		this.mdProvCb = mdProvCb;
+	public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+		this.cuentaBancaria = cuentaBancaria;
 	}
 
 }

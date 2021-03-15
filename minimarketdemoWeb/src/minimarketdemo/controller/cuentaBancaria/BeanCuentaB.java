@@ -13,32 +13,31 @@ import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.core.entities.CuentaBancaria;
 import minimarketdemo.model.core.entities.Proveedor;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
+import minimarketdemo.model.core.managers.ManagerProveedor;
 
 @Named
 @SessionScoped
 public class BeanCuentaB implements Serializable {
 
+	private int codiProv;
 	private String codigoCB;
-	private String nombre;
 	private String tipoCuenta;
 	private String entidadBancaria;
 	private String descripcion;
 	private BigDecimal saldo;
 	private Boolean estado;
 	private CuentaBancaria cuentaEdit;
-	
-	
+
 	private List<Proveedor> listaProveedores;
 	private List<CuentaBancaria> listaCuentasBancarias;
-	
-	
+
 	@EJB
 	private ManagerCuentasB mCuentas;
-	
+	@EJB
+	private ManagerProveedor mProveedor;
 
-	
-	
-	
+	private Proveedor provee;
+
 	/**
 	 * 
 	 */
@@ -49,65 +48,101 @@ public class BeanCuentaB implements Serializable {
 
 	@PostConstruct
 	public void inicializar() {
-		listaCuentasBancarias=mCuentas.findAllCuentasBancarias();
-		listaProveedores= mCuentas.findAllProveedores();
-		
+		listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
+		listaProveedores = mProveedor.ListarProveedores();
+		provee = new Proveedor();
+
 	}
-	
+
 	public void actionListenerCrearCuenta() {
 		try {
-			mCuentas.crearCuentaBancaria(codigoCB, nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
+			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
+			provee = mProveedor.proveedorById(codiProv);
+			System.out.println(provee.getNombre());
+			mCuentas.crearCuentaBancaria(provee.getCodigoprov(), provee.getNombre(), tipoCuenta, entidadBancaria,
+					descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
-			//actualizamos la lista de cuentas
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			codigoCB="";
-			nombre="";
-			tipoCuenta="";
-			entidadBancaria="";
-			descripcion="";
-			
-			
+			// actualizamos la lista de cuentas
+			listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
+			codigoCB = "";
+			tipoCuenta = "";
+			entidadBancaria = "";
+			descripcion = "";
+
+			provee = new Proveedor();
+
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 	public void actionListenerSeleccionarCuenta(CuentaBancaria cuenta) {
-		cuentaEdit=cuenta;
-		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
-		
+		cuentaEdit = cuenta;
+		System.out.println("cuenta seleccionado: " + cuentaEdit.getCodigocb());
+
 	}
-	
+
 	public void actionListenerActualizarCuenta() {
 		try {
-			
+			provee = mProveedor.proveedorById(codiProv);
+			cuentaEdit.setCodigoprov(provee.getCodigoprov());
+			cuentaEdit.setNombre(provee.getNombre());
 			mCuentas.actualizarCuentaBancaria(cuentaEdit);
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
+			listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
 			JSFUtil.crearMensajeINFO("Cuenta actualizada");
-			
+
 		} catch (Exception e) {
-			JSFUtil.crearMensajeERROR(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	public void actionListenerEliminarCuenta(String codigo) {
-		try {
-			mCuentas.eliminarCuentaBancaria(codigo);
-			JSFUtil.crearMensajeINFO("la cuenta se ha eliminado");
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			
-		} catch (Exception e) {
-			
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
+	public void actionListenerEliminarCuenta(String codigo) {
+		try {
+			mCuentas.eliminarCuentaBancaria(codigo);
+			JSFUtil.crearMensajeINFO("la cuenta se ha eliminado");
+			listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
+
+		} catch (Exception e) {
+
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
+		cuentaEdit = cuentab;
+		System.out.println("cuenta seleccionado: " + cuentaEdit.getCodigocb());
+		return "cuentas_edicion";
+	}
 	
+
+	public String getCodigoCB() {
+		return codigoCB;
+	}
+
+	public void setCodigoCB(String codigoCB) {
+		this.codigoCB = codigoCB;
+	}
+
+	public int getCodiProv() {
+		return codiProv;
+	}
+
+	public void setCodiProv(int codiProv) {
+		this.codiProv = codiProv;
+	}
+
+	public Proveedor getProvee() {
+		return provee;
+	}
+
+	public void setProvee(Proveedor provee) {
+		this.provee = provee;
+	}
+
 	public CuentaBancaria getCuentaEdit() {
 		return cuentaEdit;
 	}
@@ -130,22 +165,6 @@ public class BeanCuentaB implements Serializable {
 
 	public void setListaCuentasBancarias(List<CuentaBancaria> listaCuentasBancarias) {
 		this.listaCuentasBancarias = listaCuentasBancarias;
-	}
-
-	public String getCodigoCB() {
-		return codigoCB;
-	}
-
-	public void setCodigoCB(String codigoCB) {
-		this.codigoCB = codigoCB;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getTipoCuenta() {
@@ -172,8 +191,6 @@ public class BeanCuentaB implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-
-
 	public BigDecimal getSaldo() {
 		return saldo;
 	}
@@ -194,7 +211,4 @@ public class BeanCuentaB implements Serializable {
 		return serialVersionUID;
 	}
 
-	
-	
-	
 }

@@ -17,13 +17,12 @@
 	</p:growl>
 	<h:form>
 		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home" action="cuentas?faces-redirect=true" />
+			<p:menuitem value="Regresar" icon="pi pi-home"
+				action="cuentas?faces-redirect=true" />
 			<f:facet name="options">
-				<p:menuButton value=""
-					icon="pi pi-user">
+				<p:menuButton value="" icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
-					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
-						></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
@@ -31,29 +30,44 @@
 	<p:panel>
 		<h:form>
 			<p:panelGrid columns="2">
-				
-				<h:outputText value="Codigo:" />
-				<p:inputText value=""
-					required="true" requiredMessage="Ingrese el codigo" />
-				
+
+			
+
 				<h:outputText value="Nombre:" />
-				<p:inputText value=""
-					required="true" requiredMessage="Ingrese los apellidos" />
+
+				<p:selectOneMenu filter="true" id="nombres"
+					value="#{beanCuentaB.codiProv}" required="true">
+					<f:selectItems value="#{beanCuentaB.listaProveedores}" var="prov"
+						 itemValue="#{prov.codigoprov}" itemLabel="#{prov.nombre}" />
+					<p:ajax event="change" update="@this" />
+				</p:selectOneMenu>
+
+
 				<h:outputText value="Tipo cuenta:" />
-                <p:selectOneMenu id="option" value="">
-                    <f:selectItem itemLabel="Select One" itemValue=""/>
-                    <f:selectItem itemLabel="Option1" itemValue="Option1"/>
-                    <f:selectItem itemLabel="Option2" itemValue="Option2"/>
-                    <f:selectItem itemLabel="Option3" itemValue="Option3"/>
-                    
-                </p:selectOneMenu>
-				<h:outputText value="Entidad" />
-				<p:inputText value=""
-					required="true" requiredMessage="Ingrese el correo" />
+				<p:selectOneMenu id="option" value="#{beanCuentaB.tipoCuenta}">
+
+					<f:selectItem itemLabel="Ahorro" itemValue="Ahorro" />
+					<f:selectItem itemLabel="Credito" itemValue="Credito" />
+
+
+				</p:selectOneMenu>
+				<h:outputText value="Entidad Bancaria" />
+				<p:inputText value="#{beanCuentaB.entidadBancaria}" required="true"
+					requiredMessage="Ingrese la entidad bancaria" />
+
+
+				<h:outputText value="Descripcion" />
+				<p:inputText value="#{beanCuentaB.descripcion}" required="true"
+					requiredMessage="Ingrese una descripcion" />
+
+
 				<h:outputText value="Saldo:" />
-                <p:inputNumber id="input1" value="#{inputNumberView.input1}" modifyValueOnWheel="false" />
+				<p:inputNumber value="#{beanCuentaB.saldo}"
+					modifyValueOnWheel="false" />
+
+
 				<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
-					></p:commandButton>
+					actionListener="#{beanCuentaB.actionListenerCrearCuenta()}"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</p:panel>
