@@ -36,14 +36,13 @@ private EntityManager em;
     }
     
     
-    public void crearCuentaBancaria(String codigo, String nombre, String tipo_cuenta,String entidad_bancaria, String descripcion,
+    public void crearCuentaBancaria(String nombre, String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) {
     	
     	CuentaBancaria c = new CuentaBancaria();
-    	c.setCodigocb(codigo);
     	c.setNombre(nombre);
     	c.setTipoCuenta(tipo_cuenta);
-    	c.setEntidadBancaria(descripcion);
+    	c.setEntidadBancaria(entidad_bancaria);
     	c.setDescripcion(descripcion);
     	c.setSaldocb(saldoCB);
     	c.setEstadocb(estadoCB);
