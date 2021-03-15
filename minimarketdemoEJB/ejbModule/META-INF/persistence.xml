@@ -12,11 +12,14 @@
 		<class>minimarketdemo.model.core.entities.ThmRolDetalle</class>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		<class>minimarketdemo.model.core.entities.CuentaBancaria</class>
 		<class>minimarketdemo.model.core.entities.Pago</class>
 >>>>>>> 02d3786 (Cliente API-REST)
 =======
+=======
+>>>>>>> 78c564e (eliminar archivos modificados)
 		<class>minimarketdemo.model.core.entities.CuentaBancaria</class>
 		<class>minimarketdemo.model.core.entities.Pago</class>
 =======
@@ -25,6 +28,11 @@
 		<class>minimarketdemo.model.core.entities.Proveedor</class>
 		<class>minimarketdemo.model.core.entities.CuentaBancaria</class>
 >>>>>>> 144bf4c ( visas actualizadas crud Cuentas y Maestro Detalle v2)
+<<<<<<< HEAD
 >>>>>>> 60f611e ( visas actualizadas crud Cuentas y Maestro Detalle v2)
+=======
+=======
+>>>>>>> 625d0ec (eliminar archivos modificados)
+>>>>>>> 78c564e (eliminar archivos modificados)
 	</persistence-unit>
 </persistence>

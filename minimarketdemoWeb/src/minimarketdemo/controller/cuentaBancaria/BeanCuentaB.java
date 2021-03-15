@@ -70,6 +70,7 @@ public class BeanCuentaB implements Serializable {
 			
 
 
+
 			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
 			provee = mProveedor.proveedorById(codiProv);
 			System.out.println(provee.getNombre());
@@ -84,6 +85,7 @@ public class BeanCuentaB implements Serializable {
 			descripcion = "";
 
 			provee = new Proveedor();
+
 
 			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
