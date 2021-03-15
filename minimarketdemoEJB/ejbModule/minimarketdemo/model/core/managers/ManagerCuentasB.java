@@ -39,6 +39,7 @@ private EntityManager em;
     	CuentaBancaria c = new CuentaBancaria();
     	
     	c.setCodigoprov(condigoProv);
+    }
     public List<Proveedor> findAllProveedores(){
     	return em.createNamedQuery("Proveedor.findAll", Proveedor.class).getResultList();
     }

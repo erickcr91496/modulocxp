@@ -12,7 +12,6 @@ import javax.inject.Named;
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.core.entities.CuentaBancaria;
 import minimarketdemo.model.core.entities.Proveedor;
-import minimarketdemo.model.core.entities.SegUsuario;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
 import minimarketdemo.model.core.managers.ManagerProveedor;
 
@@ -57,20 +56,6 @@ public class BeanCuentaB implements Serializable {
 
 	public void actionListenerCrearCuenta() {
 		try {
-
-			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
-			JSFUtil.crearMensajeINFO("Cuenta creada");
-			//actualizamos la lista de cuentas
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			nombre="";
-			tipoCuenta="";
-			entidadBancaria="";
-			descripcion="";
-			
-			
-
-
-
 			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
 			provee = mProveedor.proveedorById(codiProv);
 			System.out.println(provee.getNombre());
@@ -86,17 +71,6 @@ public class BeanCuentaB implements Serializable {
 
 			provee = new Proveedor();
 
-
-			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
-			JSFUtil.crearMensajeINFO("Cuenta creada");
-			//actualizamos la lista de cuentas
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			nombre="";
-			tipoCuenta="";
-			entidadBancaria="";
-			descripcion="";
-			
-			
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
@@ -124,21 +98,7 @@ public class BeanCuentaB implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
-		cuentaEdit=cuentab;
-		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
-		return "cuentas_edicion";
-	}
-	
 
-	
-	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
-		cuentaEdit=cuentab;
-		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
-		return "cuentas_edicion";
-	}
-	
 	public void actionListenerEliminarCuenta(String codigo) {
 		try {
 			mCuentas.eliminarCuentaBancaria(codigo);

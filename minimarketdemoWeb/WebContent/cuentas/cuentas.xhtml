@@ -34,8 +34,6 @@
 
 		<h:form>
 			<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u"
-		<!-- 		<h:form>
-			<p:dataTable   value="" var="c"
 				paginator="true" rows="5">
 				<p:column headerText="CODIGO CB">
 					<h:outputText value="#{u.codigocb}" />
@@ -68,62 +66,13 @@
 							icon="pi pi-exclamation-triangle"></p:confirm>
 					</p:commandButton>
 
-				</p:column>
-			</p:dataTable>
- 		</h:form> 
- 		
- 		 -->
-
-		<h:form id="formDatos">
-
-		<h:form>
-			<p:dataTable value="#{beanCuentaB.listaCuentasBancarias}" var="u"
-				paginator="true" rows="5">
-				<p:column headerText="CODIGO CB">
-					<h:outputText value="#{u.codigocb}" />
-				</p:column>
-				<p:column headerText="NOMBRE">
-					<h:outputText value="#{u.nombre}" />
-				</p:column>
-				<p:column headerText="TIPO DE CUENTA">
-					<h:outputText value="#{u.tipoCuenta}" />
-				</p:column>
-				<p:column headerText="ENTIDAD BANCARIA">
-					<h:outputText value="#{u.entidadBancaria}" />
-				</p:column>
-				<p:column headerText="DESCRIPCION">
-					<h:outputText value="#{u.descripcion}" />
-				</p:column>
-				<p:column headerText="SALDO">
-					<h:outputText value="#{u.saldocb}" />
-				</p:column>
-				<p:column headerText="ESTADO">
-					<h:outputText value="#{u.estadocb}" />
-				</p:column>
 
 
 				</p:column>
 			</p:dataTable>
 		</h:form>
 
-				<p:column headerText="OPCIONES">
-					<p:commandButton icon="pi pi-trash" title="eliminar" update="@form">
-						<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
 
-
-				<p:column headerText="OPCIONES">
-					<p:commandButton icon="pi pi-pencil" title="editar"
-						action="#{beanCuentaB.actionSeleccionarEdicionCuenta(u)}" />
-					<p:commandButton icon="pi pi-times-circle" title="eliminar"
-						actionListener="#{beanCuentaB.actionListenerEliminarCuenta(u.codigocb)}"
-						styleClass="ui-button-danger" update="@form">
-						<p:confirm header="Confirmacion" message="desea eliminar?"
-							icon="pi pi-exclamation-triangle"></p:confirm>
-					</p:commandButton>
-
-				</p:column>
-			</p:dataTable>
-		</h:form>
 
 	</p:panel>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
