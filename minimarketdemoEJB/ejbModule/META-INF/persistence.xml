@@ -16,14 +16,6 @@
 		<class>minimarketdemo.model.core.entities.Cuentabancaria</class>
 		<class>minimarketdemo.model.core.entities.DetallePago</class>
 
-		<class>minimarketdemo.model.core.entities.CuentaBancaria</class>
-		<class>minimarketdemo.model.core.entities.Pago</class>
-		<class>minimarketdemo.model.core.entities.CuentaBancaria</class>
-		<class>minimarketdemo.model.core.entities.Pago</class>
-		<class>minimarketdemo.model.core.entities.MdProvCb</class>
-		<class>minimarketdemo.model.core.entities.Pago</class>
-		<class>minimarketdemo.model.core.entities.Proveedor</class>
-		<class>minimarketdemo.model.core.entities.CuentaBancaria</class>
 
 	</persistence-unit>
 </persistence>

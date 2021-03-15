@@ -3,28 +3,25 @@ package minimarketdemo.model.core.managers;
 import java.math.BigDecimal;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 import javax.ejb.EJB;
-=======
->>>>>>> d183b02 (conflictos 1)
->>>>>>> 56f47a5 (conflictos 1)
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-<<<<<<< HEAD
+
 import minimarketdemo.model.core.entities.CuentaBancaria;
 import minimarketdemo.model.core.entities.Proveedor;
-=======
-<<<<<<< HEAD
+
 import minimarketdemo.model.core.entities.Cuentabancaria;
 
-=======
 import minimarketdemo.model.core.entities.CuentaBancaria;
 import minimarketdemo.model.core.entities.Proveedor;
+
+import minimarketdemo.model.core.entities.Cuentabancaria;
 
 
 /**
@@ -37,9 +34,9 @@ public class ManagerCuentasB {
 private EntityManager em;
 
 
+
 	@EJB
 	ManagerDAO mDAO;
-
     /**
      * Default constructor. 
      */
@@ -82,6 +79,7 @@ private EntityManager em;
     public void eliminarCuentaBancaria(String codigo) throws Exception{
 
     	Cuentabancaria c=em.find(Cuentabancaria.class, codigo);
+
     public List<CuentaBancaria> findAllCuentasBancarias(){
     	return em.createNamedQuery("CuentaBancaria.findAll", CuentaBancaria.class).getResultList();
     }
@@ -125,7 +123,6 @@ private EntityManager em;
 
     public void actualizarCuentaBancaria(Cuentabancaria cuenta) throws Exception {
     	Cuentabancaria c=em.find(Cuentabancaria.class, cuenta.getCodigocb());
-
     	
     	if(c==null) 
     		throw new Exception("No existe la cuenta indicada ("+cuenta.getCodigocb()+")");
