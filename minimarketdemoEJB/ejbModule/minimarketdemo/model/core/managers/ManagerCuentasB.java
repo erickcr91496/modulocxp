@@ -39,16 +39,6 @@ private EntityManager em;
     	CuentaBancaria c = new CuentaBancaria();
     	
     	c.setCodigoprov(condigoProv);
-    }
-    public List<Proveedor> findAllProveedores(){
-    	return em.createNamedQuery("Proveedor.findAll", Proveedor.class).getResultList();
-    }
-    
-    
-    public void crearCuentaBancaria(String nombre, String tipo_cuenta,String entidad_bancaria, String descripcion,
-    		BigDecimal saldoCB, boolean estadoCB ) {
-    	
-    	CuentaBancaria c = new CuentaBancaria();
     	c.setNombre(nombre);
     	c.setTipoCuenta(tipo_cuenta);
     	c.setEntidadBancaria(descripcion);

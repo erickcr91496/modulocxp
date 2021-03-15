@@ -42,7 +42,5 @@ public class Proveedor implements Serializable {
 		this.telefono = telefono;
 	}
 	
-	
-	
-	
+
 }

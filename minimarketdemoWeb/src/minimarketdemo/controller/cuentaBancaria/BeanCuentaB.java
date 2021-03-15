@@ -211,4 +211,5 @@ public class BeanCuentaB implements Serializable {
 		return serialVersionUID;
 	}
 
+
 }
