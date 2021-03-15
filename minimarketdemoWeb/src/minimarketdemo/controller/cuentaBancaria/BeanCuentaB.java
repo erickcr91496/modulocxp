@@ -57,18 +57,6 @@ public class BeanCuentaB implements Serializable {
 	public void actionListenerCrearCuenta() {
 		try {
 
-
-			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
-			JSFUtil.crearMensajeINFO("Cuenta creada");
-			//actualizamos la lista de cuentas
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			nombre="";
-			tipoCuenta="";
-			entidadBancaria="";
-			descripcion="";
-			
-			
-
 			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
 			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
@@ -91,6 +79,7 @@ public class BeanCuentaB implements Serializable {
 			descripcion="";
 			
 			
+
 
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
@@ -131,6 +120,7 @@ public class BeanCuentaB implements Serializable {
 		return "cuentas_edicion";
 	}
 	
+
 	public void actionListenerEliminarCuenta(String codigo) {
 		try {
 			mCuentas.eliminarCuentaBancaria(codigo);
