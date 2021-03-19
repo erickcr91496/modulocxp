@@ -10,33 +10,31 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import minimarketdemo.controller.JSFUtil;
-import minimarketdemo.model.core.entities.CuentaBancaria;
-import minimarketdemo.model.core.entities.Proveedor;
+import minimarketdemo.model.core.entities.Cuentabancaria;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
-import minimarketdemo.model.core.managers.ManagerProveedor;
+import minimarketdemo.model.core.managers.ManagerProveedorFacturas;
 
 @Named
 @SessionScoped
 public class BeanCuentaB implements Serializable {
 
-	private int codiProv;
-	private String codigoCB;
+	private String nombre;
 	private String tipoCuenta;
 	private String entidadBancaria;
 	private String descripcion;
 	private BigDecimal saldo;
 	private Boolean estado;
-	private CuentaBancaria cuentaEdit;
+	private Cuentabancaria cuentaEdit;
 
-	private List<Proveedor> listaProveedores;
-	private List<CuentaBancaria> listaCuentasBancarias;
+
+	private List<Cuentabancaria> listaCuentasBancarias;
 
 	@EJB
 	private ManagerCuentasB mCuentas;
 	@EJB
-	private ManagerProveedor mProveedor;
+	private ManagerProveedorFacturas mProveedor;
 
-	private Proveedor provee;
+
 
 	/**
 	 * 
@@ -49,27 +47,19 @@ public class BeanCuentaB implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
-		listaProveedores = mProveedor.ListarProveedores();
-		provee = new Proveedor();
-
 	}
 
 	public void actionListenerCrearCuenta() {
 		try {
 			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
-			provee = mProveedor.proveedorById(codiProv);
-			System.out.println(provee.getNombre());
-			mCuentas.crearCuentaBancaria(provee.getCodigoprov(), provee.getNombre(), tipoCuenta, entidadBancaria,
-					descripcion, saldo, true);
+			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
 			// actualizamos la lista de cuentas
 			listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
-			codigoCB = "";
+			nombre = "";
 			tipoCuenta = "";
 			entidadBancaria = "";
 			descripcion = "";
-
-			provee = new Proveedor();
 
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
@@ -78,7 +68,7 @@ public class BeanCuentaB implements Serializable {
 
 	}
 
-	public void actionListenerSeleccionarCuenta(CuentaBancaria cuenta) {
+	public void actionListenerSeleccionarCuenta(Cuentabancaria cuenta) {
 		cuentaEdit = cuenta;
 		System.out.println("cuenta seleccionado: " + cuentaEdit.getCodigocb());
 
@@ -86,9 +76,6 @@ public class BeanCuentaB implements Serializable {
 
 	public void actionListenerActualizarCuenta() {
 		try {
-			provee = mProveedor.proveedorById(codiProv);
-			cuentaEdit.setCodigoprov(provee.getCodigoprov());
-			cuentaEdit.setNombre(provee.getNombre());
 			mCuentas.actualizarCuentaBancaria(cuentaEdit);
 			listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
 			JSFUtil.crearMensajeINFO("Cuenta actualizada");
@@ -112,58 +99,40 @@ public class BeanCuentaB implements Serializable {
 		}
 	}
 
-	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
+	public String actionSeleccionarEdicionCuenta(Cuentabancaria cuentab) {
 		cuentaEdit = cuentab;
 		System.out.println("cuenta seleccionado: " + cuentaEdit.getCodigocb());
 		return "cuentas_edicion";
 	}
 	
 
-	public String getCodigoCB() {
-		return codigoCB;
+	
+
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setCodigoCB(String codigoCB) {
-		this.codigoCB = codigoCB;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public int getCodiProv() {
-		return codiProv;
-	}
 
-	public void setCodiProv(int codiProv) {
-		this.codiProv = codiProv;
-	}
 
-	public Proveedor getProvee() {
-		return provee;
-	}
-
-	public void setProvee(Proveedor provee) {
-		this.provee = provee;
-	}
-
-	public CuentaBancaria getCuentaEdit() {
+	public Cuentabancaria getCuentaEdit() {
 		return cuentaEdit;
 	}
 
-	public void setCuentaEdit(CuentaBancaria cuentaEdit) {
+	public void setCuentaEdit(Cuentabancaria cuentaEdit) {
 		this.cuentaEdit = cuentaEdit;
 	}
 
-	public List<Proveedor> getListaProveedores() {
-		return listaProveedores;
-	}
+	
 
-	public void setListaProveedores(List<Proveedor> listaProveedores) {
-		this.listaProveedores = listaProveedores;
-	}
-
-	public List<CuentaBancaria> getListaCuentasBancarias() {
+	public List<Cuentabancaria> getListaCuentasBancarias() {
 		return listaCuentasBancarias;
 	}
 
-	public void setListaCuentasBancarias(List<CuentaBancaria> listaCuentasBancarias) {
+	public void setListaCuentasBancarias(List<Cuentabancaria> listaCuentasBancarias) {
 		this.listaCuentasBancarias = listaCuentasBancarias;
 	}
 

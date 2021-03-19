@@ -1,5 +1,6 @@
 package minimarketdemo.api.rest.auditoria;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +14,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import minimarketdemo.model.auditoria.managers.ManagerAuditoria;
+import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.AudBitacora;
+import minimarketdemo.model.core.managers.ManagerDAO;
 import minimarketdemo.model.core.utils.ModelUtil;
+import minimarketdemo.model.pago.dto.DTOPagoProveedores;
 
 @RequestScoped
 @Path("auditoria")
@@ -23,6 +27,8 @@ import minimarketdemo.model.core.utils.ModelUtil;
 public class ServicioRESTAuditoria {
 	@EJB
 	private ManagerAuditoria mAuditoria;
+	@EJB
+	ManagerDAO mDAO;
 	
 	@GET
 	@Path(value = "bitacora")

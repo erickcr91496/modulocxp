@@ -35,12 +35,8 @@
 
 				<h:outputText value="Nombre:" />
 
-				<p:selectOneMenu filter="true" id="nombres"
-					value="#{beanCuentaB.codiProv}" required="true">
-					<f:selectItems value="#{beanCuentaB.listaProveedores}" var="prov"
-						 itemValue="#{prov.codigoprov}" itemLabel="#{prov.nombre}" />
-					<p:ajax event="change" update="@this" />
-				</p:selectOneMenu>
+				<p:inputText value="#{beanCuentaB.nombre}"
+					required="true" requiredMessage="Debe ingresar el nombre del titular"></p:inputText>
 
 
 				<h:outputText value="Tipo cuenta:" />

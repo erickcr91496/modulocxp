@@ -3,13 +3,14 @@ package minimarketdemo.model.core.managers;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import minimarketdemo.model.core.entities.CuentaBancaria;
-import minimarketdemo.model.core.entities.Proveedor;
+import minimarketdemo.model.core.entities.Cuentabancaria;
+
 
 /**
  * Session Bean implementation class ManagerCuentasB
@@ -19,6 +20,9 @@ import minimarketdemo.model.core.entities.Proveedor;
 public class ManagerCuentasB {
 @PersistenceContext
 private EntityManager em;
+
+	@EJB
+	ManagerDAO mDAO;
     /**
      * Default constructor. 
      */
@@ -27,46 +31,45 @@ private EntityManager em;
 
     
     
-    public List<CuentaBancaria> findAllCuentasBancarias(){
-    	return em.createNamedQuery("CuentaBancaria.findAll", CuentaBancaria.class).getResultList();
+    public List<Cuentabancaria> findAllCuentasBancarias(){
+    	return em.createNamedQuery("Cuentabancaria.findAll", Cuentabancaria.class).getResultList();
     }
        
     
-    public void crearCuentaBancaria( int condigoProv ,String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
-    		BigDecimal saldoCB, boolean estadoCB ) {
+    public void crearCuentaBancaria(String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
+    		BigDecimal saldoCB, boolean estadoCB ) throws Exception {
     	
-    	CuentaBancaria c = new CuentaBancaria();
+    	Cuentabancaria c = new Cuentabancaria();
     	
-    	c.setCodigoprov(condigoProv);
-    	c.setNombre(nombre);
-    	c.setTipoCuenta(tipo_cuenta);
-    	c.setEntidadBancaria(descripcion);
-    	c.setDescripcion(descripcion);
+
+    	c.setPropietariocb(nombre);
+    	c.setTipocb(tipo_cuenta);
+    	c.setEntidadbancariacb(descripcion);
+    	c.setDescripcioncb(descripcion);
     	c.setSaldocb(saldoCB);
     	c.setEstadocb(estadoCB);
     	
-    	em.persist(c);
+    	mDAO.insertar(c);
     }
     
     public void eliminarCuentaBancaria(String codigo) throws Exception{
-    	CuentaBancaria c=em.find(CuentaBancaria.class, codigo);
+    	Cuentabancaria c=em.find(Cuentabancaria.class, codigo);
     	if(c==null)
     		throw new Exception("No existe la cuenta indicada: "+codigo);
     	em.remove(c);
     			
     }
     
-    public void actualizarCuentaBancaria(CuentaBancaria cuenta) throws Exception {
-    	CuentaBancaria c=em.find(CuentaBancaria.class, cuenta.getCodigocb());
+    public void actualizarCuentaBancaria(Cuentabancaria cuenta) throws Exception {
+    	Cuentabancaria c=em.find(Cuentabancaria.class, cuenta.getCodigocb());
     	
     	if(c==null) 
     		throw new Exception("No existe la cuenta indicada ("+cuenta.getCodigocb()+")");
     	
-    	c.setNombre(cuenta.getNombre());
-    	c.setCodigoprov(cuenta.getCodigoprov());
-    	c.setTipoCuenta(cuenta.getTipoCuenta());
-    	c.setEntidadBancaria(cuenta.getEntidadBancaria());
-    	c.setDescripcion(cuenta.getDescripcion());
+    	c.setPropietariocb(cuenta.getPropietariocb());
+    	c.setTipocb(cuenta.getTipocb());
+    	c.setEntidadbancariacb(cuenta.getEntidadbancariacb());
+    	c.setDescripcioncb(cuenta.getDescripcioncb());
     	c.setSaldocb(cuenta.getSaldocb());
     	
     	em.merge(c);
