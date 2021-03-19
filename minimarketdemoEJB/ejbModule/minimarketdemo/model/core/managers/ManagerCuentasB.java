@@ -35,12 +35,17 @@ private EntityManager em;
     	return em.createNamedQuery("Cuentabancaria.findAll", Cuentabancaria.class).getResultList();
     }
        
+
     
+    
+
     public void crearCuentaBancaria(String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) throws Exception {
+
     	
     	Cuentabancaria c = new Cuentabancaria();
     	
+
 
     	c.setPropietariocb(nombre);
     	c.setTipocb(tipo_cuenta);

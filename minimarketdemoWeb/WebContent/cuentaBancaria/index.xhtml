@@ -6,8 +6,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-
-
 <h:head></h:head>
 <body>
 
@@ -50,18 +48,18 @@
 
 							<h:outputText value="CodigoCB:" />
 							<p:selectOneMenu value="#{beanCuentaProv.codigoCB}">
-								<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
-									itemLabel="#{c.cuentaBancaria.codigocb}"
-									itemValue="#{c.cuentaBancaria.codigocb}"></f:selectItems>
+								<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
+									itemLabel="#{c.codigocb}"
+									itemValue="#{c.codigocb}"></f:selectItems>
 
 							</p:selectOneMenu>
 
 
 							<h:outputText value="Proveedor" />
 							<p:selectOneMenu value="#{beanCuentaProv.codigoProv}">
-								<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
-									itemLabel="#{c.proveedor.nombre}"
-									itemValue="#{c.proveedor.codigoprov}"></f:selectItems>
+								<f:selectItems value="#{beanCuentaB.listaProveedores}" var="c"
+									itemLabel="#{c.nombre}"
+									itemValue="#{c.codigoprov}"></f:selectItems>
 
 							</p:selectOneMenu>
 

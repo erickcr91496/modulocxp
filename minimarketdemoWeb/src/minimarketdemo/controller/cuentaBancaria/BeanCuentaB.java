@@ -1,17 +1,21 @@
 package minimarketdemo.controller.cuentaBancaria;
-
+ 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-
+ 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-
+ 
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.core.entities.Cuentabancaria;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
+
+
+
+
 import minimarketdemo.model.core.managers.ManagerProveedorFacturas;
 
 @Named
@@ -181,3 +185,4 @@ public class BeanCuentaB implements Serializable {
 	}
 
 }
+
