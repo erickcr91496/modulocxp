@@ -31,7 +31,8 @@ public class ServicioRESTAuditoria {
 	private ManagerAuditoria mAuditoria;
 	@EJB
 	ManagerDAO mDAO;
-
+	
+	
 	@GET
 	@Path(value = "bitacora")
 	public List<AudBitacora> findBitacoraAyer() {
@@ -93,5 +94,6 @@ public class ServicioRESTAuditoria {
 		
 		return pagos;
 	}
+
 
 }
