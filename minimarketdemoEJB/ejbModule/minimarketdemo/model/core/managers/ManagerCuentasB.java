@@ -31,25 +31,20 @@ private EntityManager em;
     	return em.createNamedQuery("CuentaBancaria.findAll", CuentaBancaria.class).getResultList();
     }
        
-    
-<<<<<<< HEAD
+
     public List<Proveedor> findAllProveedores(){
     	return em.createNamedQuery("Proveedor.findAll", Proveedor.class).getResultList();
     }
     
     
-    public void crearCuentaBancaria(String nombre, String tipo_cuenta,String entidad_bancaria, String descripcion,
-    		BigDecimal saldoCB, boolean estadoCB ) {
-    	
-    	CuentaBancaria c = new CuentaBancaria();
-=======
+
     public void crearCuentaBancaria( int condigoProv ,String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) {
     	
     	CuentaBancaria c = new CuentaBancaria();
     	
     	c.setCodigoprov(condigoProv);
->>>>>>> 02d3786c7f11db1d997789c593ddd3235314309e
+
     	c.setNombre(nombre);
     	c.setTipoCuenta(tipo_cuenta);
     	c.setEntidadBancaria(entidad_bancaria);
