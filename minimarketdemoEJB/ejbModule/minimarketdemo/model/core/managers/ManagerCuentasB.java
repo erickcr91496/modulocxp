@@ -31,6 +31,12 @@ private EntityManager em;
     	return em.createNamedQuery("CuentaBancaria.findAll", CuentaBancaria.class).getResultList();
     }
        
+
+
+    public List<Proveedor> findAllProveedores(){
+    	return em.createNamedQuery("Proveedor.findAll", Proveedor.class).getResultList();
+    }
+    
     
 
     public void crearCuentaBancaria( int condigoProv ,String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
@@ -39,6 +45,7 @@ private EntityManager em;
     	CuentaBancaria c = new CuentaBancaria();
     	
     	c.setCodigoprov(condigoProv);
+
     	c.setNombre(nombre);
     	c.setTipoCuenta(tipo_cuenta);
     	c.setEntidadBancaria(descripcion);
