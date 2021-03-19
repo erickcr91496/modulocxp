@@ -11,14 +11,26 @@ import java.util.List;
  * 
  */
 @Entity
+<<<<<<< HEAD
 @Table(name="cuenta_bancaria")
 @NamedQuery(name="CuentaBancaria.findAll", query="SELECT c FROM CuentaBancaria c")
 public class CuentaBancaria implements Serializable {
+=======
+@Table(name="cuentabancaria")
+
+@NamedQuery(name="Cuentabancaria.findAll", query="SELECT c FROM Cuentabancaria c")
+public class Cuentabancaria implements Serializable {
+>>>>>>> 0654384 (migracion bdd corregida y actualizaciones vistas)
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+<<<<<<< HEAD
 	@Column(unique=true, nullable=false, length=2147483647)
+=======
+
+	@Column(unique=true, nullable=false, length=15)
+>>>>>>> 0654384 (migracion bdd corregida y actualizaciones vistas)
 	private String codigocb;
 
 	@Column(nullable=false)
@@ -45,6 +57,13 @@ public class CuentaBancaria implements Serializable {
 	@OneToMany(mappedBy="cuentaBancaria")
 	private List<Pago> pagos;
 
+<<<<<<< HEAD
+=======
+	//bi-directional many-to-one association to CabeceraPago
+
+	@OneToMany(mappedBy="cuentabancaria")
+	private List<CabeceraPago> cabeceraPagos;
+>>>>>>> 0654384 (migracion bdd corregida y actualizaciones vistas)
 
 	public CuentaBancaria() {
 	}

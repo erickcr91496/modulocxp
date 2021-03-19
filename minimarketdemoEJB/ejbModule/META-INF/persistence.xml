@@ -17,5 +17,6 @@
 		<class>minimarketdemo.model.core.entities.DetallePago</class>
 
 
+
 	</persistence-unit>
 </persistence>
