@@ -77,5 +77,17 @@ public class ManagerProveedorFacturas {
 		}
     
     }
+    
+    
+    public void APiTABLA(Apifactura api) throws Exception {
+
+    		
+    		
+
+    		mDAO.insertar(api);
+    						
+		
+    
+    }
 
 }

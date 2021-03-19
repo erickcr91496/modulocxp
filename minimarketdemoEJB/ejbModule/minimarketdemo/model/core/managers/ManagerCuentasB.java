@@ -76,7 +76,7 @@ private EntityManager em;
     	c.setEntidadbancariacb(cuenta.getEntidadbancariacb());
     	c.setDescripcioncb(cuenta.getDescripcioncb());
     	c.setSaldocb(cuenta.getSaldocb());
-    	
+   	
     	em.merge(c);
     	}
     
