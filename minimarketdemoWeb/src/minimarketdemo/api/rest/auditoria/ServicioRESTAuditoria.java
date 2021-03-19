@@ -51,46 +51,43 @@ public class ServicioRESTAuditoria {
 
 		List<Apifactura> list = mDAO.findAll(Apifactura.class);
 		List<DTOPagoProveedor> pagos = new ArrayList<DTOPagoProveedor>();
-		
+
 		List provs = new ArrayList();
-		
+
 		List totales = new ArrayList();
-		
-		for(Apifactura p:list) {
-		
+
+		for (Apifactura p : list) {
+
 			provs.add(p.getIdProveedor());
 		}
-		
-		provs=(List) provs.stream().distinct().collect(Collectors.toList());
-		
-		BigDecimal total= new BigDecimal(0);
-		BigDecimal cero= new BigDecimal(0);
-		int cont=0;
-		double saldo=0;
-		
-		for(int i=0; i<provs.size(); i++) {
-			for(int j=0; j<list.size();j++) {
-				
-				if(provs.get(i)== list.get(j).getIdProveedor()){
-					total=total.add(list.get(j).getTotal());
-					
+
+		provs = (List) provs.stream().distinct().collect(Collectors.toList());
+
+		BigDecimal total = new BigDecimal(0);
+		BigDecimal cero = new BigDecimal(0);
+		int cont = 0;
+		double saldo = 0;
+
+		for (int i = 0; i < provs.size(); i++) {
+			for (int j = 0; j < list.size(); j++) {
+
+				if (provs.get(i) == list.get(j).getIdProveedor()) {
+					total = total.add(list.get(j).getTotal());
+
 				}
-						
+
 			}
 			totales.add(total);
-			total=cero;		
+			total = cero;
 		}
-		
-		
-		for (int i=0; i<provs.size(); i++) {
-		
 
-			DTOPagoProveedor pag = new DTOPagoProveedor((int)provs.get(i), (BigDecimal)totales.get(i));
+		for (int i = 0; i < provs.size(); i++) {
+
+			DTOPagoProveedor pag = new DTOPagoProveedor((int) provs.get(i), (BigDecimal) totales.get(i));
 			pagos.add(pag);
-			
+
 		}
-		
-		
+
 		return pagos;
 	}
 

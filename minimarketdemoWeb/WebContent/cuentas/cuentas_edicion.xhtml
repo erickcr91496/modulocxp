@@ -32,27 +32,24 @@
 			<p:panelGrid columns="2">
 				<h:outputText value="Nombre:" />
 
-				<p:selectOneMenu filter="true" id="nombres"
-					value="#{beanCuentaB.codiProv}" required="true">
-					<f:selectItems value="#{beanCuentaB.listaProveedores}" var="prov"
-						 itemValue="#{prov.codigoprov}" itemLabel="#{prov.nombre}" />
-					<p:ajax event="change" update="@this" />
-				</p:selectOneMenu>
+				<p:inputText value="#{beanCuentaB.cuentaEdit.propietariocb}"
+					required="true" requiredMessage="Debe ingresar el nombre del titular"></p:inputText>
+				
 				
 
 				<h:outputText value="Tipo cuenta:" />
 				<p:selectOneMenu id="option"
-					value="#{beanCuentaB.cuentaEdit.tipoCuenta}">
+					value="#{beanCuentaB.cuentaEdit.tipocb}">
 					<f:selectItem itemLabel="Cuenta Ahorros" itemValue="Cuenta Ahorros" />
 					<f:selectItem itemLabel="Cuenta Corriente"
 						itemValue="Cuenta Corriente" />
 				</p:selectOneMenu>
 
 				<h:outputText value="Entidad Bancaria" />
-				<p:inputText value="#{beanCuentaB.cuentaEdit.entidadBancaria}"
+				<p:inputText value="#{beanCuentaB.cuentaEdit.entidadbancariacb}"
 					required="true" requiredMessage="debe ingresar la entidad bancaria"></p:inputText>
 				<h:outputText value="Descripcion" />
-				<p:inputText value="#{beanCuentaB.cuentaEdit.descripcion}"
+				<p:inputText value="#{beanCuentaB.cuentaEdit.descripcioncb}"
 					required="true" requiredMessage="debe ingresar la descripcion"></p:inputText>
 				<h:outputText value="saldo" />
 				<p:inputText value="#{beanCuentaB.cuentaEdit.saldocb}"
