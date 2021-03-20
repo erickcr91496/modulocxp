@@ -22,8 +22,8 @@ public class BeanSegUsuarios implements Serializable {
 	private SegUsuario edicionUsuario;
 	
 	
+	
 	public BeanSegUsuarios() {
-		
 	}
 	
 	public String actionMenuUsuarios() {

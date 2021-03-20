@@ -8,20 +8,29 @@
 
 
 
-<h:head></h:head>
+<h:head>
+	<title>Pagos</title>
+</h:head>
 <body>
-
 	<p:growl>
-		<p:autoUpdate>
-		</p:autoUpdate>
-
+		<p:autoUpdate />
 	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<p:menuitem value="Nueva Cabecera " icon="pi pi-wallet"
+				action="nuevaCabecera?faces-redirect=true" />
+				<p:menuitem value="Nuevo Detalle " icon="pi pi-wallet"
+				action="NuevoDetalle?faces-redirect=true" />	
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
 
-	<p:panel>
-		<h3>
-			<h:outputText value="Pagos" />
-		</h3>
-	</p:panel>
 	<div class="ui-g">
 		<div class="ui-g-2">
 
@@ -41,43 +50,41 @@
 
 		<div class="ui-g-10">
 
-			
+
 			<h:form>
-					<p:dataTable value="#{beanCabeceraPagos.cabeceraList}" var="c"
-						paginator="true" rows="5">
-						<p:column headerText="CODIGO ">
-							<h:outputText value="#{c.nroPago}" />
-						</p:column>
-						<p:column headerText="NOMBRE CAJERO">
-							<h:outputText value="#{c.nombreCajero}" />
-						</p:column>
-						<p:column headerText="ID PROVEEDOR">
-							<h:outputText value="#{c.idProveedor}" />
-						</p:column>
-						<p:column headerText="ENTIDAD BANCARIA">
-							<h:outputText value="#{c.cuentabancaria.propietariocb}" />
-						</p:column>
-						<p:column headerText="DESCRIPCION">
-							<h:outputText value="#{c.descripcion}" />
-						</p:column>
-						<p:column headerText="FECHA">
-							<h:outputText value="#{c.fecha}" />
-						</p:column>
-						<p:column headerText="OPCIONES">
-							<p:commandButton icon="pi pi-pencil" title="editar"
-								 />
-							<p:commandButton icon="pi pi-times-circle" title="eliminar"
-								
-								styleClass="ui-button-danger" update="@form">
-								<p:confirm header="Confirmacion" message="desea eliminar?"
-									icon="pi pi-exclamation-triangle"></p:confirm>
-							</p:commandButton>
+				<p:dataTable value="#{beanCabeceraPagos.cabeceraList}" var="c"
+					paginator="true" rows="5">
+					<p:column headerText="CODIGO ">
+						<h:outputText value="#{c.nroPago}" />
+					</p:column>
+					<p:column headerText="NOMBRE CAJERO">
+						<h:outputText value="#{c.nombreCajero}" />
+					</p:column>
+					<p:column headerText="ID PROVEEDOR">
+						<h:outputText value="#{c.idProveedor}" />
+					</p:column>
+					<p:column headerText="ENTIDAD BANCARIA">
+						<h:outputText value="#{c.cuentabancaria.propietariocb}" />
+					</p:column>
+					<p:column headerText="DESCRIPCION">
+						<h:outputText value="#{c.descripcion}" />
+					</p:column>
+					<p:column headerText="FECHA">
+						<h:outputText value="#{c.fecha}" />
+					</p:column>
+					<p:column headerText="OPCIONES">
+						<p:commandButton icon="pi pi-pencil" title="editar" />
+						<p:commandButton icon="pi pi-times-circle" title="eliminar"
+							styleClass="ui-button-danger" update="@form">
+							<p:confirm header="Confirmacion" message="desea eliminar?"
+								icon="pi pi-exclamation-triangle"></p:confirm>
+						</p:commandButton>
 
 
 
-						</p:column>
-					</p:dataTable>
-				</h:form>
+					</p:column>
+				</p:dataTable>
+			</h:form>
 
 			<div class="ui-g-12">
 				<h:form id="formDatos">
