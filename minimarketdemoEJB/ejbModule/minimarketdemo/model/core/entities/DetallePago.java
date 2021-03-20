@@ -17,7 +17,6 @@ public class DetallePago implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-
 	@Column(unique=true, nullable=false)
 	private Integer iddetalle;
 

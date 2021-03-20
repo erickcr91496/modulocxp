@@ -1,5 +1,4 @@
 package minimarketdemo.controller.cuentaBancaria;
-
  
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,19 +8,19 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-
-import minimarketdemo.controller.JSFUtil;
-import minimarketdemo.model.core.entities.CuentaBancaria;
-import minimarketdemo.model.core.entities.Proveedor;
-import minimarketdemo.model.core.managers.ManagerCuentasB;
-import minimarketdemo.model.core.managers.ManagerProveedor;
-
-
  
+import minimarketdemo.controller.JSFUtil;
+import minimarketdemo.model.core.entities.Cuentabancaria;
+import minimarketdemo.model.core.managers.ManagerCuentasB;
+
+
+
+
+import minimarketdemo.model.core.managers.ManagerProveedorFacturas;
+
 @Named
 @SessionScoped
 public class BeanCuentaB implements Serializable {
-
 
 	private String nombre;
 	private String tipoCuenta;
@@ -56,7 +55,6 @@ public class BeanCuentaB implements Serializable {
 
 	public void actionListenerCrearCuenta() {
 		try {
-
 			System.out.println("actionListenerCrearCuenta!!!!!!!!!");
 			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
 			JSFUtil.crearMensajeINFO("Cuenta creada");
@@ -66,20 +64,6 @@ public class BeanCuentaB implements Serializable {
 			tipoCuenta = "";
 			entidadBancaria = "";
 			descripcion = "";
-
-			provee = new Proveedor();
-
-			mCuentas.crearCuentaBancaria(nombre, tipoCuenta, entidadBancaria, descripcion, saldo, true);
-			JSFUtil.crearMensajeINFO("Cuenta creada");
-			//actualizamos la lista de cuentas
-			listaCuentasBancarias= mCuentas.findAllCuentasBancarias();
-			nombre="";
-			tipoCuenta="";
-			entidadBancaria="";
-			descripcion="";
-			
-			
-
 
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
@@ -105,21 +89,6 @@ public class BeanCuentaB implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
-	
-	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
-		cuentaEdit=cuentab;
-		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
-		return "cuentas_edicion";
-	}
-
-	
-	public String actionSeleccionarEdicionCuenta(CuentaBancaria cuentab) {
-		cuentaEdit=cuentab;
-		System.out.println("cuenta seleccionado: "+cuentaEdit.getCodigocb());
-		return "cuentas_edicion";
-	}
-	
 
 	public void actionListenerEliminarCuenta(String codigo) {
 		try {

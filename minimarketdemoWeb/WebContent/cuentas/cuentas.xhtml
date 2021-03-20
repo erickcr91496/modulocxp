@@ -39,16 +39,16 @@
 					<h:outputText value="#{u.codigocb}" />
 				</p:column>
 				<p:column headerText="NOMBRE">
-					<h:outputText value="#{u.nombre}" />
+					<h:outputText value="#{u.propietariocb}" />
 				</p:column>
 				<p:column headerText="TIPO DE CUENTA">
-					<h:outputText value="#{u.tipoCuenta}" />
+					<h:outputText value="#{u.tipocb}" />
 				</p:column>
 				<p:column headerText="ENTIDAD BANCARIA">
-					<h:outputText value="#{u.entidadBancaria}" />
+					<h:outputText value="#{u.entidadbancariacb}" />
 				</p:column>
 				<p:column headerText="DESCRIPCION">
-					<h:outputText value="#{u.descripcion}" />
+					<h:outputText value="#{u.descripcioncb}" />
 				</p:column>
 				<p:column headerText="SALDO">
 					<h:outputText value="#{u.saldocb}" />
@@ -73,20 +73,6 @@
 		</h:form>
 
 
-
-				<p:column headerText="OPCIONES">
-					<p:commandButton icon="pi pi-pencil" title="editar"
-						action="#{beanCuentaB.actionSeleccionarEdicionCuenta(u)}" />
-					<p:commandButton icon="pi pi-times-circle" title="eliminar"
-						actionListener="#{beanCuentaB.actionListenerEliminarCuenta(u.codigocb)}"
-						styleClass="ui-button-danger" update="@form">
-						<p:confirm header="Confirmacion" message="desea eliminar?"
-							icon="pi pi-exclamation-triangle"></p:confirm>
-					</p:commandButton>
-
-				</p:column>
-			</p:dataTable>
-		</h:form>
 
 	</p:panel>
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"

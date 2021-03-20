@@ -7,65 +7,42 @@ import java.util.List;
 
 
 /**
- * The persistent class for the cuenta_bancaria database table.
+ * The persistent class for the cuentabancaria database table.
  * 
  */
 @Entity
-<<<<<<< HEAD
-@Table(name="cuenta_bancaria")
-@NamedQuery(name="CuentaBancaria.findAll", query="SELECT c FROM CuentaBancaria c")
-public class CuentaBancaria implements Serializable {
-=======
 @Table(name="cuentabancaria")
-
 @NamedQuery(name="Cuentabancaria.findAll", query="SELECT c FROM Cuentabancaria c")
 public class Cuentabancaria implements Serializable {
->>>>>>> 0654384 (migracion bdd corregida y actualizaciones vistas)
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-<<<<<<< HEAD
-	@Column(unique=true, nullable=false, length=2147483647)
-=======
-
 	@Column(unique=true, nullable=false, length=15)
->>>>>>> 0654384 (migracion bdd corregida y actualizaciones vistas)
 	private String codigocb;
 
-	@Column(nullable=false)
-	private Integer codigoprov;
+	@Column(nullable=false, length=100)
+	private String descripcioncb;
 
-	@Column(length=50)
-	private String descripcion;
-
-	@Column(name="entidad_bancaria", length=50)
-	private String entidadBancaria;
+	@Column(nullable=false, length=50)
+	private String entidadbancariacb;
 
 	private Boolean estadocb;
 
-	@Column(length=50)
-	private String nombre;
+	@Column(nullable=false, length=100)
+	private String propietariocb;
 
 	@Column(precision=10, scale=2)
 	private BigDecimal saldocb;
 
-	@Column(name="tipo_cuenta", length=50)
-	private String tipoCuenta;
+	@Column(nullable=false, length=50)
+	private String tipocb;
 
-	//bi-directional many-to-one association to Pago
-	@OneToMany(mappedBy="cuentaBancaria")
-	private List<Pago> pagos;
-
-<<<<<<< HEAD
-=======
 	//bi-directional many-to-one association to CabeceraPago
-
 	@OneToMany(mappedBy="cuentabancaria")
 	private List<CabeceraPago> cabeceraPagos;
->>>>>>> 0654384 (migracion bdd corregida y actualizaciones vistas)
 
-	public CuentaBancaria() {
+	public Cuentabancaria() {
 	}
 
 	public String getCodigocb() {
@@ -76,28 +53,20 @@ public class Cuentabancaria implements Serializable {
 		this.codigocb = codigocb;
 	}
 
-	public Integer getCodigoprov() {
-		return this.codigoprov;
+	public String getDescripcioncb() {
+		return this.descripcioncb;
 	}
 
-	public void setCodigoprov(Integer codigoprov) {
-		this.codigoprov = codigoprov;
+	public void setDescripcioncb(String descripcioncb) {
+		this.descripcioncb = descripcioncb;
 	}
 
-	public String getDescripcion() {
-		return this.descripcion;
+	public String getEntidadbancariacb() {
+		return this.entidadbancariacb;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getEntidadBancaria() {
-		return this.entidadBancaria;
-	}
-
-	public void setEntidadBancaria(String entidadBancaria) {
-		this.entidadBancaria = entidadBancaria;
+	public void setEntidadbancariacb(String entidadbancariacb) {
+		this.entidadbancariacb = entidadbancariacb;
 	}
 
 	public Boolean getEstadocb() {
@@ -108,12 +77,12 @@ public class Cuentabancaria implements Serializable {
 		this.estadocb = estadocb;
 	}
 
-	public String getNombre() {
-		return this.nombre;
+	public String getPropietariocb() {
+		return this.propietariocb;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setPropietariocb(String propietariocb) {
+		this.propietariocb = propietariocb;
 	}
 
 	public BigDecimal getSaldocb() {
@@ -124,35 +93,34 @@ public class Cuentabancaria implements Serializable {
 		this.saldocb = saldocb;
 	}
 
-	public String getTipoCuenta() {
-		return this.tipoCuenta;
+	public String getTipocb() {
+		return this.tipocb;
 	}
 
-	public void setTipoCuenta(String tipoCuenta) {
-		this.tipoCuenta = tipoCuenta;
+	public void setTipocb(String tipocb) {
+		this.tipocb = tipocb;
 	}
 
-	public List<Pago> getPagos() {
-		return this.pagos;
+	public List<CabeceraPago> getCabeceraPagos() {
+		return this.cabeceraPagos;
 	}
 
-	public void setPagos(List<Pago> pagos) {
-		this.pagos = pagos;
+	public void setCabeceraPagos(List<CabeceraPago> cabeceraPagos) {
+		this.cabeceraPagos = cabeceraPagos;
 	}
 
-	public Pago addPago(Pago pago) {
-		getPagos().add(pago);
-		pago.setCuentaBancaria(this);
+	public CabeceraPago addCabeceraPago(CabeceraPago cabeceraPago) {
+		getCabeceraPagos().add(cabeceraPago);
+		cabeceraPago.setCuentabancaria(this);
 
-		return pago;
+		return cabeceraPago;
 	}
 
-	public Pago removePago(Pago pago) {
-		getPagos().remove(pago);
-		pago.setCuentaBancaria(null);
+	public CabeceraPago removeCabeceraPago(CabeceraPago cabeceraPago) {
+		getCabeceraPagos().remove(cabeceraPago);
+		cabeceraPago.setCuentabancaria(null);
 
-		return pago;
+		return cabeceraPago;
 	}
-
 
 }
