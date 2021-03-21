@@ -32,6 +32,8 @@ public class ManagerCabeceraPagos {
 	ManagerDAO mDAO;
 	@EJB
 	ManagerProveedorFacturas mFacturas;
+	
+	
 	public ManagerCabeceraPagos() {
 
 	}
@@ -83,6 +85,7 @@ public class ManagerCabeceraPagos {
     	if(u==null)
     		throw new Exception("No existe la cuenta indicada");
     	ca.setCuentabancaria(u);
+    	
     	
     	ca.setCodigousuario(codigoUsuario);
     	

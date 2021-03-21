@@ -1,6 +1,7 @@
 package minimarketdemo.model.core.managers;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.Cuentabancaria;
 
 
@@ -37,7 +39,16 @@ private EntityManager em;
        
 
     
-    
+    public List<Cuentabancaria> findAllByCodigoCB(String codigoCB){
+		List<Cuentabancaria> list = findAllCuentasBancarias();
+		List<Cuentabancaria> aux = new ArrayList<Cuentabancaria>();
+		for (Cuentabancaria a : list) {
+			if(a.getCodigocb().equals(codigoCB)) {
+				aux.add(a);
+			}
+		}
+		return aux;
+	}
 
     public void crearCuentaBancaria(String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) throws Exception {

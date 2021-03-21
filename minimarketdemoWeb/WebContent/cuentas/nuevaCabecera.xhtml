@@ -44,17 +44,22 @@
 				<p:selectOneMenu value="#{beanGenerarPago.codigoCB}">
 					<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
 						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>
+						
+						<p:ajax update="saldoCuenta"
+						listener="#{beanGenerarPago.listenerObtenerSaldo()}" />
 
 				</p:selectOneMenu>
 
-
-				<h:outputText value="Nombre cajero" />
-				<p:selectOneMenu value="#{beanGenerarPago.codigoUsuario}">
-					<f:selectItems value="#{beanCabeceraPagos.listaUsuarios}" var="c"
-						itemLabel="#{c.idSegUsuario}" itemValue="#{c.idSegUsuario}"></f:selectItems>
-
-				</p:selectOneMenu>
-
+				<h:outputText value="Nombre Cajero"   />
+					<h:outputText value="#{beanSegLogin.loginDTO.nombre}"   />
+				
+				
+				<h:outputText value="Saldo CB"   />
+				<h:outputText id="saldoCuenta" value="#{beanGenerarPago.saldo}"></h:outputText>
+				
+				
+				
+				
 
 			</p:panelGrid>
 			<br />

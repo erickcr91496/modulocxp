@@ -32,6 +32,7 @@ public class ManagerSeguridades {
 	@EJB
 	private ManagerAuditoria mAuditoria;
 
+	public static int llevar=0;
 	/**
 	 * Default constructor.
 	 */
@@ -115,12 +116,16 @@ public class ManagerSeguridades {
     		if(usuario.getActivo()==false) {
         		mAuditoria.mostrarLog(getClass(), "login", "Intento de login usuario desactivado "+idSegUsuario);
         		throw new Exception("El usuario esta desactivado.");
-        	}
-    		mAuditoria.mostrarLog(getClass(), "login", "Login exitoso "+idSegUsuario);
+        	} 
+    		mAuditoria.mostrarLog(getClass(), "login", "Login exitoso llega"+idSegUsuario);
     		//crear DTO:
     		LoginDTO loginDTO=new LoginDTO();
     		loginDTO.setIdSegUsuario(usuario.getIdSegUsuario());
     		loginDTO.setCorreo(usuario.getCorreo());
+    		loginDTO.setNombre(usuario.getNombres());
+    		llevar= usuario.getIdSegUsuario();
+    		
+    		
     		//obtener la lista de modulos a los que tiene acceso:
     		List<SegAsignacion> listaAsignaciones=findAsignacionByUsuario(usuario.getIdSegUsuario());
     		for(SegAsignacion asig:listaAsignaciones) {
@@ -178,6 +183,10 @@ public class ManagerSeguridades {
 			LoginDTO loginDTO = new LoginDTO();
 			loginDTO.setIdSegUsuario(usuario.getIdSegUsuario());
 			loginDTO.setCorreo(usuario.getCorreo());
+			loginDTO.setNombre(usuario.getNombres());
+    		llevar= usuario.getIdSegUsuario();
+
+			
 			// obtener la lista de modulos a los que tiene acceso:
 			List<SegAsignacion> listaAsignaciones = findAsignacionByUsuario(usuario.getIdSegUsuario());
 			for (SegAsignacion asig : listaAsignaciones) {
