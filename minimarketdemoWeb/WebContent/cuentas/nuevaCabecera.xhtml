@@ -28,87 +28,100 @@
 		</p:menubar>
 	</h:form>
 	<p:panel>
-		<h:form>
-			<p:panelGrid columns="2">
+		<h:form id="frmDatos">
+			<p:panelGrid columns="8" id="pnlCabecera">
 
 
 
 				<h:outputText value="DescripcionPagos:" />
 
-				<p:inputText value="#{beanCabeceraPagos.descripcionpago}"
+				<p:inputText value="#{beanGenerarPago.descripcionpago}"
 					required="true"
 					requiredMessage="Debe ingresar la descripcion de pago"></p:inputText>
 
 
-				<h:outputText value="Codigo CB" />
-				<p:selectOneMenu value="#{beanCabeceraPagos.codigoCB}">
+				<h:outputText value="Codigo cuenta bancaria" />
+				<p:selectOneMenu value="#{beanGenerarPago.codigoCB}">
 					<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
 						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>
 
 				</p:selectOneMenu>
 
 
-				<h:outputText value="Codigo Usuario" />
-				<p:selectOneMenu value="#{beanCabeceraPagos.codigoUsuario}">
+				<h:outputText value="Nombre cajero" />
+				<p:selectOneMenu value="#{beanGenerarPago.codigoUsuario}">
 					<f:selectItems value="#{beanCabeceraPagos.listaUsuarios}" var="c"
 						itemLabel="#{c.idSegUsuario}" itemValue="#{c.idSegUsuario}"></f:selectItems>
 
 				</p:selectOneMenu>
 
-				<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
-					actionListener="#{beanCabeceraPagos.actionListenerCrearCabeceraPago()}"></p:commandButton>
+
 			</p:panelGrid>
-			
-			<p:panelGrid columns="2" >
+			<br />
 
 
+			<p:panelGrid columns="4" id="pnlDetalle">
+
+				<h:outputText id="cmbproveedor" value="Codigo Proveedor" />
+				<p:selectOneMenu value="#{beanGenerarPago.idProveedor}">
+					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
+						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
+					<p:ajax update=":frmDatos:pnlDetalle"
+						listener="#{beanGenerarPago.listenerListarFacturasByIdProv()}" />
+				</p:selectOneMenu>
+
+				<h:outputText id="cmbfactura" value="Codigo Factura" />
+				<p:selectOneMenu value="#{beanGenerarPago.idFactura}">
+					<f:selectItems value="#{beanGenerarPago.apifacturaList}" var="f"
+						itemLabel="#{f.idFactura}" itemValue="#{f.idFactura}"></f:selectItems>
+					<p:ajax update="outTotal"
+						listener="#{beanGenerarPago.listenerFactura()}" />
+				</p:selectOneMenu>
 
 				<h:outputText value="Valor Factura:" />
 
-				<p:inputText value="vfact" required="true"></p:inputText>
+				<h:outputText id="outTotal" value="#{beanGenerarPago.factura.total}"></h:outputText>
 
 				<h:outputText value="Valor a Pagar:" />
 
-				<p:inputText value="valor" required="true"></p:inputText>
+				<p:spinner value="#{beanGenerarPago.valorApagar}" required="true" />
 
-				<h:outputText value="Id Factura" />
-				<p:selectOneMenu value=" ">
-					<f:selectItems value=" " var="c" itemLabel="add" itemValue="add"></f:selectItems>
-
-				</p:selectOneMenu>
-
-				
+				<p:commandButton value="Agregar" icon="pi pi-save"
+					update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles"
+					actionListener="#{beanGenerarPago.actionListenerInsertarListaDetalle()}"></p:commandButton>
 			</p:panelGrid>
-			
-			
-			
-			
+
+
+			<div class="ui-g-12">
+
+
+				<p:dataTable value="#{beanGenerarPago.detalleList}" var="d"
+					id="tblDetalles">
+					<p:column headerText="IdFactura">
+						<h:outputText value="#{d.apifactura.idFactura}" />
+					</p:column>
+					<p:column headerText="valorFactura">
+						<h:outputText value="#{d.valorfactura}" />
+					</p:column>
+					<p:column headerText="valorPagar">
+						<h:outputText value="#{d.valorapagar}" />
+					</p:column>
+
+
+					<p:column headerText="Total">
+						<h:outputText value="#{d.valorfactura.subtract(d.valorapagar)}" />
+					</p:column>
+
+				</p:dataTable>
+
+
+			</div>
+			<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
+				actionListener="#{beanGenerarPago.actionListenerInsertarDetalles()}"></p:commandButton>
 		</h:form>
 	</p:panel>
-	
-	<div class="ui-g-12">
-		<h:form id="formDatos">
-
-			<p:dataTable value="" var="u">
-				<p:column headerText="IdFactura">
-					<h:outputText value="fact1" />
-				</p:column>
-				<p:column headerText="valorFactura">
-					<h:outputText value="20" />
-				</p:column>
-				<p:column headerText="valorPagar">
-					<h:outputText value="10" />
-				</p:column>
 
 
-				<p:column headerText="Total">
-					<h:outputText value="10" />
-				</p:column>
 
-			</p:dataTable>
-						
-		</h:form>
-	</div>
-	
 </body>
 </html>

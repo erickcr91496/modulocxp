@@ -91,5 +91,9 @@ public class ManagerCabeceraPagos {
     	em.persist(ca);
     }
     
+    public List<CabeceraPago> findAllCabeceraPago(){
+    	return mDAO.findAll(CabeceraPago.class);
+    }
+    
 
 }
