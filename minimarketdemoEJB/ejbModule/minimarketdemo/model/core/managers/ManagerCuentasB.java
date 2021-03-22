@@ -10,10 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-<<<<<<< HEAD
-=======
+
 import minimarketdemo.model.core.entities.Apifactura;
->>>>>>> 28f21844eb1082926afacdea95a99ad817d9a230
 import minimarketdemo.model.core.entities.Cuentabancaria;
 
 
@@ -53,12 +51,10 @@ private EntityManager em;
 		return aux;
 	}
     
-<<<<<<< HEAD
-=======
+
     public Cuentabancaria findByIdCuenta(String codigo) throws Exception {
     	return (Cuentabancaria) mDAO.findById(Cuentabancaria.class, codigo);
     }
->>>>>>> 28f21844eb1082926afacdea95a99ad817d9a230
 
     public void crearCuentaBancaria(String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) throws Exception {
