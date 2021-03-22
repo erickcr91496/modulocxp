@@ -12,6 +12,32 @@
 	<title>Pagos</title>
 </h:head>
 <body>
+
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
+			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
+				action="cuentas?faces-redirect=true" />
+
+			<p:menuitem value="Pagos" icon="pi pi-credit-card"
+				action="pagos?faces-redirect=true" />
+
+			<p:menuitem value="Documentos de pago" icon="pi pi-copy"
+				action="datos_pago?faces-redirect=true" />
+			<p:menuitem value="Estado de cuenta"
+				icon="pi pi-exclamation-triangle" />
+			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
+
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
@@ -36,23 +62,24 @@
 
 
 
-			<h:form>
-				<p:menu>
-					<p:submenu label="Opciones para admin">
-						<p:menuitem value="Regresar" icon="pi pi-home" action="index">
-						</p:menuitem>
+<!-- 			<h:form> -->
+<!-- 				<p:menu> -->
+<!-- 					<p:submenu label="Opciones para admin"> -->
+<!-- 						<p:menuitem value="Regresar" icon="pi pi-home" action="index"> -->
+<!-- 						</p:menuitem> -->
 
-					</p:submenu>
+<!-- 					</p:submenu> -->
 
-				</p:menu>
-			</h:form>
+<!-- 				</p:menu> -->
+<!-- 			</h:form> -->
 		</div>
 
 		<div class="ui-g-10">
 
 
 			<h:form>
-				<p:dataTable value="#{beanCabeceraPagos.cabeceraList}" var="c"
+
+				<p:dataTable  value="#{beanCabeceraPagos.cabeceraList}" var="c"
 					paginator="true" rows="5">
 					<p:column headerText="CODIGO ">
 						<h:outputText value="#{c.nroPago}" />
@@ -73,97 +100,103 @@
 						<h:outputText value="#{c.fecha}" />
 					</p:column>
 					<p:column headerText="OPCIONES">
-						<p:commandButton icon="pi pi-pencil" title="editar" />
+
+						<p:commandButton icon="pi pi-pencil" title="editar"
+							action="/detalle_pago" />
 						<p:commandButton icon="pi pi-times-circle" title="eliminar"
 							styleClass="ui-button-danger" update="@form">
 							<p:confirm header="Confirmacion" message="desea eliminar?"
 								icon="pi pi-exclamation-triangle"></p:confirm>
 						</p:commandButton>
 
+						<p:commandButton icon="pi pi-search-plus" title="Ver Detalles"
+							action="#{beanDetallePagos.actionSeleccionarDetallePago(c)}" />
 
 
 					</p:column>
 				</p:dataTable>
 			</h:form>
 
-			<div class="ui-g-12">
-				<h:form id="formDatos">
+			<!-- 			<div class="ui-g-12"> -->
+							<h:form id="formDatos">
 
-					<p:dataTable value="#{beanCuentaProv.listaCuentaProv}" var="u">
-						<p:column headerText="codigoMD">
-							<h:outputText value="#{u.codigomd}" />
-						</p:column>
-						<p:column headerText="codigoCB">
-							<h:outputText value="#{u.cuentaBancaria.codigocb}" />
-						</p:column>
-						<p:column headerText="codigoProv">
-							<h:outputText value="#{u.proveedor.codigoprov}" />
-						</p:column>
+			<!-- 					<p:dataTable value="#{beanCuentaProv.listaCuentaProv}" var="u"> -->
+			<!-- 						<p:column headerText="codigoMD"> -->
+			<!-- 							<h:outputText value="#{u.codigomd}" /> -->
+			<!-- 						</p:column> -->
+			<!-- 						<p:column headerText="codigoCB"> -->
+			<!-- 							<h:outputText value="#{u.cuentaBancaria.codigocb}" /> -->
+			<!-- 						</p:column> -->
+			<!-- 						<p:column headerText="codigoProv"> -->
+			<!-- 							<h:outputText value="#{u.proveedor.codigoprov}" /> -->
+			<!-- 						</p:column> -->
 
-						<p:column headerText="Saldo a pagar">
-							<h:outputText value="#{u.saldoPagar}" />
-						</p:column>
+			<!-- 						<p:column headerText="Saldo a pagar"> -->
+			<!-- 							<h:outputText value="#{u.saldoPagar}" /> -->
+			<!-- 						</p:column> -->
 
-						<p:column headerText="OPCIONES">
-							<p:commandButton icon="pi pi-trash" title="eliminar"
-								actionListener="#{beanCuentaProv.actionListenerEliminarCuentasProvs(u.codigomd)}"
-								update="@form">
-								<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
+			<!-- 						<p:column headerText="OPCIONES"> -->
+			<!-- 							<p:commandButton icon="pi pi-trash" title="eliminar" -->
+			<!-- 								actionListener="#{beanCuentaProv.actionListenerEliminarCuentasProvs(u.codigomd)}" -->
+			<!-- 								update="@form"> -->
+			<!-- 								actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
 
 
-								<p:confirm header="Confirmacion" message="desea eliminar?"
-									icon="pi pi-exclamation-triangle"></p:confirm>
-							</p:commandButton>
+			<!-- 								<p:confirm header="Confirmacion" message="desea eliminar?" -->
+			<!-- 									icon="pi pi-exclamation-triangle"></p:confirm> -->
+			<!-- 							</p:commandButton> -->
 
-							<p:commandButton icon="pi pi-user-edit" title="editar"
-								actionListener="#{beanCuentaProv.actionListenerSeleccionarCuentaProv(u)}"
-								update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
-							</p:commandButton>
+			<!-- 							<p:commandButton icon="pi pi-user-edit" title="editar" -->
+			<!-- 								actionListener="#{beanCuentaProv.actionListenerSeleccionarCuentaProv(u)}" -->
+			<!-- 								update=":formEdicion" oncomplete="PF('dlgEdicion').show();"> -->
+			<!-- 							</p:commandButton> -->
 
-						</p:column>
-					</p:dataTable>
+			<!-- 						</p:column> -->
+			<!-- 					</p:dataTable> -->
+			<!-- 				</h:form> -->
+			<!-- 			</div> -->
+			<!-- 		</div> -->
+			<!-- 	</div> -->
+
+			<p:dialog header="Editar informacion" widgetVar="dlgEdicion"
+				modal="true">
+				<h:form id="formEdicion">
+					<p:messages>
+						<p:autoUpdate>
+						</p:autoUpdate>
+					</p:messages>
+					<h:panelGrid columns="2">
+
+						<h:outputText value="Codigo CuentaB" />
+						<h:outputText
+							value="#{beanCuentaProv.cuentaProvEdit.cuentaBancaria.codigocb}" />
+
+						<h:outputText value="Proveedor" />
+						<h:outputText
+							value="#{beanCuentaProv.cuentaProvEdit.proveedor.nombre}" />
+
+						<h:outputText value="Saldo a pagar" />
+						<p:inputText value="#{beanCuentaProv.cuentaProvEdit.saldoPagar}"
+							required="true" requiredMessage="debe ingresar el saldo"></p:inputText>
+
+						<p:commandButton value="Actualizar" icon="fa fa-save"
+							update="@form,:formDatos"
+							actionListener="#{beanCuentaProv.actionListenerActualizarCuentaProv()}"></p:commandButton>
+					</h:panelGrid>
 				</h:form>
-			</div>
-		</div>
-	</div>
 
-	<p:dialog header="Editar informacion" widgetVar="dlgEdicion"
-		modal="true">
-		<h:form id="formEdicion">
-			<p:messages>
-				<p:autoUpdate>
-				</p:autoUpdate>
-			</p:messages>
-			<h:panelGrid columns="2">
 
-				<h:outputText value="Codigo CuentaB" />
-				<h:outputText
-					value="#{beanCuentaProv.cuentaProvEdit.cuentaBancaria.codigocb}" />
+			</p:dialog>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="SI" type="button"
+					styleClass="ui-confirmdialog-yes" icon="pi pi-check"></p:commandButton>
+				<p:commandButton value="NO" type="button"
+					styleClass="ui-confirmdialog-no" icon="pi pi-times"></p:commandButton>
 
-				<h:outputText value="Proveedor" />
-				<h:outputText
-					value="#{beanCuentaProv.cuentaProvEdit.proveedor.nombre}" />
-
-				<h:outputText value="Saldo a pagar" />
-				<p:inputText value="#{beanCuentaProv.cuentaProvEdit.saldoPagar}"
-					required="true" requiredMessage="debe ingresar el saldo"></p:inputText>
-
-				<p:commandButton value="Actualizar" icon="fa fa-save"
-					update="@form,:formDatos"
-					actionListener="#{beanCuentaProv.actionListenerActualizarCuentaProv()}"></p:commandButton>
-			</h:panelGrid>
+			</p:confirmDialog>
 		</h:form>
-
-
-	</p:dialog>
-	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-		<p:commandButton value="SI" type="button"
-			styleClass="ui-confirmdialog-yes" icon="pi pi-check"></p:commandButton>
-		<p:commandButton value="NO" type="button"
-			styleClass="ui-confirmdialog-no" icon="pi pi-times"></p:commandButton>
-
-	</p:confirmDialog>
-
-
+		</div>
+		</div>
+		
 </body>
 </html>

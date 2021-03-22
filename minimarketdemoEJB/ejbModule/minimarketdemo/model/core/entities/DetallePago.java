@@ -3,6 +3,7 @@ package minimarketdemo.model.core.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -35,7 +36,6 @@ public class DetallePago implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="codigopago", nullable=false)
 	private CabeceraPago cabeceraPago;
-
 	public DetallePago() {
 	}
 

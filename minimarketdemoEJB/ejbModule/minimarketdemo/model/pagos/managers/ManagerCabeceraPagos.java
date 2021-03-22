@@ -71,6 +71,7 @@ public class ManagerCabeceraPagos {
 
 	}
 	
+
 	
 
     public void crearCabeceraPagos(String codigocb,String descripcionPago, Integer codigoUsuario ) throws Exception {
@@ -101,5 +102,6 @@ public class ManagerCabeceraPagos {
     
     
     
+
 
 }
