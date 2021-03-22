@@ -19,8 +19,10 @@ import minimarketdemo.model.seguridades.managers.ManagerSeguridades;
 public class BeanSegLogin implements Serializable {
 	private int idSegUsuario;
 	private String clave;
-	private LoginDTO loginDTO;
 	private String codigo;
+	private String nombre;
+	private LoginDTO loginDTO;
+	
 	@EJB
 	private ManagerSeguridades mSeguridades;
 
@@ -131,5 +133,14 @@ public class BeanSegLogin implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 
 }
