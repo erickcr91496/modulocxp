@@ -8,9 +8,7 @@
 
 
 
-<h:head>
-	<title>Pagos</title>
-</h:head>
+<h:head></h:head>
 <body>
 
 	<h:form>
@@ -39,24 +37,16 @@
 		</p:menubar>
 	</h:form>
 	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
-			<p:menuitem value="Nueva Cabecera " icon="pi pi-wallet"
-				action="nuevaCabecera?faces-redirect=true" />
-				<p:menuitem value="Nuevo Detalle " icon="pi pi-wallet"
-				action="NuevoDetalle?faces-redirect=true" />	
-			<f:facet name="options">
-				<p:menuButton value="" icon="pi pi-user">
-					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
-					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
-				</p:menuButton>
-			</f:facet>
-		</p:menubar>
-	</h:form>
+		<p:autoUpdate>
+		</p:autoUpdate>
 
+	</p:growl>
+
+	<p:panel>
+		<h3>
+			<h:outputText value="Pagos" />
+		</h3>
+	</p:panel>
 	<div class="ui-g">
 		<div class="ui-g-2">
 
