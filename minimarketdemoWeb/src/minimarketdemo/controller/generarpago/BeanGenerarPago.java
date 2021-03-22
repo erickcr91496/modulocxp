@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.controller.seguridades.BeanSegLogin;
 import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.CabeceraPago;
@@ -27,7 +28,7 @@ public class BeanGenerarPago implements Serializable {
 
 	@EJB
 	ManagerGenerarPagos mGenerarPagos;
-	@EJB 
+	@EJB
 	ManagerCabeceraPagos mCabecera;
 	@EJB
 	ManagerSeguridades mseguridades;
@@ -38,17 +39,27 @@ public class BeanGenerarPago implements Serializable {
 	private int idFactura;
 	private List<DetallePago> detalleList;
 	private List<Apifactura> apifacturaList;
-	private List<Cuentabancaria>  cuentasList;
+	private List<Cuentabancaria> cuentasList;
 	private Apifactura factura;
 	private List<Integer> proveedoresList;
+
 	private BigDecimal valorApagar;
+
+	// variable para maximo a pagar
+	double maximoPago;
+
+	// variables para el calculo de totales
+	private BigDecimal valorApagarOpe;
+	private BigDecimal valorFactura;
+	private BigDecimal totalDeuda;
+
 	private BigDecimal saldo;
-	
-	//Variables para crear la cabecera
+
+	// Variables para crear la cabecera
 	private String descripcionpago;
 	private String codigoCB;
 	private Integer codigoUsuario;
-	
+
 	LoginDTO dto;
 
 	public BeanGenerarPago() {
@@ -63,17 +74,29 @@ public class BeanGenerarPago implements Serializable {
 		idFactura = apifacturaList.get(0).getIdFactura();
 		factura = mGenerarPagos.findByIdApiFactura(idFactura);
 		detalleList = new ArrayList<DetallePago>();
-		
-		//probar
+
+		// Inicializar variabes para gurdar valores del pago
+		valorApagarOpe = new BigDecimal(0.00);
+		valorFactura = new BigDecimal(0.00);
+		totalDeuda = new BigDecimal(0.00);
+
+		// probar
 		cuentasList = mCuentas.findAllByCodigoCB("CTA-BAN-0001");
 		saldo = cuentasList.get(0).getSaldocb();
-		
+
+		// inicializar mayor valor que se pueda pagar
+
 	}
 
-	public void listenerListarFacturasByIdProv() {	
+	public void listenerListarFacturasByIdProv() {
 		apifacturaList = mGenerarPagos.findAllByIdProveedor(idProveedor);
 		idFactura = apifacturaList.get(0).getIdFactura();
 		detalleList = new ArrayList<DetallePago>();
+
+		// Reiniciar variabes para gurdar valores del pago
+		valorApagarOpe = new BigDecimal(0.00);
+		valorFactura = new BigDecimal(0.00);
+		totalDeuda = new BigDecimal(0.00);
 		try {
 			factura = mGenerarPagos.findByIdApiFactura(idFactura);
 		} catch (Exception e) {
@@ -82,13 +105,12 @@ public class BeanGenerarPago implements Serializable {
 		}
 
 	}
-	
+
 	public void listenerObtenerSaldo() {
 		cuentasList = mCuentas.findAllByCodigoCB(codigoCB);
-		
-		saldo= cuentasList.get(0).getSaldocb();
-		
-		
+
+		saldo = cuentasList.get(0).getSaldocb();
+
 	}
 
 	public void listenerFactura() {
@@ -107,40 +129,64 @@ public class BeanGenerarPago implements Serializable {
 		DetallePago dp = new DetallePago();
 		dp.setApifactura(factura);
 		dp.setCabeceraPago(null);
-		dp.setValorfactura((BigDecimal) (factura.getTotal()));		
+		dp.setValorfactura((BigDecimal) (factura.getTotal()));
 		dp.setValorapagar((BigDecimal) valorApagar);
-		detalleList.add(dp);
-		
-		apifacturaList = mGenerarPagos.eliminarIdLista(apifacturaList, factura.getIdFactura());
-		
 
-		
-		idFactura = apifacturaList.get(0).getIdFactura();
+		BigDecimal subTotal = saldo.subtract(valorApagarOpe);
+		if (subTotal.compareTo(valorFactura) == 1) {
+			
+			//agregar en la lista detalles para mostar en la tabla
+			detalleList.add(dp);
+
+			// sumatoria de totales en el detalle
+			valorFactura = valorFactura.add(dp.getValorfactura());
+			valorApagarOpe = valorApagarOpe.add(dp.getValorapagar());
+			totalDeuda = valorFactura.subtract(valorApagarOpe);
+
+			// Elimar de la lista la factura seleccionada y dar un nuevo id a la factura
+			apifacturaList = mGenerarPagos.eliminarIdLista(apifacturaList, factura.getIdFactura());
+			idFactura = apifacturaList.get(0).getIdFactura();
+		} else {
+			JSFUtil.crearMensajeWARN("Saldo insificiente");
+		}
+
 		try {
 			factura = mGenerarPagos.findByIdApiFactura(idFactura);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
+	public double mayorValoraPagar() {
+		BigDecimal aux = saldo.subtract(valorApagarOpe);
+		BigDecimal fact = (BigDecimal) factura.getTotal();
+		if (aux.compareTo(fact) == 1) {
+			return fact.doubleValue();
+		} else {
+
+			return aux.doubleValue();
+		}
+	}
+
 	public void actionListenerInsertarDetalles() {
 		try {
 			mCabecera.crearCabeceraPagos(codigoCB, descripcionpago, mseguridades.llevar);
 			List<CabeceraPago> listcP = mCabecera.findAllCabeceraPago();
-			CabeceraPago cP = listcP.get(listcP.size()-1);
+			CabeceraPago cP = listcP.get(listcP.size() - 1);
 			for (DetallePago listDe : detalleList) {
-				mGenerarPagos.insertarDetallePago(cP, listDe.getValorfactura(), listDe.getValorapagar(), listDe.getApifactura());
+				mGenerarPagos.insertarDetallePago(cP, listDe.getValorfactura(), listDe.getValorapagar(),
+						listDe.getApifactura());
 			}
+			Cuentabancaria cb = mCuentas.findByIdCuenta(codigoCB);
+			cb.setSaldocb(saldo.subtract(valorApagarOpe));
+			mCuentas.actualizarCuentaBancaria(cb);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
-	
-	
 
 	public BigDecimal getValorApagar() {
 		return valorApagar;
@@ -245,7 +291,29 @@ public class BeanGenerarPago implements Serializable {
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
-	
-	
+
+	public BigDecimal getValorFactura() {
+		return valorFactura;
+	}
+
+	public void setValorFactura(BigDecimal valorFactura) {
+		this.valorFactura = valorFactura;
+	}
+
+	public BigDecimal getTotalDeuda() {
+		return totalDeuda;
+	}
+
+	public void setTotalDeuda(BigDecimal totalDeuda) {
+		this.totalDeuda = totalDeuda;
+	}
+
+	public BigDecimal getValorApagarOpe() {
+		return valorApagarOpe;
+	}
+
+	public void setValorApagarOpe(BigDecimal valorApagarOpe) {
+		this.valorApagarOpe = valorApagarOpe;
+	}
 
 }

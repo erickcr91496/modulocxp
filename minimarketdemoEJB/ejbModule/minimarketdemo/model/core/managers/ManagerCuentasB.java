@@ -49,6 +49,10 @@ private EntityManager em;
 		}
 		return aux;
 	}
+    
+    public Cuentabancaria findByIdCuenta(String codigo) throws Exception {
+    	return (Cuentabancaria) mDAO.findById(Cuentabancaria.class, codigo);
+    }
 
     public void crearCuentaBancaria(String nombre ,String tipo_cuenta,String entidad_bancaria, String descripcion,
     		BigDecimal saldoCB, boolean estadoCB ) throws Exception {

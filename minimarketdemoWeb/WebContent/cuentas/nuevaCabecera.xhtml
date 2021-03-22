@@ -29,9 +29,7 @@
 	</h:form>
 	<p:panel>
 		<h:form id="frmDatos">
-			<p:panelGrid columns="8" id="pnlCabecera">
-
-
+			<p:panelGrid columns="4" id="pnlCabecera">
 
 				<h:outputText value="DescripcionPagos:" />
 
@@ -43,23 +41,22 @@
 				<h:outputText value="Codigo cuenta bancaria" />
 				<p:selectOneMenu value="#{beanGenerarPago.codigoCB}">
 					<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
-						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>
-						
-						<p:ajax update="saldoCuenta"
+						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>	
+					<p:ajax update="saldoCuenta , :frmDatos:pnlDetalle"
 						listener="#{beanGenerarPago.listenerObtenerSaldo()}" />
 
 				</p:selectOneMenu>
 
-				<h:outputText value="Nombre Cajero"   />
-					<h:outputText value="#{beanSegLogin.loginDTO.nombre}"   />
-				
-				
-				<h:outputText value="Saldo CB"   />
+				<h:outputText value="Nombre Cajero" />
+				<h:outputText value="#{beanSegLogin.loginDTO.nombre}" />
+
+
+				<h:outputText value="Saldo CB" />
 				<h:outputText id="saldoCuenta" value="#{beanGenerarPago.saldo}"></h:outputText>
-				
-				
-				
-				
+
+
+
+
 
 			</p:panelGrid>
 			<br />
@@ -72,7 +69,7 @@
 					filter="true" filterMatchMode="startsWith">
 					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
 						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
-					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles"
+					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales"
 						listener="#{beanGenerarPago.listenerListarFacturasByIdProv()}" />
 				</p:selectOneMenu>
 
@@ -91,10 +88,10 @@
 				<h:outputText value="Valor a Pagar:" />
 
 				<p:spinner value="#{beanGenerarPago.valorApagar}" required="true"
-					min="1" />
+					min="1" max="#{beanGenerarPago.mayorValoraPagar()}" stepFactor="0.25"/>
 
 				<p:commandButton value="Agregar" icon="pi pi-save"
-					update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles"
+					update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales"
 					actionListener="#{beanGenerarPago.actionListenerInsertarListaDetalle()}"></p:commandButton>
 			</p:panelGrid>
 
@@ -123,9 +120,21 @@
 
 
 			</div>
+
+			<p:panelGrid columns="4" id="pnlTotales" layout="grid"
+				styleClass="showcase-text-align-center">
+				<h:outputText value="Total" />
+				<h:outputText value="#{beanGenerarPago.valorFactura}" />
+				<h:outputText value="#{beanGenerarPago.valorApagarOpe}" />
+				<h:outputText value="#{beanGenerarPago.totalDeuda}" />
+			</p:panelGrid>
+
 			<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
 				actionListener="#{beanGenerarPago.actionListenerInsertarDetalles()}"></p:commandButton>
 		</h:form>
+
+
+
 	</p:panel>
 
 
