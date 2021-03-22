@@ -4,10 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<f:metadata>
-	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
-		type="preRenderView"></f:event>
-</f:metadata>
+
 <h:head></h:head>
 <body>
 	<h:form>
@@ -15,14 +12,12 @@
 			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
 			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
 				action="cuentas?faces-redirect=true" />
-			
-			<p:menuitem value="Pagos" icon="pi pi-credit-card"
-				action="pagos?faces-redirect=true" />
 
 			<p:menuitem value="Pagos" icon="pi pi-credit-card"
 				action="pagos?faces-redirect=true" />
 
-			<p:menuitem value="Documentos de pago" icon="pi pi-copy" action="datos_pago?faces-redirect=true"/>
+			<p:menuitem value="Documentos de pago" icon="pi pi-copy"
+				action="datos_pago?faces-redirect=true" />
 			<p:menuitem value="Estado de cuenta"
 				icon="pi pi-exclamation-triangle" />
 			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
@@ -36,8 +31,42 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<p:staticMessage severity="info" summary="Módulo de Cuentas por pagar"></p:staticMessage>
 	</h:form>
-	<div></div>
+
+	<p:growl>
+		<p:autoUpdate>
+		</p:autoUpdate>
+
+	</p:growl>
+
+	<p:panel>
+		<h3>
+			<h:outputText value="Detalles de Pago - " />
+			<h:outputText value="#{beanDetallePagos.cabecera.nroPago}" />
+		</h3>
+	</p:panel>
+	<div class="ui-g">
+		<div class="ui-g-10">
+
+
+			<h:form>
+				<p:dataTable value="#{beanDetallePagos.cabecera}" var="c"
+					paginator="false" rows="5">
+				</p:dataTable>
+			</h:form>
+
+			<p:dataTable value="#{beanDetallePagos.detallesList}" var="d">
+				<p:column headerText="ID Factura">
+					<h:outputText value="#{d.iddetalle}" />
+				</p:column>
+				<p:column headerText="Valor a Pagar">
+					<h:outputText value="#{d.valorapagar}" />
+				</p:column>
+				<p:column headerText="Valor de la factura">
+					<h:outputText value="#{d.valorfactura}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+	</div>
 </body>
 </html>

@@ -34,4 +34,8 @@ public class DTOPagoProveedor {
 	
 	
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 28f21844eb1082926afacdea95a99ad817d9a230

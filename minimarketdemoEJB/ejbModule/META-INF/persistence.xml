@@ -10,13 +10,10 @@
 		<class>minimarketdemo.model.core.entities.ThmEmpleado</class>
 		<class>minimarketdemo.model.core.entities.ThmRolCabecera</class>
 		<class>minimarketdemo.model.core.entities.ThmRolDetalle</class>
+
+		<class>minimarketdemo.model.core.entities.Apifactura</class>
 		<class>minimarketdemo.model.core.entities.CabeceraPago</class>
 		<class>minimarketdemo.model.core.entities.Cuentabancaria</class>
-		<class>minimarketdemo.model.core.entities.Apifactura</class>
 		<class>minimarketdemo.model.core.entities.DetallePago</class>
-		<class>minimarketdemo.model.core.entities.FacturaProveedore</class>
-
-
-
 	</persistence-unit>
 </persistence>

@@ -6,8 +6,34 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
+
+
 <h:head></h:head>
 <body>
+<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
+			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
+				action="cuentas?faces-redirect=true" />
+			
+			<p:menuitem value="Pagos" icon="pi pi-credit-card"
+				action="pagos?faces-redirect=true" />
+
+			<p:menuitem value="Documentos de pago" icon="pi pi-copy" action="datos_pago?faces-redirect=true"/>
+			<p:menuitem value="Estado de cuenta"
+				icon="pi pi-exclamation-triangle" />
+			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
+
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
 
 	<p:growl>
 		<p:autoUpdate>
@@ -17,73 +43,40 @@
 
 	<p:panel>
 		<h3>
-			<h:outputText value="Cuentas Proveedores" />
+			<h:outputText value="Documentos de Pagos" />
 		</h3>
 	</p:panel>
 	<div class="ui-g">
-		<div class="ui-g-2">
-
-
-
-			<h:form>
-				<p:menu>
-					<p:submenu label="Opciones para admin">
-						<p:menuitem value="Regresar" icon="pi pi-home" action="index">
-						</p:menuitem>
-
-					</p:submenu>
-
-				</p:menu>
-			</h:form>
-		</div>
-
 		<div class="ui-g-10">
 
-			<div class="ui-g-6">
-				<h:form>
-					<p:panel header="Nueva Cuenta Proveedor" collapsed="true"
-						toggleable="true">
-						<h:panelGrid columns="2">
-
-
-							<h:outputText value="CodigoCB:" />
-							<p:selectOneMenu value="#{beanCuentaProv.codigoCB}">
-								<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
-									itemLabel="#{c.codigocb}"
-									itemValue="#{c.codigocb}"></f:selectItems>
-
-								<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
-									itemLabel="#{c.codigocb}"
-									itemValue="#{c.codigocb}"></f:selectItems>
-								<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
-									itemLabel="#{c.Cuentabancaria.codigocb}"
-									itemValue="#{c.Cuentabancaria.codigocb}"></f:selectItems>
-s
-							</p:selectOneMenu>
-
-
-							<h:outputText value="Proveedor" />
-							<p:selectOneMenu value="#{beanCuentaProv.codigoProv}">
-								<f:selectItems value="#{beanCuentaB.listaProveedores}" var="c"
-									itemLabel="#{c.nombre}"
-									itemValue="#{c.codigoprov}"></f:selectItems>
-
-							</p:selectOneMenu>
-
-							<h:outputText value="Saldo a pagar" />
-							<p:inputText value="#{beanCuentaProv.saldo}" required="true"
-								requiredMessage="debe ingresar el saldo"></p:inputText>
-
-							<p:commandButton
-								actionListener="#{beanCuentaProv.actionListenerCrearCuentasProv()}"
-								value="Crear CuentasProv" icon="pi pi-save"
-								update="@form,:formDatos"></p:commandButton>
-						</h:panelGrid>
-
-					</p:panel>
+			
+			<h:form>
+					<p:dataTable value="#{beanCabeceraPagos.cabeceraList}" var="c"
+						paginator="true" rows="5">
+						<p:column headerText="CODIGO ">
+							<h:outputText value="#{c.nroPago}" />
+						</p:column>
+						<p:column headerText="NOMBRE CAJERO">
+							<h:outputText value="#{c.nombreCajero}" />
+						</p:column>
+						<p:column headerText="ID PROVEEDOR">
+							<h:outputText value="#{c.idProveedor}" />
+						</p:column>
+						<p:column headerText="ENTIDAD BANCARIA">
+							<h:outputText value="#{c.cuentabancaria.propietariocb}" />
+						</p:column>
+						<p:column headerText="DESCRIPCION">
+							<h:outputText value="#{c.descripcion}" />
+						</p:column>
+						<p:column headerText="FECHA">
+							<h:outputText value="#{c.fecha}" />
+						</p:column>
+						<p:column headerText="OPCIONES">
+							<p:commandButton icon="pi pi-search-plus" title="Ver Detalles"
+								action="detalles_factura?faces-redirect=true" actionListener="#{beanCabeceraPagos.cabeceraList}"/>
+						</p:column>
+					</p:dataTable>
 				</h:form>
-			</div>
-			<div class="ui-g-6"></div>
 
 			<div class="ui-g-12">
 				<h:form id="formDatos">
@@ -93,7 +86,7 @@ s
 							<h:outputText value="#{u.codigomd}" />
 						</p:column>
 						<p:column headerText="codigoCB">
-							<h:outputText value="#{u.Cuentabancaria.codigocb}" />
+							<h:outputText value="#{u.cuentaBancaria.codigocb}" />
 						</p:column>
 						<p:column headerText="codigoProv">
 							<h:outputText value="#{u.proveedor.codigoprov}" />
@@ -105,7 +98,7 @@ s
 
 						<p:column headerText="OPCIONES">
 							<p:commandButton icon="pi pi-trash" title="eliminar"
-							actionListener="#{beanCuentaProv.actionListenerEliminarCuentasProvs(u.codigomd)}"
+								actionListener="#{beanCuentaProv.actionListenerEliminarCuentasProvs(u.codigomd)}"
 								update="@form">
 								<!-- actionListener="#{beanAdmin.actionListenerEliminarUsuario(u.idUsuario)}" -->
 
@@ -116,9 +109,8 @@ s
 
 							<p:commandButton icon="pi pi-user-edit" title="editar"
 								actionListener="#{beanCuentaProv.actionListenerSeleccionarCuentaProv(u)}"
-								update=":formEdicion"
-								oncomplete="PF('dlgEdicion').show();">
-								</p:commandButton>
+								update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+							</p:commandButton>
 
 						</p:column>
 					</p:dataTable>
@@ -135,10 +127,10 @@ s
 				</p:autoUpdate>
 			</p:messages>
 			<h:panelGrid columns="2">
-				
+
 				<h:outputText value="Codigo CuentaB" />
 				<h:outputText
-					value="#{beanCuentaProv.cuentaProvEdit.Cuentabancaria.codigocb}" />
+					value="#{beanCuentaProv.cuentaProvEdit.cuentaBancaria.codigocb}" />
 
 				<h:outputText value="Proveedor" />
 				<h:outputText

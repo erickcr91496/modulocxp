@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+import java.util.List;
+
 
 /**
  * The persistent class for the detalle_pagos database table.

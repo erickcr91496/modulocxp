@@ -1,8 +1,16 @@
 package minimarketdemo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
+
+import minimarketdemo.model.core.entities.Apifactura;
+import minimarketdemo.model.core.managers.ManagerDAO;
+import minimarketdemo.model.pago.dto.DTOPagoProveedores;
 
 public class JSFUtil {
 	/**
@@ -14,6 +22,8 @@ public class JSFUtil {
 	 * <li>FacesMessage.SEVERITY_INFO
 	 * @param mensaje Contenido del mensaje
 	 */
+
+	
 	public static void crearMensaje(Severity severidad,String mensaje,String detalle){
 		FacesMessage msg = new FacesMessage();
 		msg.setSeverity(severidad);
@@ -33,4 +43,13 @@ public class JSFUtil {
 	public static void crearMensajeINFO(String mensaje){
 		crearMensaje(FacesMessage.SEVERITY_INFO,mensaje,null);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

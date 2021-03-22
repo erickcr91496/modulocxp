@@ -6,6 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
+
+
 <h:head></h:head>
 <body>
 
@@ -48,25 +50,18 @@
 
 							<h:outputText value="CodigoCB:" />
 							<p:selectOneMenu value="#{beanCuentaProv.codigoCB}">
-								<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
-									itemLabel="#{c.codigocb}"
-									itemValue="#{c.codigocb}"></f:selectItems>
-
-								<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
-									itemLabel="#{c.codigocb}"
-									itemValue="#{c.codigocb}"></f:selectItems>
 								<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
-									itemLabel="#{c.Cuentabancaria.codigocb}"
-									itemValue="#{c.Cuentabancaria.codigocb}"></f:selectItems>
-s
+									itemLabel="#{c.cuentaBancaria.codigocb}"
+									itemValue="#{c.cuentaBancaria.codigocb}"></f:selectItems>
+
 							</p:selectOneMenu>
 
 
 							<h:outputText value="Proveedor" />
 							<p:selectOneMenu value="#{beanCuentaProv.codigoProv}">
-								<f:selectItems value="#{beanCuentaB.listaProveedores}" var="c"
-									itemLabel="#{c.nombre}"
-									itemValue="#{c.codigoprov}"></f:selectItems>
+								<f:selectItems value="#{beanCuentaProv.listaCuentaProv}" var="c"
+									itemLabel="#{c.proveedor.nombre}"
+									itemValue="#{c.proveedor.codigoprov}"></f:selectItems>
 
 							</p:selectOneMenu>
 
@@ -93,7 +88,7 @@ s
 							<h:outputText value="#{u.codigomd}" />
 						</p:column>
 						<p:column headerText="codigoCB">
-							<h:outputText value="#{u.Cuentabancaria.codigocb}" />
+							<h:outputText value="#{u.cuentaBancaria.codigocb}" />
 						</p:column>
 						<p:column headerText="codigoProv">
 							<h:outputText value="#{u.proveedor.codigoprov}" />
@@ -138,7 +133,7 @@ s
 				
 				<h:outputText value="Codigo CuentaB" />
 				<h:outputText
-					value="#{beanCuentaProv.cuentaProvEdit.Cuentabancaria.codigocb}" />
+					value="#{beanCuentaProv.cuentaProvEdit.cuentaBancaria.codigocb}" />
 
 				<h:outputText value="Proveedor" />
 				<h:outputText
