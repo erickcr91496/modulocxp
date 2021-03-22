@@ -8,7 +8,10 @@ import minimarketdemo.model.core.entities.SegModulo;
 public class LoginDTO {
 	private int idSegUsuario;
 	private String correo;
+	private String codigo;
+	private String nombre;
 	private List<SegModulo> listaModulos;
+	
 	public LoginDTO() {
 		listaModulos=new ArrayList<SegModulo>();
 	}
@@ -30,5 +33,18 @@ public class LoginDTO {
 	public void setListaModulos(List<SegModulo> listaModulos) {
 		this.listaModulos = listaModulos;
 	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	
 }

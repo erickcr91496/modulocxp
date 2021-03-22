@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata> -->
+<h:head>
+	<title>Nueva Cabecera</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home"
+				action="pagos?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<h:form id="frmDatos">
+			<p:panelGrid columns="4" id="pnlCabecera">
+
+				<h:outputText value="DescripcionPagos:" />
+
+				<p:inputText value="#{beanGenerarPago.descripcionpago}"
+					required="true"
+					requiredMessage="Debe ingresar la descripcion de pago"></p:inputText>
+
+
+				<h:outputText value="Codigo cuenta bancaria" />
+				<p:selectOneMenu value="#{beanGenerarPago.codigoCB}">
+					<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
+						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>	
+					<p:ajax update="saldoCuenta , :frmDatos:pnlDetalle"
+						listener="#{beanGenerarPago.listenerObtenerSaldo()}" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Nombre Cajero" />
+				<h:outputText value="#{beanSegLogin.loginDTO.nombre}" />
+
+
+				<h:outputText value="Saldo CB" />
+				<h:outputText id="saldoCuenta" value="#{beanGenerarPago.saldo}"></h:outputText>
+
+
+
+
+
+			</p:panelGrid>
+			<br />
+
+
+			<p:panelGrid columns="4" id="pnlDetalle">
+
+				<h:outputText id="cmbproveedor" value="Codigo Proveedor" />
+				<p:selectOneMenu value="#{beanGenerarPago.idProveedor}"
+					filter="true" filterMatchMode="startsWith">
+					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
+						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
+					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales"
+						listener="#{beanGenerarPago.listenerListarFacturasByIdProv()}" />
+				</p:selectOneMenu>
+
+				<h:outputText id="cmbfactura" value="Codigo Factura" />
+				<p:selectOneMenu value="#{beanGenerarPago.idFactura}">
+					<f:selectItems value="#{beanGenerarPago.apifacturaList}" var="f"
+						itemLabel="#{f.idFactura}" itemValue="#{f.idFactura}"></f:selectItems>
+					<p:ajax update="outTotal"
+						listener="#{beanGenerarPago.listenerFactura()}" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Valor Factura:" />
+
+				<h:outputText id="outTotal" value="#{beanGenerarPago.factura.total}"></h:outputText>
+
+				<h:outputText value="Valor a Pagar:" />
+
+				<p:spinner value="#{beanGenerarPago.valorApagar}" required="true"
+					min="1" max="#{beanGenerarPago.mayorValoraPagar()}" stepFactor="0.25"/>
+
+				<p:commandButton value="Agregar" icon="pi pi-save"
+					update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales"
+					actionListener="#{beanGenerarPago.actionListenerInsertarListaDetalle()}"></p:commandButton>
+			</p:panelGrid>
+
+
+			<div class="ui-g-12">
+
+
+				<p:dataTable value="#{beanGenerarPago.detalleList}" var="d"
+					id="tblDetalles">
+					<p:column headerText="IdFactura">
+						<h:outputText value="#{d.apifactura.idFactura}" />
+					</p:column>
+					<p:column headerText="valorFactura">
+						<h:outputText value="#{d.valorfactura}" />
+					</p:column>
+					<p:column headerText="valorPagar">
+						<h:outputText value="#{d.valorapagar}" />
+					</p:column>
+
+
+					<p:column headerText="Total">
+						<h:outputText value="#{d.valorfactura.subtract(d.valorapagar)}" />
+					</p:column>
+
+				</p:dataTable>
+
+
+			</div>
+
+			<p:panelGrid columns="4" id="pnlTotales" layout="grid"
+				styleClass="showcase-text-align-center">
+				<h:outputText value="Total" />
+				<h:outputText value="#{beanGenerarPago.valorFactura}" />
+				<h:outputText value="#{beanGenerarPago.valorApagarOpe}" />
+				<h:outputText value="#{beanGenerarPago.totalDeuda}" />
+			</p:panelGrid>
+
+			<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
+				actionListener="#{beanGenerarPago.actionListenerInsertarDetalles()}"></p:commandButton>
+		</h:form>
+
+
+
+	</p:panel>
+
+
+
+</body>
+</html>

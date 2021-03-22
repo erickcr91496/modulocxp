@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata> -->
+<h:head>
+	<title>Nuevo detalle</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home"
+				action="pagos?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<h:form>
+			<p:panelGrid columns="2" >
+
+				<h:outputText value="Codigo de pago" />
+				<p:selectOneMenu value="menu">
+					<f:selectItems value="lista" var="c" itemLabel="add"
+						itemValue="add"></f:selectItems>
+
+				</p:selectOneMenu>
+
+
+
+				<h:outputText value="Valor Factura:" />
+
+				<p:inputText value="vfact" required="true"></p:inputText>
+
+				<h:outputText value="Valor a Pagar:" />
+
+				<p:inputText value="valor" required="true"></p:inputText>
+
+				<h:outputText value="Id Factura" />
+				<p:selectOneMenu value=" ">
+					<f:selectItems value=" " var="c" itemLabel="add" itemValue="add"></f:selectItems>
+
+				</p:selectOneMenu>
+
+				<p:commandButton value="Guardar" icon="pi pi-save"
+					actionListener="#{beanCabeceraPagos.actionListenerCrearCabeceraPago()}"></p:commandButton>
+			</p:panelGrid>
+			
+			
+			
+			<p:panelGrid columns="2" >
+
+				<h:outputText value="Codigo de pago" />
+				<p:selectOneMenu value="menu">
+					<f:selectItems value="lista" var="c" itemLabel="add"
+						itemValue="add"></f:selectItems>
+
+				</p:selectOneMenu>
+
+
+
+				<h:outputText value="Valor Factura:" />
+
+				<p:inputText value="vfact" required="true"></p:inputText>
+
+				<h:outputText value="Valor a Pagar:" />
+
+				<p:inputText value="valor" required="true"></p:inputText>
+
+				<h:outputText value="Id Factura" />
+				<p:selectOneMenu value=" ">
+					<f:selectItems value=" " var="c" itemLabel="add" itemValue="add"></f:selectItems>
+
+				</p:selectOneMenu>
+
+				<p:commandButton value="Guardar" icon="pi pi-save"
+					actionListener="#{beanCabeceraPagos.actionListenerCrearCabeceraPago()}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+
+
+
+
+	</p:panel>
+
+	<div class="ui-g-12">
+		<h:form id="formDatos">
+
+			<p:dataTable value="" var="u">
+				<p:column headerText="IdFactura">
+					<h:outputText value="fact1" />
+				</p:column>
+				<p:column headerText="valorFactura">
+					<h:outputText value="20" />
+				</p:column>
+				<p:column headerText="valorPagar">
+					<h:outputText value="10" />
+				</p:column>
+
+
+				<p:column headerText="Total">
+					<h:outputText value="10" />
+				</p:column>
+
+
+
+			</p:dataTable>
+
+
+			
+		</h:form>
+	</div>
+
+
+
+</body>
+</html>
