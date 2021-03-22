@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
+			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
+				action="cuentas?faces-redirect=true" />
+
+			<p:menuitem value="Pagos" icon="pi pi-credit-card"
+				action="pagos?faces-redirect=true" />
+
+			<p:menuitem value="Documentos de pago" icon="pi pi-copy"
+				action="datos_pago?faces-redirect=true" />
+			<p:menuitem value="Estado de cuenta"
+				icon="pi pi-exclamation-triangle" />
+			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
+
+			<f:facet name="options">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+	<p:growl>
+		<p:autoUpdate>
+		</p:autoUpdate>
+
+	</p:growl>
+
+	<p:panel>
+		<h3>
+			<h:outputText value="Detalles de Pago - " />
+			<h:outputText value="#{beanDetallePagos.cabecera.nroPago}" />
+		</h3>
+	</p:panel>
+	<div class="ui-g">
+		<div class="ui-g-10">
+
+
+			<h:form>
+				<p:dataTable value="#{beanDetallePagos.cabecera}" var="c"
+					paginator="false" rows="5">
+				</p:dataTable>
+			</h:form>
+
+			<p:dataTable value="#{beanDetallePagos.detallesList}" var="d">
+				<p:column headerText="ID Factura">
+					<h:outputText value="#{d.iddetalle}" />
+				</p:column>
+				<p:column headerText="Valor a Pagar">
+					<h:outputText value="#{d.valorapagar}" />
+				</p:column>
+				<p:column headerText="Valor de la factura">
+					<h:outputText value="#{d.valorfactura}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+	</div>
+</body>
+</html>
