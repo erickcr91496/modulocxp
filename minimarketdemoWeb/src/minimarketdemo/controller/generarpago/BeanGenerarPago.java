@@ -52,9 +52,10 @@ public class BeanGenerarPago implements Serializable {
 		detalleList = new ArrayList<DetallePago>();
 	}
 
-	public void listenerListarFacturasByIdProv() {
+	public void listenerListarFacturasByIdProv() {	
 		apifacturaList = mGenerarPagos.findAllByIdProveedor(idProveedor);
 		idFactura = apifacturaList.get(0).getIdFactura();
+		detalleList = new ArrayList<DetallePago>();
 		try {
 			factura = mGenerarPagos.findByIdApiFactura(idFactura);
 		} catch (Exception e) {
@@ -110,9 +111,10 @@ public class BeanGenerarPago implements Serializable {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
+	
+	
 
 	public BigDecimal getValorApagar() {
 		return valorApagar;

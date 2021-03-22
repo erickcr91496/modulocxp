@@ -51,7 +51,7 @@ public class ManagerCabeceraPagos {
 			
 			SegUsuario cajero = new SegUsuario();			
 			Cabecera c =  new Cabecera();
-			
+					
 			c.setCuentabancaria(p.getCuentabancaria());
 			c.setDescripcion(p.getDescripcionpago());
 			c.setFecha(p.getFechapago());
@@ -94,6 +94,9 @@ public class ManagerCabeceraPagos {
     public List<CabeceraPago> findAllCabeceraPago(){
     	return mDAO.findAll(CabeceraPago.class);
     }
+    
+    
+    
     
 
 }

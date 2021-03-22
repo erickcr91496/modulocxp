@@ -37,52 +37,48 @@ public class ManagerGenerarPagos {
 	public List<Integer> findAllIdProveedores() {
 		List<Apifactura> list = findAllApiFacturas();
 		List<Integer> aux = new ArrayList<Integer>();
-		
+
 		for (Apifactura a : list) {
-			if(!aux.contains(a.getIdProveedor())){
+			if (!aux.contains(a.getIdProveedor()) && a.getTotal().compareTo(BigDecimal.ZERO) != 0) {
 				aux.add(a.getIdProveedor());
 			}
 		}
-		
-		return aux;
-	}
-	
-	public List<Apifactura> findAllByIdProveedor(Integer id){
-		List<Apifactura> list = findAllApiFacturas();
-		List<Apifactura> aux = new ArrayList<Apifactura>();
-		for (Apifactura a : list) {
-			if(a.getIdProveedor().equals(id)) {
-				aux.add(a);
-			}
-		}
-		return aux;
-	}
-	
-	
-	public Apifactura findByIdApiFactura(Integer id) throws Exception {
-		return (Apifactura) mDAO.findById(Apifactura.class, id);
-	}
-	
-	public List<Apifactura> eliminarIdLista(List<Apifactura> lista, Integer id){
-		List<Apifactura> aux = lista;
-		for (int i = 0; i < lista.size(); i++) {
-			if(lista.get(i).getIdFactura().equals(id)) {
-				aux.remove(i);
-			}
-		}
-		
 
 		return aux;
 	}
-	
-	public void insertarDetallePago(CabeceraPago cabecera, BigDecimal valorFactura,BigDecimal valorApagar,Apifactura factura ) throws Exception {
-		DetallePago detalle =  new DetallePago();
+
+	public List<Apifactura> findAllByIdProveedor(Integer id) {
+		return mDAO.findWhere(Apifactura.class, "o.idProveedor='" + id + "' and o.total!='0'", null);
+	}
+
+	public Apifactura findByIdApiFactura(Integer id) throws Exception {
+		return (Apifactura) mDAO.findById(Apifactura.class, id);
+	}
+
+	public List<Apifactura> eliminarIdLista(List<Apifactura> lista, Integer id) {
+		List<Apifactura> aux = lista;
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getIdFactura().equals(id)) {
+				aux.remove(i);
+			}
+		}
+
+		return aux;
+	}
+
+	public void insertarDetallePago(CabeceraPago cabecera, BigDecimal valorFactura, BigDecimal valorApagar,
+			Apifactura factura) throws Exception {
+
+		Apifactura fac = new Apifactura();
+		fac.setIdProveedor(factura.getIdProveedor());
+		fac.setTotal(valorFactura.subtract(valorApagar));
+		fac.setIdFactura(factura.getIdFactura());
+		mDAO.actualizar(fac);
+		DetallePago detalle = new DetallePago();
 		detalle.setApifactura(factura);
 		detalle.setCabeceraPago(cabecera);
 		detalle.setValorapagar(valorApagar);
 		detalle.setValorfactura(valorFactura);
 		mDAO.insertar(detalle);
 	}
-	
-
 }

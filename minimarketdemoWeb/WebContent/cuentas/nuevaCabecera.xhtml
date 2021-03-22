@@ -63,10 +63,11 @@
 			<p:panelGrid columns="4" id="pnlDetalle">
 
 				<h:outputText id="cmbproveedor" value="Codigo Proveedor" />
-				<p:selectOneMenu value="#{beanGenerarPago.idProveedor}">
+				<p:selectOneMenu value="#{beanGenerarPago.idProveedor}"
+					filter="true" filterMatchMode="startsWith">
 					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
 						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
-					<p:ajax update=":frmDatos:pnlDetalle"
+					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles"
 						listener="#{beanGenerarPago.listenerListarFacturasByIdProv()}" />
 				</p:selectOneMenu>
 
@@ -84,7 +85,8 @@
 
 				<h:outputText value="Valor a Pagar:" />
 
-				<p:spinner value="#{beanGenerarPago.valorApagar}" required="true" />
+				<p:spinner value="#{beanGenerarPago.valorApagar}" required="true"
+					min="1" />
 
 				<p:commandButton value="Agregar" icon="pi pi-save"
 					update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles"
