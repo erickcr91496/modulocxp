@@ -11,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import minimarketdemo.controller.JSFUtil;
+import minimarketdemo.controller.pagos.BeanCabeceraPagos;
 import minimarketdemo.controller.seguridades.BeanSegLogin;
 import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.CabeceraPago;
@@ -59,7 +60,8 @@ public class BeanGenerarPago implements Serializable {
 	private String descripcionpago;
 	private String codigoCB;
 	private Integer codigoUsuario;
-
+	
+	BeanCabeceraPagos refreshCabecera;
 	LoginDTO dto;
 
 	public BeanGenerarPago() {
@@ -182,6 +184,9 @@ public class BeanGenerarPago implements Serializable {
 			Cuentabancaria cb = mCuentas.findByIdCuenta(codigoCB);
 			cb.setSaldocb(saldo.subtract(valorApagarOpe));
 			mCuentas.actualizarCuentaBancaria(cb);
+			mCabecera.findAllCabeceraPago();    
+			refreshCabecera.getCabeceraList();
+			System.out.println( "Refrescando: " +refreshCabecera.getCabeceraList());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

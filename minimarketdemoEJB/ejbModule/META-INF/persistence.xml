@@ -15,5 +15,6 @@
 		<class>minimarketdemo.model.core.entities.CabeceraPago</class>
 		<class>minimarketdemo.model.core.entities.Cuentabancaria</class>
 		<class>minimarketdemo.model.core.entities.DetallePago</class>
+		<class>minimarketdemo.model.core.entities.Ciudade</class>
 	</persistence-unit>
 </persistence>

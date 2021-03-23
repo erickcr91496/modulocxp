@@ -8,8 +8,11 @@
 
 
 
-<h:head></h:head>
+<h:head>
+	<title>Pagos</title>
+</h:head>
 <body>
+
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
@@ -36,16 +39,24 @@
 		</p:menubar>
 	</h:form>
 	<p:growl>
-		<p:autoUpdate>
-		</p:autoUpdate>
-
+		<p:autoUpdate />
 	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<p:menuitem value="Nueva Cabecera " icon="pi pi-wallet"
+				action="nuevaCabecera?faces-redirect=true" />
+				<p:menuitem value="Nuevo Detalle " icon="pi pi-wallet"
+				action="NuevoDetalle?faces-redirect=true" />	
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
 
-	<p:panel>
-		<h3>
-			<h:outputText value="Pagos" />
-		</h3>
-	</p:panel>
 	<div class="ui-g">
 		<div class="ui-g-2">
 
@@ -67,6 +78,7 @@
 
 
 			<h:form>
+
 				<p:dataTable  value="#{beanCabeceraPagos.cabeceraList}" var="c"
 					paginator="true" rows="5">
 					<p:column headerText="CODIGO ">
@@ -88,6 +100,7 @@
 						<h:outputText value="#{c.fecha}" />
 					</p:column>
 					<p:column headerText="OPCIONES">
+
 						<p:commandButton icon="pi pi-pencil" title="editar"
 							action="/detalle_pago" />
 						<p:commandButton icon="pi pi-times-circle" title="eliminar"
@@ -95,6 +108,7 @@
 							<p:confirm header="Confirmacion" message="desea eliminar?"
 								icon="pi pi-exclamation-triangle"></p:confirm>
 						</p:commandButton>
+
 						<p:commandButton icon="pi pi-search-plus" title="Ver Detalles"
 							action="#{beanDetallePagos.actionSeleccionarDetallePago(c)}" />
 

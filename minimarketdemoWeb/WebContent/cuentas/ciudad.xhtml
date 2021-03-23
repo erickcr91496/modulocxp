@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <f:metadata> -->
+<!-- <f:event listener="" -->
+<!-- type="preRenderView"></f:event> -->
+<!-- </f:metadata> -->
+<h:head>
+	<title>Ciudades</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<p:menuitem value="Nueva Ciudad " icon="pi pi-wallet"
+				action="nuevaCiudad?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+
+
+
+		<h:form>
+			<p:dataTable value="#{beanCiudad.listaCiudades}" var="u"
+				paginator="true" rows="5">
+				<p:column headerText="Ciudad">
+					<h:outputText value="#{u.nombreciudad}" />
+				</p:column>
+				<p:column headerText="Descripcion">
+					<h:outputText value="#{u.descripcionciudad}" />
+				</p:column>
+				<p:column headerText="Poblacion">
+					<h:outputText value="#{u.poblacion}" />
+				</p:column>
+
+				<p:column headerText="OPCIONES">
+					<p:commandButton icon="pi pi-pencil" title="editar"
+						action="/detalle_pago" />
+
+
+
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+
+	</p:panel>
+
+</body>
+</html>
