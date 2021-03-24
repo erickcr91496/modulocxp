@@ -72,7 +72,8 @@ public class BeanGenerarPago implements Serializable {
 	private String descripcionpago;
 	private String codigoCB;
 	private Integer codigoUsuario;
-
+	
+	BeanCabeceraPagos refreshCabecera;
 	LoginDTO dto;
 
 	public BeanGenerarPago() {
@@ -248,6 +249,8 @@ public class BeanGenerarPago implements Serializable {
 			} else {
 				JSFUtil.crearMensajeWARN("Ingrese los valores a pagar");
 			}
+
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

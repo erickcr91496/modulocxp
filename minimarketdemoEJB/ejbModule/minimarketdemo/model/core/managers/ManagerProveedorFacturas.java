@@ -14,6 +14,7 @@ import com.sun.tools.javac.util.DefinedBy.Api;
 
 import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.ProveedorFacturas;
+
 import minimarketdemo.model.pagos.managers.ManagerCabeceraPagos;
 /**
  * Session Bean implementation class ManagerProveedor
@@ -89,5 +90,6 @@ public class ManagerProveedorFacturas {
 		
     
     }
+
 
 }

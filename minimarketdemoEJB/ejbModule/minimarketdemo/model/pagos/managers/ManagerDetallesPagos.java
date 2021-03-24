@@ -7,10 +7,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import minimarketdemo.model.core.entities.DetallePago;
 import minimarketdemo.model.core.managers.ManagerDAO;
+import minimarketdemo.model.pago.dto.DTOReporteEstadoCuentaProv;
 
 /**
  * Session Bean implementation class ManagerDetallesPagos
@@ -24,7 +27,9 @@ public class ManagerDetallesPagos {
 	@EJB
 	ManagerDetallesPagos mDetalles;
 	DetallePago dp;
-	
+	@PersistenceContext
+
+	EntityManager em;
 	
 	public ManagerDetallesPagos() {
 		
@@ -58,7 +63,7 @@ public class ManagerDetallesPagos {
 			
 		}
 	
-	
+
 
 
 }

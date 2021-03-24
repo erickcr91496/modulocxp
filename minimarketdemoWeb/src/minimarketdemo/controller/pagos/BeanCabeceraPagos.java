@@ -10,8 +10,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import minimarketdemo.controller.JSFUtil;
+
 import minimarketdemo.model.core.entities.SegUsuario;
 import minimarketdemo.model.core.managers.ManagerDAO;
+import minimarketdemo.model.pago.dto.DTOReporteEstadoCuentaProv;
 import minimarketdemo.model.pagos.managers.Cabecera;
 import minimarketdemo.model.pagos.managers.ManagerCabeceraPagos;
 import minimarketdemo.model.seguridades.managers.ManagerSeguridades;
@@ -19,6 +21,7 @@ import minimarketdemo.model.seguridades.managers.ManagerSeguridades;
 @Named
 @SessionScoped
 public class BeanCabeceraPagos implements Serializable {
+
 
 	/**
 	 * 
@@ -31,6 +34,7 @@ public class BeanCabeceraPagos implements Serializable {
 	
 	@EJB 
 	ManagerCabeceraPagos mCabecera;
+
 	@EJB 
 	ManagerSeguridades mUsuario;
 	
@@ -38,6 +42,7 @@ public class BeanCabeceraPagos implements Serializable {
 	
 	private List<SegUsuario> listaUsuarios;
 	
+	private List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv;
 	public BeanCabeceraPagos() {
 
 	}
@@ -48,7 +53,9 @@ public class BeanCabeceraPagos implements Serializable {
 			System.out.println("Bean Cabcera!!!");
 			
 			cabeceraList = mCabecera.finAllCabecera();
+
 			listaUsuarios= mUsuario.findAllUsuarios();
+			listaEstadoCuentaProv = mCabecera.findDataEstadoCuentaProveedor();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			JSFUtil.crearMensajeERROR(e.getMessage());
@@ -70,6 +77,7 @@ public class BeanCabeceraPagos implements Serializable {
 	}
 	
 	
+
 
 	
 	public void actionListenerCrearCabeceraPago() {
@@ -116,6 +124,7 @@ public class BeanCabeceraPagos implements Serializable {
 		this.cabeceraList = cabeceraList;
 	}
 
+
 	public String getDescripcionpago() {
 		return descripcionpago;
 	}
@@ -132,8 +141,17 @@ public class BeanCabeceraPagos implements Serializable {
 		this.codigoUsuario = codigoUsuario;
 	}
 	
+	public List<DTOReporteEstadoCuentaProv> getListaEstadoCuentaProv() {
+		return listaEstadoCuentaProv;
+	}
+
+	public void setListaEstadoCuentaProv(List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv) {
+		this.listaEstadoCuentaProv = listaEstadoCuentaProv;
+	}
+
+
 	
 	
-	
+
 
 }

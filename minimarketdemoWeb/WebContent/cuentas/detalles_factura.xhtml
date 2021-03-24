@@ -66,6 +66,12 @@
 					<h:outputText value="#{d.valorfactura}" />
 				</p:column>
 			</p:dataTable>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Imprimir" icon="pi-pi-print"
+					onclick="window.print()">
+				</p:commandButton>
+			</p:panelGrid>
+
 		</div>
 	</div>
 </body>

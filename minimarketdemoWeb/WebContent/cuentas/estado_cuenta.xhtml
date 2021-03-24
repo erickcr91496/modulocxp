@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <f:metadata> -->
+<!-- <f:event listener="" -->
+<!-- type="preRenderView"></f:event> -->
+<!-- </f:metadata> -->
+<h:head>
+	<title>Ciudades</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
+			<p:menuitem value="Nueva Ciudad " icon="pi pi-wallet"
+				action="nuevaCiudad?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<p:panel>
+		<p:panel>
+			<h3>
+				<h:outputText value="Estado de cuenta proveedores con valor pagado" />
+			</h3>
+		</p:panel>
+
+		<p:panel>
+			<h:form>
+
+				<h:outputText id="cmbproveedor"
+					value="Seleccione Código Proveedor]]" />
+				<p:selectOneMenu value="#{beanGenerarPago.idProveedor}">
+					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
+						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
+
+				</p:selectOneMenu>
+				<p:commandButton icon="pi pi-search-plus" title="Ver Reporte"
+					action="#{beanDetallePagos.actionSeleccionarDetallePago(c)}" />
+
+			</h:form>
+		</p:panel>
+
+		<h:form id="formDatos">
+
+			<p:dataTable value="#{beanCabeceraPagos.listaEstadoCuentaProv}"
+				var="c" paginator="true" rows="5">
+				<p:column headerText="COD.PROVEEDOR">
+					<h:outputText value="#{c.id_proveedor}" />
+				</p:column>
+				<p:column headerText="COD. FACTURA">
+					<h:outputText value="#{c.id_factura}" />
+				</p:column>
+				<p:column headerText="COD. PAGO ">
+					<h:outputText value="#{c.codigo_pago}" />
+				</p:column>
+
+				<p:column headerText="VALOR FACTURA">
+					<h:outputText value="#{c.valor_factura}" />
+				</p:column>
+				<p:column headerText="VALOR PAGADO">
+					<h:outputText value="#{c.valor_pagago}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+	</p:panel>
+	<p:panel>
+
+
+	</p:panel>
+
+</body>
+</html>

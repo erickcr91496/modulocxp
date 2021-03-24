@@ -41,7 +41,7 @@
 				<h:outputText value="Codigo cuenta bancaria" />
 				<p:selectOneMenu value="#{beanGenerarPago.codigoCB}">
 					<f:selectItems value="#{beanCuentaB.listaCuentasBancarias}" var="c"
-						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>	
+						itemLabel="#{c.codigocb}" itemValue="#{c.codigocb}"></f:selectItems>
 					<p:ajax update="saldoCuenta , :frmDatos:pnlDetalle"
 						listener="#{beanGenerarPago.listenerObtenerSaldo()}" />
 
@@ -69,7 +69,8 @@
 					filter="true" filterMatchMode="startsWith">
 					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
 						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
-					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales,cmbfactura"
+					<p:ajax
+						update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales,cmbfactura"
 						listener="#{beanGenerarPago.listenerListarFacturasByIdProv()}" />
 				</p:selectOneMenu>
 
@@ -88,7 +89,8 @@
 				<h:outputText value="Valor a Pagar:" />
 
 				<p:spinner value="#{beanGenerarPago.valorApagar}" required="true"
-					min="1" max="#{beanGenerarPago.mayorValoraPagar()}" stepFactor="0.25"/>
+					min="1" max="#{beanGenerarPago.mayorValoraPagar()}"
+					stepFactor="0.25" />
 
 				<p:commandButton value="Agregar" icon="pi pi-save"
 					update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales"
@@ -132,6 +134,11 @@
 			<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
 				actionListener="#{beanGenerarPago.actionListenerInsertarDetalles()}"
 				action="#{beanDetallePagos.actionSeleccionarDetallePago(beanGenerarPago.cabecera)}"></p:commandButton>
+
+			<p:panelGrid columns="1">				
+			</p:panelGrid>
+
+
 		</h:form>
 
 

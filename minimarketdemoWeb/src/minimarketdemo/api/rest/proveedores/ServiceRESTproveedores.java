@@ -22,6 +22,7 @@ import minimarketdemo.model.core.managers.ManagerProveedorFacturas;
 @Produces("application/json")
 @Consumes("application/json")
 public class ServiceRESTproveedores {
+
 	@EJB
 	ManagerDAO mDAO;
 	@EJB

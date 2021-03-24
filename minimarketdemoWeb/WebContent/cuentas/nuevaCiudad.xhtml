@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<title>Ciudad</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Regresar" icon="pi pi-home" action="ciudad?faces-redirect=true" />
+			<p:menuitem value="Nueva Ciudad " icon="pi pi-wallet"
+				action="cuentanueva?faces-redirect=true" />
+			<f:facet name="options">
+				<p:menuButton value="" icon="pi pi-user">
+					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+				</p:menuButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>	<p:panel>
+		<h:form>
+			<p:panelGrid columns="2">
+				
+				<h:outputText value="Ciudad" />
+				<p:inputText value="#{beanCiudad.nombre}"
+					required="true" requiredMessage="Ingrese el codigo" />
+				
+				<h:outputText value="Descripcion" />
+				<p:inputText value="#{beanCiudad.descripcion}"
+					required="true" requiredMessage="Ingrese los apellidos" />
+				<h:outputText value="Poblacion" />
+				<p:inputText value="#{beanCiudad.poblacion}"
+					required="true" requiredMessage="Ingrese los nombres" />
+				
+				<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
+					actionListener="#{beanCiudad.actionListenerCrearCuenta()}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
+</body>
+</html>

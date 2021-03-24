@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.Cuentabancaria;
 
@@ -67,6 +68,7 @@ private EntityManager em;
 		return aux;
 	}
     
+
     public Cuentabancaria findByIdCuenta(String codigo) throws Exception {
     	return (Cuentabancaria) mDAO.findById(Cuentabancaria.class, codigo);
     }
