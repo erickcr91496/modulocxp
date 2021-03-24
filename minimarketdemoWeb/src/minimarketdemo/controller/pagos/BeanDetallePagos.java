@@ -10,6 +10,7 @@ import javax.inject.Named;
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.core.entities.Cuentabancaria;
 import minimarketdemo.model.core.entities.DetallePago;
+import minimarketdemo.model.pago.dto.DTOReporteEstadoCuentaProv;
 import minimarketdemo.model.pagos.managers.Cabecera;
 import minimarketdemo.model.pagos.managers.Detalles;
 import minimarketdemo.model.pagos.managers.ManagerDetallesPagos;
@@ -21,6 +22,8 @@ public class BeanDetallePagos implements Serializable {
 	@EJB 
 	ManagerDetallesPagos mDetalles;
 	private List<DetallePago> detallesList;
+	private List<DetallePago> detallesListFacturas;
+
 	private Detalles detallesShow;
 	private Cabecera cabecera;
 	public BeanDetallePagos() {
@@ -38,6 +41,10 @@ public class BeanDetallePagos implements Serializable {
 //		}
 //	}
 	
+	public void inicializar() {
+		//detallesListFacturas= mDetalles.listarDetalle();
+	}
+	
 	public String actionSeleccionarDetallePago(Cabecera c) {
 		cabecera = c;
 		detallesList = mDetalles.BuscarporIdProveedor(c.getNroPago());
@@ -45,7 +52,9 @@ public class BeanDetallePagos implements Serializable {
 		return "detalles_factura";
 	}
 	
-	
+
+		
+
 
 	public Cabecera getCabecera() {
 		return cabecera;
@@ -61,6 +70,14 @@ public class BeanDetallePagos implements Serializable {
 
 	public void setDetallesList(List<DetallePago> detallesList) {
 		this.detallesList = detallesList;
+	}
+
+	public List<DetallePago> getDetallesListFacturas() {
+		return detallesListFacturas;
+	}
+
+	public void setDetallesListFacturas(List<DetallePago> detallesListFacturas) {
+		this.detallesListFacturas = detallesListFacturas;
 	}
 
 

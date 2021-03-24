@@ -13,6 +13,7 @@ import minimarketdemo.controller.JSFUtil;
 
 import minimarketdemo.model.core.entities.SegUsuario;
 import minimarketdemo.model.core.managers.ManagerDAO;
+import minimarketdemo.model.pago.dto.DTOReporteEstadoCuentaProv;
 import minimarketdemo.model.pagos.managers.Cabecera;
 import minimarketdemo.model.pagos.managers.ManagerCabeceraPagos;
 import minimarketdemo.model.seguridades.managers.ManagerSeguridades;
@@ -41,6 +42,7 @@ public class BeanCabeceraPagos implements Serializable {
 	
 	private List<SegUsuario> listaUsuarios;
 	
+	private List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv;
 	public BeanCabeceraPagos() {
 
 	}
@@ -53,6 +55,7 @@ public class BeanCabeceraPagos implements Serializable {
 			cabeceraList = mCabecera.finAllCabecera();
 
 			listaUsuarios= mUsuario.findAllUsuarios();
+			listaEstadoCuentaProv = mCabecera.findDataEstadoCuentaProveedor();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			JSFUtil.crearMensajeERROR(e.getMessage());
@@ -123,7 +126,15 @@ public class BeanCabeceraPagos implements Serializable {
 		this.codigoUsuario = codigoUsuario;
 	}
 	
-	
+	public List<DTOReporteEstadoCuentaProv> getListaEstadoCuentaProv() {
+		return listaEstadoCuentaProv;
+	}
+
+	public void setListaEstadoCuentaProv(List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv) {
+		this.listaEstadoCuentaProv = listaEstadoCuentaProv;
+	}
+
+
 	
 	
 
