@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import minimarketdemo.api.rest.proveedores.ServiceRESTproveedores;
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.controller.pagos.BeanCabeceraPagos;
 import minimarketdemo.controller.seguridades.BeanSegLogin;
@@ -18,6 +19,7 @@ import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.CabeceraPago;
 import minimarketdemo.model.core.entities.Cuentabancaria;
 import minimarketdemo.model.core.entities.DetallePago;
+import minimarketdemo.model.core.managers.DTOPagoProveedor;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
 import minimarketdemo.model.generarpagos.managers.ManagerGenerarPagos;
 import minimarketdemo.model.pagos.managers.Cabecera;
@@ -49,8 +51,11 @@ public class BeanGenerarPago implements Serializable {
 	private List<Cuentabancaria> cuentasList;
 	private Apifactura factura;
 	private List<Integer> proveedoresList;
+	List<DTOPagoProveedor> pagos = new ArrayList<DTOPagoProveedor>();
 
 	private BigDecimal valorApagar;
+
+	
 
 	// variable para maximo a pagar
 	double maximoPago;
@@ -97,6 +102,34 @@ public class BeanGenerarPago implements Serializable {
 		// probar
 		cuentasList = mCuentas.findAllCuentasBancarias();
 		saldo = cuentasList.get(0).getSaldocb();
+		
+		//listar del api sumando
+		
+		try {
+			
+			//pagos= service.devolver();
+			pagos= mGenerarPagos.devolver();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//System.out.println(" lo que llega !!! "+pagos.get(0).getIdProveedor());
+			//System.out.println(" lo que llega !!! "+pagos.get(0).getTotal());
+		}
+		
+		
+		//try {
+		
+			
+			//listaPagosProveedores= service.devolver();
+			
+	//	} catch (Exception e) {
+			// TODO: handle exception
+		//	System.out.println("esta llegando datos: "+listaPagosProveedores.get(0).getTotal());
+			//e.getStackTrace();
+		//}
+		
+		
+		//listafinal= service.devolver();
 
 	}
 
@@ -356,12 +389,15 @@ public class BeanGenerarPago implements Serializable {
 		this.valorApagarOpe = valorApagarOpe;
 	}
 
-	public BeanCabeceraPagos getbCabecera() {
-		return bCabecera;
+
+	public List<DTOPagoProveedor> getPagos() {
+		return pagos;
 	}
 
-	public void setbCabecera(BeanCabeceraPagos bCabecera) {
-		this.bCabecera = bCabecera;
+	public void setPagos(List<DTOPagoProveedor> pagos) {
+		this.pagos = pagos;
 	}
+
+	
 
 }

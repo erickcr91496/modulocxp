@@ -3,12 +3,16 @@ package minimarketdemo.model.core.managers;
 import java.math.BigDecimal;
 
 
+
 public class DTOPagoProveedor {
+
 
 	
 	private Integer idProveedor;
 
 	private BigDecimal total;
+	
+	
 
 	public DTOPagoProveedor(Integer idProveedor, BigDecimal total) {
 		super();

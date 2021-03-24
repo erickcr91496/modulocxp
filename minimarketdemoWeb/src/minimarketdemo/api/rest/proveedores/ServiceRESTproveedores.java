@@ -29,6 +29,7 @@ public class ServiceRESTproveedores {
 	
 	@GET
 	@Path(value = "pagos")
+	
 	public List<DTOPagoProveedor> devolver() throws Exception {
 		mFacturas.actualizarApiFacturas();
 		
@@ -68,9 +69,12 @@ public class ServiceRESTproveedores {
 
 			DTOPagoProveedor pag = new DTOPagoProveedor((int) provs.get(i), (BigDecimal) totales.get(i));
 			pagos.add(pag);
+		
+			
 
 		}
 
 		return pagos;
 	}
+	
 }

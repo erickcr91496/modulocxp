@@ -8,9 +8,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
- 
+
+import minimarketdemo.api.rest.proveedores.ServiceRESTproveedores;
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.core.entities.Cuentabancaria;
+import minimarketdemo.model.core.managers.DTOPagoProveedor;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
 
 
@@ -30,6 +32,8 @@ public class BeanCuentaB implements Serializable {
 	private Boolean estado;
 	private Cuentabancaria cuentaEdit;
 
+
+	
 
 	private List<Cuentabancaria> listaCuentasBancarias;
 
@@ -51,6 +55,7 @@ public class BeanCuentaB implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
+		
 	}
 
 	public void actionListenerCrearCuenta() {
@@ -112,6 +117,7 @@ public class BeanCuentaB implements Serializable {
 
 	
 
+	
 	public String getNombre() {
 		return nombre;
 	}

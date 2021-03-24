@@ -38,6 +38,23 @@ private EntityManager em;
     }
        
 
+    public List<DTOPagoProveedor> findAllPagosProvs(){
+    	return em.createNamedQuery("DTOPagoProveedor.findAll", DTOPagoProveedor.class).getResultList();
+    }
+       
+    
+    public List<DTOPagoProveedor> findAllByIdProov(Integer codigoCB){
+		List<DTOPagoProveedor> list = findAllPagosProvs();
+		List<DTOPagoProveedor> aux = new ArrayList<DTOPagoProveedor>();
+		for (DTOPagoProveedor a : list) {
+			if(a.getIdProveedor()== codigoCB) {
+				aux.add(a);
+			}
+		}
+		return aux;
+	}
+    
+    
     
     public List<Cuentabancaria> findAllByCodigoCB(String codigoCB){
 		List<Cuentabancaria> list = findAllCuentasBancarias();
