@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head></h:head>
+<body>
+
+	<p:growl>
+		<p:autoUpdate>
+		</p:autoUpdate>
+
+	</p:growl>
+
+	<p:panel>
+		<h3>
+			<h:outputText value="Pagina de Lenguajes de Progrmacion" />
+		</h3>
+	</p:panel>
+	<div class="ui-g">
+		<div class="ui-g-2">
+
+
+
+			
+		</div>
+
+		<div class="ui-g-10">
+
+			
+			<div class="ui-g-6"></div>
+
+			<div class="ui-g-12">
+				<h:form id="formDatos">
+
+					<p:dataTable value="#{beanLenguajes.listaLenguajes}" var="u">
+						<p:column headerText="ID Lenguaje">
+							<h:outputText value="#{u.idLenguaje}" />
+						</p:column>
+						<p:column headerText="Nombre:">
+							<h:outputText value="#{u.nombrelenguaje}" />
+						</p:column>
+						<p:column headerText="Descripcion:">
+							<h:outputText value="#{u.descripcionlenguaje}" />
+						</p:column>
+						<p:column headerText="Grado Dificultad">
+							<h:outputText value="#{u.niveldifultad}" />
+						</p:column>
+						
+						<p:column headerText="OPCIONES">
+							<p:commandButton icon="pi pi-trash" title="eliminar"
+								>
+
+								<p:confirm header="Confirmacion" message="desea eliminar?"
+									icon="pi pi-exclamation-triangle"></p:confirm>
+							</p:commandButton>
+
+							<p:commandButton icon="pi pi-user-edit" title="editar"
+								></p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+</html>
