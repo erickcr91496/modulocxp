@@ -55,6 +55,21 @@ public class BeanCabeceraPagos implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void reiniciar() {
+		try {
+			System.out.println("Bean Cabcera!!!");
+			
+			cabeceraList = mCabecera.finAllCabecera();
+			listaUsuarios= mUsuario.findAllUsuarios();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	
 	public void actionListenerCrearCabeceraPago() {

@@ -3,6 +3,7 @@ package minimarketdemo.controller.generarpago;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import minimarketdemo.controller.JSFUtil;
+import minimarketdemo.controller.pagos.BeanCabeceraPagos;
 import minimarketdemo.controller.seguridades.BeanSegLogin;
 import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.CabeceraPago;
@@ -18,6 +20,7 @@ import minimarketdemo.model.core.entities.Cuentabancaria;
 import minimarketdemo.model.core.entities.DetallePago;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
 import minimarketdemo.model.generarpagos.managers.ManagerGenerarPagos;
+import minimarketdemo.model.pagos.managers.Cabecera;
 import minimarketdemo.model.pagos.managers.ManagerCabeceraPagos;
 import minimarketdemo.model.seguridades.dtos.LoginDTO;
 import minimarketdemo.model.seguridades.managers.ManagerSeguridades;
@@ -34,6 +37,10 @@ public class BeanGenerarPago implements Serializable {
 	ManagerSeguridades mseguridades;
 	@EJB
 	ManagerCuentasB mCuentas;
+
+	BeanCabeceraPagos bCabecera;
+
+	Cabecera cabecera;
 
 	private int idProveedor;
 	private int idFactura;
@@ -53,6 +60,7 @@ public class BeanGenerarPago implements Serializable {
 	private BigDecimal valorFactura;
 	private BigDecimal totalDeuda;
 
+	// saldo que se tiene en la Cuenta Bancaria
 	private BigDecimal saldo;
 
 	// Variables para crear la cabecera
@@ -75,16 +83,20 @@ public class BeanGenerarPago implements Serializable {
 		factura = mGenerarPagos.findByIdApiFactura(idFactura);
 		detalleList = new ArrayList<DetallePago>();
 
+		codigoCB = "";
+		descripcionpago = "";
+
+		valorApagar = new BigDecimal(0.00);
+		maximoPago = 0;
+
 		// Inicializar variabes para gurdar valores del pago
 		valorApagarOpe = new BigDecimal(0.00);
 		valorFactura = new BigDecimal(0.00);
 		totalDeuda = new BigDecimal(0.00);
 
 		// probar
-		cuentasList = mCuentas.findAllByCodigoCB("CTA-BAN-0001");
+		cuentasList = mCuentas.findAllCuentasBancarias();
 		saldo = cuentasList.get(0).getSaldocb();
-
-		// inicializar mayor valor que se pueda pagar
 
 	}
 
@@ -122,6 +134,8 @@ public class BeanGenerarPago implements Serializable {
 		}
 	}
 
+	// metodo para agreagr a una lista los detalles
+	// nota: no se guarda en la BDD
 	public void actionListenerInsertarListaDetalle() {
 
 		System.out.println("actionListenerInsertarListaDetalle");
@@ -134,8 +148,8 @@ public class BeanGenerarPago implements Serializable {
 
 		BigDecimal subTotal = saldo.subtract(valorApagarOpe);
 		if (subTotal.compareTo(valorFactura) == 1) {
-			
-			//agregar en la lista detalles para mostar en la tabla
+
+			// agregar en la lista detalles para mostar en la tabla
 			detalleList.add(dp);
 
 			// sumatoria de totales en el detalle
@@ -170,22 +184,48 @@ public class BeanGenerarPago implements Serializable {
 		}
 	}
 
+	/// metodo para insertar en el detalle de la BDD
 	public void actionListenerInsertarDetalles() {
 		try {
-			mCabecera.crearCabeceraPagos(codigoCB, descripcionpago, mseguridades.llevar);
-			List<CabeceraPago> listcP = mCabecera.findAllCabeceraPago();
-			CabeceraPago cP = listcP.get(listcP.size() - 1);
-			for (DetallePago listDe : detalleList) {
-				mGenerarPagos.insertarDetallePago(cP, listDe.getValorfactura(), listDe.getValorapagar(),
-						listDe.getApifactura());
+			if (detalleList.size() != 0) {
+				mCabecera.crearCabeceraPagos(codigoCB, descripcionpago, mseguridades.llevar);
+				List<CabeceraPago> listcP = mCabecera.findAllCabeceraPago();
+				CabeceraPago cP = listcP.get(listcP.size() - 1);
+				for (DetallePago listDe : detalleList) {
+					mGenerarPagos.insertarDetallePago(cP, listDe.getValorfactura(), listDe.getValorapagar(),
+							listDe.getApifactura());
+				}
+				Cuentabancaria cb = mCuentas.findByIdCuenta(codigoCB);
+				cb.setSaldocb(saldo.subtract(valorApagarOpe));
+
+				// crear la cabecera para mostrar en la vista detalles
+				cabecera = new Cabecera();
+				cabecera.setCuentabancaria(cb);
+				cabecera.setDescripcion(descripcionpago);
+				cabecera.setFecha(new Date());
+				cabecera.setIdProveedor(factura.getIdProveedor());
+				cabecera.setIdUsuario(mseguridades.llevar);
+				cabecera.setNombreCajero(mseguridades.findByIdSegUsuario(mseguridades.llevar).getNombres());
+				cabecera.setNroPago(cP.getCodigopago());
+
+				JSFUtil.crearMensajeINFO("Se ha generado el pago");
+			} else {
+				JSFUtil.crearMensajeWARN("Ingrese los valores a pagar");
 			}
-			Cuentabancaria cb = mCuentas.findByIdCuenta(codigoCB);
-			cb.setSaldocb(saldo.subtract(valorApagarOpe));
-			mCuentas.actualizarCuentaBancaria(cb);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+
+	public Cabecera getCabecera() {
+		return cabecera;
+	}
+
+	public void setCabecera(Cabecera cabecera) {
+		this.cabecera = cabecera;
 	}
 
 	public BigDecimal getValorApagar() {
@@ -314,6 +354,14 @@ public class BeanGenerarPago implements Serializable {
 
 	public void setValorApagarOpe(BigDecimal valorApagarOpe) {
 		this.valorApagarOpe = valorApagarOpe;
+	}
+
+	public BeanCabeceraPagos getbCabecera() {
+		return bCabecera;
+	}
+
+	public void setbCabecera(BeanCabeceraPagos bCabecera) {
+		this.bCabecera = bCabecera;
 	}
 
 }

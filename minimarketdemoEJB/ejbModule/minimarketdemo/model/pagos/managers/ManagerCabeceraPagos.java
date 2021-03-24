@@ -85,13 +85,8 @@ public class ManagerCabeceraPagos {
     	Cuentabancaria u= em.find(Cuentabancaria.class, codigocb);
     	if(u==null)
     		throw new Exception("No existe la cuenta indicada");
-    	ca.setCuentabancaria(u);
-    	
-    	
-    	ca.setCodigousuario(codigoUsuario);
-    	
-    	
-    	
+    	ca.setCuentabancaria(u);   	
+    	ca.setCodigousuario(codigoUsuario);	
     	em.persist(ca);
     }
     

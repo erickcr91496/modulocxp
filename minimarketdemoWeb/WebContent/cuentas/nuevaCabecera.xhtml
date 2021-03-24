@@ -11,7 +11,7 @@
 <h:head>
 	<title>Nueva Cabecera</title>
 </h:head>
-<body>
+<body onload="#{beanGenerarPago.inicializar()}">
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
@@ -69,7 +69,7 @@
 					filter="true" filterMatchMode="startsWith">
 					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
 						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
-					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales"
+					<p:ajax update=":frmDatos:pnlDetalle,:frmDatos:tblDetalles,:frmDatos:pnlTotales,cmbfactura"
 						listener="#{beanGenerarPago.listenerListarFacturasByIdProv()}" />
 				</p:selectOneMenu>
 
@@ -130,7 +130,8 @@
 			</p:panelGrid>
 
 			<p:commandButton value="Guardar" icon="pi pi-save" update="@form"
-				actionListener="#{beanGenerarPago.actionListenerInsertarDetalles()}"></p:commandButton>
+				actionListener="#{beanGenerarPago.actionListenerInsertarDetalles()}"
+				action="#{beanDetallePagos.actionSeleccionarDetallePago(beanGenerarPago.cabecera)}"></p:commandButton>
 		</h:form>
 
 
