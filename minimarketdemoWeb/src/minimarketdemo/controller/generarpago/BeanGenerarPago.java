@@ -228,8 +228,11 @@ public class BeanGenerarPago implements Serializable {
 					mGenerarPagos.insertarDetallePago(cP, listDe.getValorfactura(), listDe.getValorapagar(),
 							listDe.getApifactura());
 				}
+				
+				//actualizar la cuenta bancariaSS
 				Cuentabancaria cb = mCuentas.findByIdCuenta(codigoCB);
-				cb.setSaldocb(saldo.subtract(valorApagarOpe));
+				cb.setSaldocb(saldo.subtract(valorApagarOpe));				
+				mCuentas.actualizarCuentaBancaria(cb);
 
 				// crear la cabecera para mostrar en la vista detalles
 				cabecera = new Cabecera();

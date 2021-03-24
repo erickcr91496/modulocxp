@@ -54,8 +54,7 @@ public class BeanCuentaB implements Serializable {
 
 	@PostConstruct
 	public void inicializar() {
-		listaCuentasBancarias = mCuentas.findAllCuentasBancarias();
-		
+		listaCuentasBancarias = mCuentas.findAllCuentasBancarias();		
 	}
 
 	public void actionListenerCrearCuenta() {
