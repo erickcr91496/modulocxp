@@ -1,6 +1,8 @@
 package minimarketdemo.model.pagos.managers;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.ejb.Stateless;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import minimarketdemo.model.core.entities.Apifactura;
 import minimarketdemo.model.core.entities.CabeceraPago;
@@ -91,8 +94,6 @@ public class ManagerCabeceraPagos {
 		return mDAO.findAll(CabeceraPago.class);
 	}
 
-	
-	
 	public List<DTOReporteEstadoCuentaProv> findDataEstadoCuentaProveedor() {
 		List<Object[]> listadoReporte = em.createNativeQuery(
 				"select a.id_proveedor, a.id_factura, d.codigopago, d.valorfactura, d.valorapagar  from apifacturas a INNER JOIN "
@@ -136,12 +137,46 @@ public class ManagerCabeceraPagos {
 			codigo_pago = listadoReporte.get(i)[2].toString();
 			valor_factura = (BigDecimal) listadoReporte.get(i)[3];
 			valor_pagago = (BigDecimal) listadoReporte.get(i)[4];
-
 			reporte = new DTOReporteEstadoCuentaProv(id_proveedor, id_factura, codigo_pago, valor_factura,
 					valor_pagago);
 			listadoEstadoCuenta.add(reporte);
 		}
 		return listadoEstadoCuenta;
+	}
+
+	public List<Cabecera> findCabeceraByFecha(Date fechaInicio, Date fechaFin) throws Exception {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("fecha Inicial" + format.format(fechaInicio));
+		System.out.println("fecha Final" + format.format(fechaFin));
+		String consulta = "select c from CabeceraPago c where c.fechapago between :fechaInicio and :fechaFin order by c.fechapago";
+		Query q = mDAO.getEntityManager().createQuery(consulta, CabeceraPago.class);
+		q.setParameter("fechaInicio", new Timestamp(fechaInicio.getTime()));
+		q.setParameter("fechaFin", new Timestamp(fechaFin.getTime()));
+
+		List<CabeceraPago> cbPago = q.getResultList();
+		List<Cabecera> cb = new ArrayList<Cabecera>();
+
+		for (CabeceraPago p : cbPago) {
+
+			System.out.println(p.getDescripcionpago());
+
+			SegUsuario cajero = new SegUsuario();
+			Cabecera c = new Cabecera();
+
+			c.setCuentabancaria(p.getCuentabancaria());
+			c.setDescripcion(p.getDescripcionpago());
+			c.setFecha(p.getFechapago());
+			cajero = (SegUsuario) mDAO.findById(SegUsuario.class, p.getCodigousuario());
+
+			c.setIdProveedor(p.getDetallePagos().get(0).getApifactura().getIdProveedor());
+
+			c.setIdUsuario(cajero.getIdSegUsuario());
+			c.setNombreCajero(cajero.getNombres());
+			c.setNroPago(p.getCodigopago());
+			cb.add(c);
+		}
+
+		return cb;
 	}
 
 }

@@ -43,6 +43,10 @@ public class BeanCabeceraPagos implements Serializable {
 	private List<SegUsuario> listaUsuarios;
 	
 	private List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv;
+
+	private Date fechaInicio;
+	private Date fechaFin;
+	
 	public BeanCabeceraPagos() {
 
 	}
@@ -96,10 +100,35 @@ public class BeanCabeceraPagos implements Serializable {
 
 	}
 
+	public void actionListenerConsultarFechas() {
+		try {
+			cabeceraList = mCabecera.findCabeceraByFecha(fechaInicio, fechaFin);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JSFUtil.crearMensajeINFO("registros encontrados"+cabeceraList.size());
+		}
+		
+	}
 	
 	
 	
-	
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
 	public List<SegUsuario> getListaUsuarios() {
 		return listaUsuarios;
 	}

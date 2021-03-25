@@ -11,16 +11,9 @@
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
 			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
-				action="cuentas?faces-redirect=true" />
-
-			<p:menuitem value="Pagos" icon="pi pi-credit-card"
 				action="pagos?faces-redirect=true" />
 
-			<p:menuitem value="Documentos de pago" icon="pi pi-copy"
-				action="datos_pago?faces-redirect=true" />
-			<p:menuitem value="Estado de cuenta"
-				icon="pi pi-exclamation-triangle" />
-			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
+			
 
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
@@ -43,12 +36,12 @@
 		<h3>
 			<h:outputText value="Detalles de Pago - " />
 			<h:outputText value="#{beanDetallePagos.cabecera.nroPago}" />
-		</h3>
+			</h3>	
 	</p:panel>
 
 	<div class="ui-g">
 		<p:panel>
-			<p:panelGrid columns="4" layout="flex">
+			<p:panelGrid columns="4" >
 				<h:outputText value="Codigo Proveedor" />
 				<h:outputText value="#{beanDetallePagos.cabecera.idProveedor}" />
 
