@@ -9,17 +9,16 @@
 <!-- type="preRenderView"></f:event> -->
 <!-- </f:metadata> -->
 <h:head>
-	<title>Ciudades</title>
+	<title>Cuenta</title>
 </h:head>
-<body>
+<body onload="#{beanGenerarPago.inicializar()}">
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
-			<p:menuitem value="Nueva Ciudad " icon="pi pi-wallet"
-				action="nuevaCiudad?faces-redirect=true" />
+
 			<f:facet name="options">
 				<p:menuButton value="" icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
