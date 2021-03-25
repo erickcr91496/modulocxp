@@ -49,27 +49,24 @@
 	<div class="ui-g">
 		<div class="ui-g-2">
 
-
-
-<!-- 			<h:form> -->
-<!-- 				<p:menu> -->
-<!-- 					<p:submenu label="Opciones para admin"> -->
-<!-- 						<p:menuitem value="Regresar" icon="pi pi-home" action="index"> -->
-<!-- 						</p:menuitem> -->
-
-<!-- 					</p:submenu> -->
-
-<!-- 				</p:menu> -->
-<!-- 			</h:form> -->
 		</div>
 
 		<div class="ui-g-10">
 
 
 			<h:form>
+				<h:outputText value="Fecha inicio:"/>
+				<p:datePicker value="#{beanCabeceraPagos.fechaInicio}"  />
+				<h:outputText value="Fecha Fin:"/>
+				<p:datePicker value="#{beanCabeceraPagos.fechaFin}" />
+				<p:commandButton update="@form" value="Consultar" icon="pi pi-clock"
+				actionListener="#{beanCabeceraPagos.actionListenerConsultarFechas()}"/>
+				
+				
+				
 				<p:dataTable  value="#{beanCabeceraPagos.cabeceraList}" var="c"
 					paginator="true" rows="5">
-					<p:column headerText="CODIGO ">
+				 	<p:column headerText="CODIGO ">
 						<h:outputText value="#{c.nroPago}" />
 					</p:column>
 					<p:column headerText="NOMBRE CAJERO">
@@ -88,13 +85,7 @@
 						<h:outputText value="#{c.fecha}" />
 					</p:column>
 					<p:column headerText="OPCIONES">
-						<p:commandButton icon="pi pi-pencil" title="editar"
-							action="/detalle_pago" />
-						<p:commandButton icon="pi pi-times-circle" title="eliminar"
-							styleClass="ui-button-danger" update="@form">
-							<p:confirm header="Confirmacion" message="desea eliminar?"
-								icon="pi pi-exclamation-triangle"></p:confirm>
-						</p:commandButton>
+
 						<p:commandButton icon="pi pi-search-plus" title="Ver Detalles"
 							action="#{beanDetallePagos.actionSeleccionarDetallePago(c)}" />
 
