@@ -1,6 +1,7 @@
 package minimarketdemo.controller.pagos;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -19,15 +20,21 @@ import minimarketdemo.model.pagos.managers.ManagerDetallesPagos;
 @SessionScoped
 public class BeanDetallePagos implements Serializable {
 
-	@EJB 
+	@EJB
 	ManagerDetallesPagos mDetalles;
 	private List<DetallePago> detallesList;
 	private List<DetallePago> detallesListFacturas;
 
 	private Detalles detallesShow;
 	private Cabecera cabecera;
+
+	// variables para realizar operaciones
+	private BigDecimal valorApagar;
+	private BigDecimal valorFactura;
+	private BigDecimal total;
+
 	public BeanDetallePagos() {
-		
+
 	}
 
 //	public void inicializar() {
@@ -40,21 +47,28 @@ public class BeanDetallePagos implements Serializable {
 //		e.printStackTrace();
 //		}
 //	}
-	
+
 	public void inicializar() {
-		//detallesListFacturas= mDetalles.listarDetalle();
+		// detallesListFacturas= mDetalles.listarDetalle();
 	}
-	
+
 	public String actionSeleccionarDetallePago(Cabecera c) {
 		cabecera = c;
 		detallesList = mDetalles.BuscarporIdProveedor(c.getNroPago());
+
+		valorApagar = new BigDecimal(0.00);
+		valorFactura = new BigDecimal(0.00);
+		total = new BigDecimal(0.00);
+
+		for (DetallePago list : detallesList) {
+			valorApagar = valorApagar.add(list.getValorapagar());
+			valorFactura = valorFactura.add(list.getValorfactura());
+		}
+		total = valorFactura.subtract(valorApagar);
+
 		System.out.println("cuenta seleccionado: " + c.getNroPago());
 		return "detalles_factura";
 	}
-	
-
-		
-
 
 	public Cabecera getCabecera() {
 		return cabecera;
@@ -80,6 +94,30 @@ public class BeanDetallePagos implements Serializable {
 		this.detallesListFacturas = detallesListFacturas;
 	}
 
+	public BigDecimal getValorApagar() {
+		return valorApagar;
+	}
 
+	public void setValorApagar(BigDecimal valorApagar) {
+		this.valorApagar = valorApagar;
+	}
+
+	public BigDecimal getValorFactura() {
+		return valorFactura;
+	}
+
+	public void setValorFactura(BigDecimal valorFactura) {
+		this.valorFactura = valorFactura;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 	
+	
+
 }

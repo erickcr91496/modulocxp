@@ -45,6 +45,28 @@
 			<h:outputText value="#{beanDetallePagos.cabecera.nroPago}" />
 		</h3>
 	</p:panel>
+
+	<div class="ui-g">
+		<p:panel>
+			<p:panelGrid columns="4" layout="flex">
+				<h:outputText value="Codigo Proveedor" />
+				<h:outputText value="#{beanDetallePagos.cabecera.idProveedor}" />
+
+				<h:outputText value="Nombre del cajero" />
+				<h:outputText value="#{beanDetallePagos.cabecera.nombreCajero}" />
+
+				<h:outputText value="Fecha" />
+				<h:outputText value="#{beanDetallePagos.cabecera.fecha}" />
+
+				<h:outputText value="Descripcion del pago" />
+				<h:outputText value="#{beanDetallePagos.cabecera.descripcion}" />
+
+				<h:outputText value="Nombre de la cuenta bancaria" />
+				<h:outputText
+					value="#{beanDetallePagos.cabecera.cuentabancaria.propietariocb}" />
+			</p:panelGrid>
+		</p:panel>
+	</div>
 	<div class="ui-g">
 		<div class="ui-g-10">
 
@@ -59,20 +81,40 @@
 				<p:column headerText="ID Factura">
 					<h:outputText value="#{d.iddetalle}" />
 				</p:column>
-				<p:column headerText="Valor a Pagar">
-					<h:outputText value="#{d.valorapagar}" />
-				</p:column>
 				<p:column headerText="Valor de la factura">
 					<h:outputText value="#{d.valorfactura}" />
 				</p:column>
-			</p:dataTable>
-			<p:panelGrid columns="1">
-				<p:commandButton value="Imprimir" icon="pi-pi-print"
-					onclick="window.print()">
-				</p:commandButton>
-			</p:panelGrid>
+				<p:column headerText="Valor a Pagar">
+					<h:outputText value="#{d.valorapagar}" />
+				</p:column>
 
+				<p:column headerText="Total">
+					<h:outputText value="#{d.valorfactura.subtract(d.valorapagar)}" />
+				</p:column>
+
+			</p:dataTable>
+				<p:panelGrid columns="4" id="pnlTotales" layout="grid"
+				styleClass="showcase-text-align-center">
+				<h:outputText value="Total" />
+				<h:outputText value="#{beanDetallePagos.valorFactura}" />
+				<h:outputText value="#{beanDetallePagos.valorApagar}" />
+				<h:outputText value="#{beanDetallePagos.total}" />
+			</p:panelGrid>
 		</div>
+		<p:panel>
+		
+		</p:panel>
 	</div>
+
+
+
+	<div>
+		<p:panelGrid columns="1">
+			<p:commandButton value="Imprimir" icon="pi-pi-print"
+				onclick="window.print()">
+			</p:commandButton>
+		</p:panelGrid>
+	</div>
+
 </body>
 </html>
