@@ -18,8 +18,7 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
-			<p:menuitem value="Nueva Cuenta " icon="pi pi-wallet"
-				action="cuentanueva?faces-redirect=true" />
+			
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -65,19 +64,7 @@
 					filterMatchMode="contains">
 					<h:outputText value="#{u.estadocb}" />
 				</p:column>
-				<p:column headerText="OPCIONES">
-					<p:commandButton icon="pi pi-pencil" title="editar"
-						action="#{beanCuentaB.actionSeleccionarEdicionCuenta(u)}" />
-					<p:commandButton icon="pi pi-times-circle" title="eliminar"
-						actionListener="#{beanCuentaB.actionListenerEliminarCuenta(u.codigocb)}"
-						styleClass="ui-button-danger" update="@form">
-						<p:confirm header="Confirmacion" message="desea eliminar?"
-							icon="pi pi-exclamation-triangle"></p:confirm>
-					</p:commandButton>
-
-
-
-				</p:column>
+				
 			</p:dataTable>
 		</h:form>
 

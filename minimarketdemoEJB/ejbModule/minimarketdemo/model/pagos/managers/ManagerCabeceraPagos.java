@@ -123,7 +123,7 @@ public class ManagerCabeceraPagos {
 	public List<DTOReporteEstadoCuentaProv> findDataEstadoCuentaByProv(Integer id_proveedor) {
 		List<Object[]> listadoReporte = em.createNativeQuery(
 				"select a.id_proveedor, a.id_factura, d.codigopago, d.valorfactura, d.valorapagar  from apifacturas a INNER JOIN "
-						+ "detalle_pagos d ON a.id_factura=d.id_factura and a.id_proveedor=" + id_proveedor + "\n" + "")
+						+ "detalle_pagos d ON a.id_factura=d.id_factura and a.id_proveedor=" + id_proveedor)
 				.getResultList();
 		List<DTOReporteEstadoCuentaProv> listadoEstadoCuenta = new ArrayList<DTOReporteEstadoCuentaProv>();
 		DTOReporteEstadoCuentaProv reporte;
