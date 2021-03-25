@@ -13,31 +13,7 @@
 </h:head>
 <body onload="#{beanCabeceraPagos.inicializar()}">
 
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
-			<p:menuitem value="Cuentas bancarias" icon="pi pi-credit-card"
-				action="cuentas?faces-redirect=true" />
-
-			<p:menuitem value="Pagos" icon="pi pi-credit-card"
-				action="pagos?faces-redirect=true" />
-
-			<p:menuitem value="Documentos de pago" icon="pi pi-copy"
-				action="datos_pago?faces-redirect=true" />
-			<p:menuitem value="Estado de cuenta"
-				icon="pi pi-exclamation-triangle" />
-			<p:menuitem value="Pagos" icon="pi pi-money-bill" />
-
-			<f:facet name="options">
-				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
-					icon="pi pi-user">
-					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
-					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
-						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
-				</p:menuButton>
-			</f:facet>
-		</p:menubar>
-	</h:form>
+	
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
@@ -46,12 +22,13 @@
 			<p:menuitem value="Regresar" icon="pi pi-home" action="menu" />
 			<p:menuitem value="Nueva Cabecera " icon="pi pi-wallet"
 				action="nuevaCabecera?faces-redirect=true" />
-				<p:menuitem value="Nuevo Detalle " icon="pi pi-wallet"
-				action="NuevoDetalle?faces-redirect=true" />	
+					
 			<f:facet name="options">
-				<p:menuButton value="" icon="pi pi-user">
+				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
+					icon="pi pi-user">
 					<p:menuitem value="Perfil" icon="pi pi-cog"></p:menuitem>
-					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"></p:menuitem>
+					<p:menuitem value="Cerrar sesión" icon="pi pi-sign-out"
+						action="#{beanSegLogin.actionCerrarSesion()}"></p:menuitem>
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
