@@ -19,6 +19,7 @@ import minimarketdemo.model.core.entities.Cuentabancaria;
 import minimarketdemo.model.core.entities.DetallePago;
 import minimarketdemo.model.core.managers.ManagerCuentasB;
 import minimarketdemo.model.generarpagos.managers.ManagerGenerarPagos;
+import minimarketdemo.model.pago.dto.DTOReporteEstadoCuentaProv;
 import minimarketdemo.model.pagos.managers.ManagerCabeceraPagos;
 import minimarketdemo.model.seguridades.dtos.LoginDTO;
 import minimarketdemo.model.seguridades.managers.ManagerSeguridades;
@@ -63,6 +64,7 @@ public class BeanGenerarPago implements Serializable {
 	
 	BeanCabeceraPagos refreshCabecera;
 	LoginDTO dto;
+	private List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv;
 
 	public BeanGenerarPago() {
 		// TODO Auto-generated constructor stub
@@ -72,8 +74,10 @@ public class BeanGenerarPago implements Serializable {
 	public void inicializar() throws Exception {
 		proveedoresList = mGenerarPagos.findAllIdProveedores();
 		idProveedor = proveedoresList.get(0);
+		
 		apifacturaList = mGenerarPagos.findAllByIdProveedor(idProveedor);
 		idFactura = apifacturaList.get(0).getIdFactura();
+		listaEstadoCuentaProv = mCabecera.findDataEstadoCuentaByProv(idProveedor);
 		factura = mGenerarPagos.findByIdApiFactura(idFactura);
 		detalleList = new ArrayList<DetallePago>();
 
@@ -107,6 +111,16 @@ public class BeanGenerarPago implements Serializable {
 		}
 
 	}
+	public void listenerEstadoByProv () {
+		listaEstadoCuentaProv = mCabecera.findDataEstadoCuentaByProv(idProveedor);
+		System.out.print(" Lista reporteeeeeeeee");
+
+		for (DTOReporteEstadoCuentaProv  lista: listaEstadoCuentaProv) {
+			System.out.print(" Lista reporteeeeeeeee"+lista.getCodigo_pago());
+		}
+	}
+	
+
 
 	public void listenerObtenerSaldo() {
 		cuentasList = mCuentas.findAllByCodigoCB(codigoCB);
@@ -319,6 +333,14 @@ public class BeanGenerarPago implements Serializable {
 
 	public void setValorApagarOpe(BigDecimal valorApagarOpe) {
 		this.valorApagarOpe = valorApagarOpe;
+	}
+
+	public List<DTOReporteEstadoCuentaProv> getListaEstadoCuentaProv() {
+		return listaEstadoCuentaProv;
+	}
+
+	public void setListaEstadoCuentaProv(List<DTOReporteEstadoCuentaProv> listaEstadoCuentaProv) {
+		this.listaEstadoCuentaProv = listaEstadoCuentaProv;
 	}
 
 }

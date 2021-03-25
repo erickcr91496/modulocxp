@@ -36,50 +36,48 @@
 		</p:panel>
 
 		<p:panel>
-			<h:form>
+			<h:form id="formDatos">
 
 				<h:outputText id="cmbproveedor"
-					value="Seleccione Código Proveedor]]" />
+					value="Seleccione Código Proveedor " />
 				<p:selectOneMenu value="#{beanGenerarPago.idProveedor}">
 					<f:selectItems value="#{beanGenerarPago.proveedoresList}" var="p"
 						itemLabel="#{p}" itemValue="#{p}"></f:selectItems>
-
+					<p:ajax 
+					update=":formDatos:pnlEstado" 
+					listener="#{beanGenerarPago.listenerEstadoByProv()}"/>
+					
 				</p:selectOneMenu>
-				<p:commandButton icon="pi pi-search-plus" title="Ver Reporte"
-					action="#{beanDetallePagos.actionSeleccionarDetallePago(c)}" />
+
+				<p:dataTable value="#{beanGenerarPago.listaEstadoCuentaProv}"
+					var="c" id="pnlEstado" paginator="true" rows="5">
+					<p:column headerText="COD.PROVEEDOR">
+						<h:outputText value="#{c.id_proveedor}" />
+					</p:column>
+					<p:column headerText="COD. FACTURA">
+						<h:outputText value="#{c.id_factura}" />
+					</p:column>
+					<p:column headerText="COD. PAGO ">
+						<h:outputText value="#{c.codigo_pago}" />
+					</p:column>
+
+					<p:column headerText="VALOR FACTURA">
+						<h:outputText value="#{c.valor_factura}" />
+					</p:column>
+					<p:column headerText="VALOR PAGADO">
+						<h:outputText value="#{c.valor_pagago}" />
+					</p:column>
+				</p:dataTable>
+
 
 			</h:form>
 		</p:panel>
 
-		<h:form id="formDatos">
 
-			<p:dataTable value="#{beanCabeceraPagos.listaEstadoCuentaProv}"
-				var="c" paginator="true" rows="5">
-				<p:column headerText="COD.PROVEEDOR">
-					<h:outputText value="#{c.id_proveedor}" />
-				</p:column>
-				<p:column headerText="COD. FACTURA">
-					<h:outputText value="#{c.id_factura}" />
-				</p:column>
-				<p:column headerText="COD. PAGO ">
-					<h:outputText value="#{c.codigo_pago}" />
-				</p:column>
-
-				<p:column headerText="VALOR FACTURA">
-					<h:outputText value="#{c.valor_factura}" />
-				</p:column>
-				<p:column headerText="VALOR PAGADO">
-					<h:outputText value="#{c.valor_pagago}" />
-				</p:column>
-			</p:dataTable>
-		</h:form>
 
 
 	</p:panel>
-	<p:panel>
 
-
-	</p:panel>
 
 </body>
 </html>
